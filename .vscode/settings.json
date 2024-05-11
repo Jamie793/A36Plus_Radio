@@ -1,0 +1,20 @@
+{
+    "cmake.generator": "MinGW Makefiles",
+    "files.associations": {
+        "main.h": "c",
+        "cmsis_armclang.h": "c",
+        "core_cm4_simd.h": "c",
+        "system_gd32f3x0.h": "c",
+        "gd32f3x0.h": "c",
+        "gpio.h": "c",
+        "spi.h": "c",
+        "st7735s_compat.h": "c",
+        "inttypes.h": "c",
+        "st7735s.h": "c",
+        "fonts.h": "c",
+        "gfx.h": "c"
+    },
+    // "cmake.buildArgs": [
+    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/arm_toolchain.cmake"
+    // ]
+}
