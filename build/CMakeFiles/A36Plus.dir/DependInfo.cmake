@@ -62,6 +62,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/1-MyFiles/2-Dev/3-A36Plus/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_tsi.c" "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_tsi.o" "gcc" "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_tsi.o.d"
   "D:/1-MyFiles/2-Dev/3-A36Plus/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_usart.c" "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_usart.o" "gcc" "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_usart.o.d"
   "D:/1-MyFiles/2-Dev/3-A36Plus/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.c" "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.o" "gcc" "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.o.d"
+  "D:/1-MyFiles/2-Dev/3-A36Plus/Users/Src/boot.c" "CMakeFiles/A36Plus.dir/Users/Src/boot.o" "gcc" "CMakeFiles/A36Plus.dir/Users/Src/boot.o.d"
   "D:/1-MyFiles/2-Dev/3-A36Plus/Users/Src/gd32f3x0_it.c" "CMakeFiles/A36Plus.dir/Users/Src/gd32f3x0_it.o" "gcc" "CMakeFiles/A36Plus.dir/Users/Src/gd32f3x0_it.o.d"
   "D:/1-MyFiles/2-Dev/3-A36Plus/Users/Src/main.c" "CMakeFiles/A36Plus.dir/Users/Src/main.o" "gcc" "CMakeFiles/A36Plus.dir/Users/Src/main.o.d"
   "D:/1-MyFiles/2-Dev/3-A36Plus/Users/Src/systick.c" "CMakeFiles/A36Plus.dir/Users/Src/systick.o" "gcc" "CMakeFiles/A36Plus.dir/Users/Src/systick.o.d"

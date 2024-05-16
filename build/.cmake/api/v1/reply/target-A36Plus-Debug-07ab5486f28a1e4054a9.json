@@ -228,7 +228,8 @@
 				30,
 				31,
 				32,
-				33
+				33,
+				34
 			]
 		}
 	],
@@ -300,7 +301,8 @@
 				30,
 				31,
 				32,
-				33
+				33,
+				34
 			]
 		}
 	],
@@ -454,6 +456,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
 			"path" : "Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "Users/Src/boot.c",
 			"sourceGroupIndex" : 1
 		},
 		{

@@ -63,6 +63,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_usart.o.d"
   "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.o"
   "CMakeFiles/A36Plus.dir/Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.o.d"
+  "CMakeFiles/A36Plus.dir/Users/Src/boot.o"
+  "CMakeFiles/A36Plus.dir/Users/Src/boot.o.d"
   "CMakeFiles/A36Plus.dir/Users/Src/gd32f3x0_it.o"
   "CMakeFiles/A36Plus.dir/Users/Src/gd32f3x0_it.o.d"
   "CMakeFiles/A36Plus.dir/Users/Src/main.o"
