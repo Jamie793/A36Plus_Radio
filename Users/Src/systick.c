@@ -34,7 +34,6 @@ OF SUCH DAMAGE.
 
 #include "gd32f3x0.h"
 #include "systick.h"
-#include "system_gd32f3x0.h"
 
 volatile static uint32_t delay;
 
@@ -81,5 +80,4 @@ void delay_decrement(void)
     if(0U != delay) {
         delay--;
     }
-    
 }

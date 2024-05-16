@@ -5,5 +5,6 @@
 #include "gpio.h"
 #include "gfx.h"
 #include "st7735s.h"
+#include "usart.h"
 int main(void);
 #endif

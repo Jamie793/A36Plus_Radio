@@ -584,6 +584,21 @@ Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.s:
 .PHONY : Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.s
 
 # target to build an object file
+Users/Src/boot.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Users/Src/boot.o
+.PHONY : Users/Src/boot.o
+
+# target to preprocess a source file
+Users/Src/boot.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Users/Src/boot.i
+.PHONY : Users/Src/boot.i
+
+# target to generate assembly for a file
+Users/Src/boot.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Users/Src/boot.s
+.PHONY : Users/Src/boot.s
+
+# target to build an object file
 Users/Src/gd32f3x0_it.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Users/Src/gd32f3x0_it.o
 .PHONY : Users/Src/gd32f3x0_it.o
@@ -728,6 +743,9 @@ help:
 	@echo ... Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.o
 	@echo ... Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.i
 	@echo ... Libraries/GD32/GD32F3x0_standard_peripheral/Source/gd32f3x0_wwdgt.s
+	@echo ... Users/Src/boot.o
+	@echo ... Users/Src/boot.i
+	@echo ... Users/Src/boot.s
 	@echo ... Users/Src/gd32f3x0_it.o
 	@echo ... Users/Src/gd32f3x0_it.i
 	@echo ... Users/Src/gd32f3x0_it.s
