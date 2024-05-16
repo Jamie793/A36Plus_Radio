@@ -12,11 +12,11 @@ int main(void)
     printf("Running...\n");
     while (1)
     {
-        printf("Testing...\n");
-        /* code */
-        LCD_LIGHT_LOW;
-        delay_1us(100); 
-        LCD_LIGHT_HIGH;
-        delay_1ms(1000);
+        // printf("Testing...\n");
+        // /* code */
+        // LCD_LIGHT_LOW;
+        // delay_1ms(1000); 
+        // LCD_LIGHT_HIGH;
+        // delay_1ms(1000);
     }
 }
