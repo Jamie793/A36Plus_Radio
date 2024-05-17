@@ -201,12 +201,14 @@ void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue)
 void st7735s_init(void)
 {
 
-    LCD_RST_HIGH;
-    st7735s_delay(120);
-    LCD_RST_LOW;
-    st7735s_delay(120);
+    // // reset lcd by hardeware
+    // LCD_RST_HIGH;
+    // st7735s_delay(30);
+    // LCD_RST_LOW;
+    // st7735s_delay(120);
     LCD_RST_HIGH;
 
+    // reset lcd by software
     st7735s_send_command(ST7735S_CMD_RESET);
     st7735s_delay(120);
 
@@ -228,10 +230,6 @@ void st7735s_init(void)
     st7735s_send_command(ST7735S_CMD_MADCTL);
     st7735s_send_data(0xA8);
 
-    // display on
-    st7735s_send_command(ST7735S_CMD_DISPON);
-    // st7735s_send_command(ST7735S_CMD_DISPOFF);
-
     // frame rate control
     //
 
@@ -239,7 +237,14 @@ void st7735s_init(void)
     //
 
     // clear screen
-    LCD_LIGHT_HIGH;
     st7735s_set_color(0x00, 0x00, 0x00);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+
+    // display on
+    st7735s_send_command(ST7735S_CMD_DISPON);
+    // st7735s_send_command(ST7735S_CMD_DISPOFF);
+    
+    //backlight on
+    st7735s_delay(30);
+    LCD_LIGHT_HIGH;
 }

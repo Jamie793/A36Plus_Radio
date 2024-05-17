@@ -1,6 +1,6 @@
 #include "spi.h"
 
-void spi_config(void)
+static void lcd_spi_config(void)
 {
     spi_parameter_struct spi_init_struct;
     rcu_periph_clock_enable(RCU_SPI1);
@@ -19,4 +19,9 @@ void spi_config(void)
     spi_init_struct.clock_polarity_phase = SPI_CK_PL_HIGH_PH_2EDGE;
     spi_init(SPI1, &spi_init_struct);
     spi_enable(SPI1);
+}
+
+void spi_config(void)
+{
+    lcd_spi_config();
 }

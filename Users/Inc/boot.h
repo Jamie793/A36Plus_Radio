@@ -1,1 +1,0 @@
-void BOOT_Get_Status(void);

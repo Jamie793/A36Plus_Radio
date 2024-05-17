@@ -1,28 +1,28 @@
 // Written by Jamiexu
 
-#ifndef __ST7735S_H_
-#define __ST7735S_H_
+#ifndef __ST7735S_JAMIEXU_H_
+#define __ST7735S_JAMIEXU_H_
 #include "main.h"
 #include "string.h"
 
 // replace your mcu gpio
-#define LCD_CS_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_CS_PIN)
-#define LCD_CS_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_CS_PIN)
+#define LCD_CS_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_CS_PIN)
+#define LCD_CS_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_CS_PIN)
 
-#define LCD_RST_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_RST_PIN)
-#define LCD_RST_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_RST_PIN)
+#define LCD_RST_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_RST_PIN)
+#define LCD_RST_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_RST_PIN)
 
-#define LCD_LIGHT_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_LIGHT_PIN)
-#define LCD_LIGHT_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_LIGHT_PIN)
+#define LCD_LIGHT_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_LIGHT_PIN)
+#define LCD_LIGHT_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_LIGHT_PIN)
 
-#define LCD_DC_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_WR_PIN)
-#define LCD_DC_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_WR_PIN)
+#define LCD_DC_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_WR_PIN)
+#define LCD_DC_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_WR_PIN)
 
-#define LCD_SDA_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_SDA_PIN)
-#define LCD_SDA_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_SDA_PIN)
+#define LCD_SDA_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_SDA_PIN)
+#define LCD_SDA_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_SDA_PIN)
 
-#define LCD_SCK_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_SCK_PIN)
-#define LCD_SCK_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_SCK_PIN)
+#define LCD_SCK_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_SCK_PIN)
+#define LCD_SCK_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_SCK_PIN)
 
 typedef enum
 {
