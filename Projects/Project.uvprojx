@@ -601,6 +601,11 @@
               <FileType>1</FileType>
               <FilePath>../Hardware/Src/usart.c</FilePath>
             </File>
+            <File>
+              <FileName>dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Hardware\Src\dma.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
