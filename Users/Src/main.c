@@ -2,12 +2,11 @@
 
 int main(void)
 {
-    SystemInit();
     systick_config();
     gpio_config();
-    // spi_config();
+    spi_config();
     usart_config();
-    //    ST7735S_Init();
+    st7735s_init();
     uint8_t i;
 
     printf("Running...\n");
