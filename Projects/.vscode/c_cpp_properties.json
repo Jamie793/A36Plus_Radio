@@ -37,7 +37,6 @@
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",
-                "GD32F3X0",
                 "GD32F330",
                 "__alignof__(x)=",
                 "__asm(x)=",

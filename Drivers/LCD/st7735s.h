@@ -1,3 +1,5 @@
+// Written by Jamiexu
+
 #ifndef __ST7735S_H_
 #define __ST7735S_H_
 #include "main.h"

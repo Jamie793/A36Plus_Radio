@@ -1,6 +1,6 @@
 #include "st7735s.h"
 
-static _color_format color_format = COLOR_FORMAT_RGB565;
+static _color_format color_format = COLOR_FORMAT_RGB666;
 static _color_rgb444 color_rgb444;
 static _color_rgb565 color_rgb565;
 static _color_rgb666 color_rgb666;
@@ -109,34 +109,49 @@ static void ST7735S_SetWindow(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2
 
 static void ST7735S_Send_Color(void)
 {
-    if (color_format == COLOR_FORMAT_RGB666)
-    {
-        ST7735S_SendData(color_rgb666.r << 2);
-        ST7735S_SendData(color_rgb666.g << 2);
-        ST7735S_SendData(color_rgb666.b << 2);
-    }
-    else if (color_format == COLOR_FORMAT_RGB565)
-    {
-        ST7735S_SendData((color_rgb666.r << 5) | (color_rgb666.g & 0x38));
-        ST7735S_SendData(((color_rgb666.g & 0x07) << 3) | color_rgb666.b);
-    }
-    else if (color_format == COLOR_FORMAT_RGB444)
-    {
-        ST7735S_SendData((color_rgb444.r << 4) | (color_rgb444.g));
-        ST7735S_SendData(color_rgb444.b << 4);
-    }
+    // if (color_format == COLOR_FORMAT_RGB666)
+    // {
+    //     ST7735S_SendData(color_rgb666.r << 2);
+    //     ST7735S_SendData(color_rgb666.g << 2);
+    //     ST7735S_SendData(color_rgb666.b << 2);
+    // }
+    // else if (color_format == COLOR_FORMAT_RGB565)
+    // {
+    //     ST7735S_SendData((color_rgb666.r << 5) | (color_rgb666.g & 0x38));
+    //     ST7735S_SendData(((color_rgb666.g & 0x07) << 3) | color_rgb666.b);
+    // }
+    // else if (color_format == COLOR_FORMAT_RGB444)
+    // {
+    //     ST7735S_SendData((color_rgb444.r << 4) | (color_rgb444.g));
+    //     ST7735S_SendData(color_rgb444.b << 4);
+    // }
 }
 
 void ST7735S_Draw_Pixel(uint8_t x, uint8_t y)
 {
     ST7735S_SetWindow(x, x + 5, y, y + 5);
-    ST7735S_Send_Color();
+    // if (color_format == COLOR_FORMAT_RGB666)
+    // {
+    ST7735S_SendData(color_rgb666.r << 2);
+    ST7735S_SendData(color_rgb666.g << 2);
+    ST7735S_SendData(color_rgb666.b << 2);
+    // }
+    // else if (color_format == COLOR_FORMAT_RGB565)
+    // {
+    //     ST7735S_SendData((color_rgb666.r << 5) | (color_rgb666.g & 0x38));
+    //     ST7735S_SendData(((color_rgb666.g & 0x07) << 3) | color_rgb666.b);
+    // }
+    // else if (color_format == COLOR_FORMAT_RGB444)
+    // {
+    //     ST7735S_SendData((color_rgb444.r << 4) | (color_rgb444.g));
+    //     ST7735S_SendData(color_rgb444.b << 4);
+    // }
 }
 
 void ST7735S_Fill_React(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
 {
     uint16_t k = 0;
-    ST7735S_SetWindow(x, x + width, y, y + height);
+    // ST7735S_SetWindow(x, x + width, y, y + heig
     for (uint16_t i = 0; i < width; i++)
     {
         for (uint16_t j = 0; j < height; j++)
@@ -148,7 +163,8 @@ void ST7735S_Fill_React(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
             //     ST7735S_Flush();
             //     k = 0;
             // }
-            ST7735S_Send_Color();
+            // ST7735S_Send_Color();
+            ST7735S_Draw_Pixel(x + i, y + j);
         }
     }
 }
@@ -199,7 +215,7 @@ void ST7735S_Init(void)
     // turn off display inversion
     ST7735S_SendCommand(ST7735S_CMD_INVOFF);
 
-    // gamma set
+    // gamma setting
     ST7735S_SendCommand(ST7735S_CMD_GAMSET);
     ST7735S_SendData(0x01);
 
@@ -218,6 +234,7 @@ void ST7735S_Init(void)
     //
 
     // clear screen
+    LCD_LIGHT_HIGH;
     ST7735S_SetColor(0xFF, 0, 0);
-    ST7735S_Fill_React(0, 0, 10, 10);
+    ST7735S_Fill_React(0, 0, DISPLAY_W, DISPLAY_H);
 }
