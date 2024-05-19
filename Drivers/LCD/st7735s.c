@@ -5,7 +5,8 @@ static _color_rgb444 color_rgb444;
 static _color_rgb565 color_rgb565;
 static _color_rgb666 color_rgb666;
 static st7735s_window_t window;
-static _color_rgb666 frame_buffer[FRAME_SIZE] = {0};
+uint8_t frame_buffer[FRAME_SIZE] = {0};
+uint32_t fram_buffer_pos = 0;
 
 static void spi_send_bytes(uint8_t len, uint8_t *data)
 {
@@ -155,40 +156,40 @@ void st7735s_draw_pixel(uint8_t x, uint8_t y)
 
 void st7735s_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
 {
-    uint16_t k = 0;
-    // st7735s_SetWindow(x, x + width, y, y + heig
+    st7735s_set_window(x, x + width, y, y + height);
     for (uint16_t i = 0; i < width; i++)
     {
         for (uint16_t j = 0; j < height; j++)
         {
-            // frame_buffer[k++] = color_rgb666;
-            // st7735s_UpdateWindow(x, y);
-            // if (k == 128)
-            // {
-            //     st7735s_Flush();
-            //     k = 0;
-            // }
-            // st7735s_Send_Color();
-            st7735s_draw_pixel(x + i, y + j);
+            frame_buffer[fram_buffer_pos++] = color_rgb666.r << 2;
+            frame_buffer[fram_buffer_pos++] = color_rgb666.g << 2;
+            frame_buffer[fram_buffer_pos++] = color_rgb666.b << 2;
+            if (fram_buffer_pos >= FRAME_SIZE)
+                st7735s_flush();
         }
     }
+    if (fram_buffer_pos > 0)
+        st7735s_flush();
 }
 
 void st7735s_flush()
 {
-    st7735s_set_window(window.xs, window.xe, window.ys, window.ye);
+    LCD_CS_LOW;
+    LCD_DC_HIGH;
+    
+    dma_transfer_number_config(DMA_CH4, fram_buffer_pos);
+    spi_dma_enable(SPI1, SPI_DMA_TRANSMIT);
+    dma_channel_enable(DMA_CH4);
 
-    if (color_format == COLOR_FORMAT_RGB666)
-    {
-        for (size_t i = 0; i < FRAME_SIZE; i++)
-        {
-            st7735s_send_data(frame_buffer[i].r << 2);
-            st7735s_send_data(frame_buffer[i].g << 2);
-            st7735s_send_data(frame_buffer[i].b << 2);
-        }
-    }
+    while (dma_flag_get(DMA_CH4, DMA_FLAG_FTF) == RESET)
+        ;
 
-    st7735s_reset_window();
+    dma_flag_clear(DMA_CH4, DMA_FLAG_FTF);
+
+    LCD_CS_HIGH;
+    fram_buffer_pos = 0;
+    spi_dma_disable(SPI1, SPI_DMA_TRANSMIT);
+    dma_channel_disable(DMA_CH4);
 }
 
 void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue)
@@ -243,8 +244,8 @@ void st7735s_init(void)
     // display on
     st7735s_send_command(ST7735S_CMD_DISPON);
     // st7735s_send_command(ST7735S_CMD_DISPOFF);
-    
-    //backlight on
+
+    // backlight on
     st7735s_delay(30);
     LCD_LIGHT_HIGH;
 }
