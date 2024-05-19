@@ -151,7 +151,24 @@
           <Name>(105=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>183</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134224338</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>../Drivers/LCD/st7735s.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Project\../Drivers/LCD/st7735s.c\183</Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -171,29 +188,36 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>0x20000010</ItemText>
+          <ItemText>flag</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>flag</ItemText>
+          <ItemText>channelx</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>channelx</ItemText>
+          <ItemText>reval</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>reval</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
           <ItemText>DMA_INTF &amp; (1 &lt;&lt; 17)</ItemText>
         </Ww>
       </WatchWindow1>
+      <WatchWindow2>
+        <Ww>
+          <count>0</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>color_rgb666</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>frame_buffer</ItemText>
+        </Ww>
+      </WatchWindow2>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>

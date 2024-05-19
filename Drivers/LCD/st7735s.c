@@ -164,6 +164,7 @@ void st7735s_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
             frame_buffer[fram_buffer_pos++] = color_rgb666.r << 2;
             frame_buffer[fram_buffer_pos++] = color_rgb666.g << 2;
             frame_buffer[fram_buffer_pos++] = color_rgb666.b << 2;
+
             if (fram_buffer_pos >= FRAME_SIZE)
                 st7735s_flush();
         }
@@ -176,7 +177,10 @@ void st7735s_flush()
 {
     LCD_CS_LOW;
     LCD_DC_HIGH;
-    
+
+    // for (uint32_t i = 0; i < fram_buffer_pos; i++)
+    //     st7735s_send_data(frame_buffer[i]);
+
     dma_transfer_number_config(DMA_CH4, fram_buffer_pos);
     spi_dma_enable(SPI1, SPI_DMA_TRANSMIT);
     dma_channel_enable(DMA_CH4);
@@ -197,6 +201,47 @@ void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue)
     color_rgb666.r = red;
     color_rgb666.g = green;
     color_rgb666.b = blue;
+}
+
+void st7735s_set_color_hex(uint8_t *color)
+{
+    if (*color != '#')
+        return;
+    unsigned long hexValue = strtoul(color + 1, NULL, 16);
+    color_rgb666.r = (hexValue >> 18) & 0x3F;
+    color_rgb666.g = (hexValue >> 12) & 0x3F;
+    color_rgb666.b = (hexValue >> 6) & 0x3F;
+}
+
+void st7735s_test(void)
+{
+    st7735s_set_color_hex("#FF0000");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
+
+    st7735s_set_color_hex("#00FF00");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
+
+    st7735s_set_color_hex("#0000FF");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
+
+    st7735s_set_color_hex("#FFFF00");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
+
+    st7735s_set_color_hex("#FF00FF");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
+
+    st7735s_set_color_hex("#00FFFF");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
+
+    st7735s_set_color_hex("#800080");
+    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    st7735s_delay(500);
 }
 
 void st7735s_init(void)

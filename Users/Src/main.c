@@ -17,6 +17,11 @@ int main(void)
     {
         printf("Testing...\n");
 
+        // st7735s_set_color(0xFF, 0x00, 0x00);
+
+        // st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+        // delay_1ms(10000);
+        st7735s_test();
         // for (uint8_t i = 0; i < 10; i++)
         //     usart_tx[i] = 0x30 + i;
 
