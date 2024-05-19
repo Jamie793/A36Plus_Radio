@@ -229,7 +229,10 @@
 				31,
 				32,
 				33,
-				34
+				34,
+				35,
+				36,
+				37
 			]
 		}
 	],
@@ -302,7 +305,10 @@
 				31,
 				32,
 				33,
-				34
+				34,
+				35,
+				36,
+				37
 			]
 		}
 	],
@@ -509,13 +515,31 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
+			"path" : "Hardware/Src/dma.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
 			"path" : "Hardware/Src/gpio.c",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 1,
+			"path" : "Hardware/Src/key.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
 			"path" : "Hardware/Src/spi.c",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 1,
+			"path" : "Hardware/Src/usart.c",
 			"sourceGroupIndex" : 1
 		}
 	],

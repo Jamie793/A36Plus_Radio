@@ -189,6 +189,21 @@ Drivers/LCD/st7735s_compat.s:
 .PHONY : Drivers/LCD/st7735s_compat.s
 
 # target to build an object file
+Hardware/Src/dma.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/dma.o
+.PHONY : Hardware/Src/dma.o
+
+# target to preprocess a source file
+Hardware/Src/dma.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/dma.i
+.PHONY : Hardware/Src/dma.i
+
+# target to generate assembly for a file
+Hardware/Src/dma.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/dma.s
+.PHONY : Hardware/Src/dma.s
+
+# target to build an object file
 Hardware/Src/gpio.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o
 .PHONY : Hardware/Src/gpio.o
@@ -204,6 +219,21 @@ Hardware/Src/gpio.s:
 .PHONY : Hardware/Src/gpio.s
 
 # target to build an object file
+Hardware/Src/key.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/key.o
+.PHONY : Hardware/Src/key.o
+
+# target to preprocess a source file
+Hardware/Src/key.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/key.i
+.PHONY : Hardware/Src/key.i
+
+# target to generate assembly for a file
+Hardware/Src/key.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/key.s
+.PHONY : Hardware/Src/key.s
+
+# target to build an object file
 Hardware/Src/spi.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/spi.o
 .PHONY : Hardware/Src/spi.o
@@ -217,6 +247,21 @@ Hardware/Src/spi.i:
 Hardware/Src/spi.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/spi.s
 .PHONY : Hardware/Src/spi.s
+
+# target to build an object file
+Hardware/Src/usart.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/usart.o
+.PHONY : Hardware/Src/usart.o
+
+# target to preprocess a source file
+Hardware/Src/usart.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/usart.i
+.PHONY : Hardware/Src/usart.i
+
+# target to generate assembly for a file
+Hardware/Src/usart.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\A36Plus.dir\build.make CMakeFiles/A36Plus.dir/Hardware/Src/usart.s
+.PHONY : Hardware/Src/usart.s
 
 # target to build an object file
 Libraries/GD32/CMSIS/GD/GD32F3x0/Source/ARM/startup_gd32f3x0.o:
@@ -664,12 +709,21 @@ help:
 	@echo ... Drivers/LCD/st7735s_compat.o
 	@echo ... Drivers/LCD/st7735s_compat.i
 	@echo ... Drivers/LCD/st7735s_compat.s
+	@echo ... Hardware/Src/dma.o
+	@echo ... Hardware/Src/dma.i
+	@echo ... Hardware/Src/dma.s
 	@echo ... Hardware/Src/gpio.o
 	@echo ... Hardware/Src/gpio.i
 	@echo ... Hardware/Src/gpio.s
+	@echo ... Hardware/Src/key.o
+	@echo ... Hardware/Src/key.i
+	@echo ... Hardware/Src/key.s
 	@echo ... Hardware/Src/spi.o
 	@echo ... Hardware/Src/spi.i
 	@echo ... Hardware/Src/spi.s
+	@echo ... Hardware/Src/usart.o
+	@echo ... Hardware/Src/usart.i
+	@echo ... Hardware/Src/usart.s
 	@echo ... Libraries/GD32/CMSIS/GD/GD32F3x0/Source/ARM/startup_gd32f3x0.o
 	@echo ... Libraries/GD32/CMSIS/GD/GD32F3x0/Source/system_gd32f3x0.o
 	@echo ... Libraries/GD32/CMSIS/GD/GD32F3x0/Source/system_gd32f3x0.i

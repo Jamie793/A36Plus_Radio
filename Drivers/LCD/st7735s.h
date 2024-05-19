@@ -1,28 +1,29 @@
 // Written by Jamiexu
 
-#ifndef __ST7735S_H_
-#define __ST7735S_H_
+#ifndef __ST7735S_JAMIEXU_H_
+#define __ST7735S_JAMIEXU_H_
 #include "main.h"
+#include "stdio.h"
 #include "string.h"
 
 // replace your mcu gpio
-#define LCD_CS_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_CS_PIN)
-#define LCD_CS_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_CS_PIN)
+#define LCD_CS_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_CS_PIN)
+#define LCD_CS_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_CS_PIN)
 
-#define LCD_RST_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_RST_PIN)
-#define LCD_RST_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_RST_PIN)
+#define LCD_RST_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_RST_PIN)
+#define LCD_RST_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_RST_PIN)
 
-#define LCD_LIGHT_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_LIGHT_PIN)
-#define LCD_LIGHT_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_LIGHT_PIN)
+#define LCD_LIGHT_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_LIGHT_PIN)
+#define LCD_LIGHT_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_LIGHT_PIN)
 
-#define LCD_DC_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_WR_PIN)
-#define LCD_DC_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_WR_PIN)
+#define LCD_DC_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_WR_PIN)
+#define LCD_DC_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_WR_PIN)
 
-#define LCD_SDA_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_SDA_PIN)
-#define LCD_SDA_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_SDA_PIN)
+#define LCD_SDA_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_SDA_PIN)
+#define LCD_SDA_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_SDA_PIN)
 
-#define LCD_SCK_LOW gpio_bit_reset(GPIO_LCD_PORT, GPIO_LCD_SCK_PIN)
-#define LCD_SCK_HIGH gpio_bit_set(GPIO_LCD_PORT, GPIO_LCD_SCK_PIN)
+#define LCD_SCK_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_SCK_PIN)
+#define LCD_SCK_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_SCK_PIN)
 
 typedef enum
 {
@@ -128,23 +129,25 @@ typedef struct
     uint16_t ye;
 } st7735s_window_t;
 
-static void SPI_SendBytes(uint8_t len, uint8_t *data); // spi send data
-static void SPI_SendByte(uint8_t data);                // spi send one byte data
-static void SPI_SendBit(uint8_t data);                 // spi send one bit data
-static void ST7735S_SendCommand(st7735s_cmd_t cmd);    // st7735s send command
-static void ST7735S_SendData(uint8_t data);            // st7735s data
-static void ST7735S_Delay(uint32_t count);            // st7735s data
+static void spi_send_bytes(uint8_t len, uint8_t *data); // spi send data
+static void spi_send_byte(uint8_t data);                // spi send one byte data
+static void spi_send_bit(uint8_t data);                 // spi send one bit data
+static void st7735s_send_command(st7735s_cmd_t cmd);    // st7735s send command
+static void st7735s_send_data(uint8_t data);            // st7735s data
+static void st7735s_delay(uint32_t count);            // st7735s data
 
-void ST7735S_Init(void);                                         // st7735s init
-void ST7735S_SetColor(uint8_t red, uint8_t green, uint8_t blue); // st7735s set color
-void ST7735S_SetPixelFormat(_color_format x);                    // st7735s set pixel format
-void ST7735S_Draw_Pixel(uint8_t x, uint8_t y);
-void ST7735S_Fill_React(uint16_t x, uint16_t y, uint16_t width, uint16_t height); // st7735s fill react
-void ST7735S_Flush(void);
+void st7735s_init(void);    
+void st7735s_test(void);                                     // st7735s init
+void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue); // st7735s set color
+void st7735s_set_color_hex(uint8_t *color); // st7735s set color by hex
+void st7735s_set_pixel_format(_color_format x);                    // st7735s set pixel format
+void st7735s_draw_pixel(uint8_t x, uint8_t y);
+void st7735s_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height); // st7735s fill react
+void st7735s_flush(void);
 
-static void ST7735S_ResetWindow(void);                                             // st7735s reset window
-static void ST7735S_UpdateWindow(uint16_t x, uint16_t y);                          // st7735s update window
-static void ST7735S_SetWindow(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2); // st7735s set window
-static void ST7735S_Send_Color(void);
+static void st7735s_reset_window(void);                                             // st7735s reset window
+static void st7735s_update_window(uint16_t x, uint16_t y);                          // st7735s update window
+static void st7735s_set_window(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2); // st7735s set window
+static void st7735s_send_color(void);
 
 #endif

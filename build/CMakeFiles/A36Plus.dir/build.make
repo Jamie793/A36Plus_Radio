@@ -529,10 +529,24 @@ CMakeFiles/A36Plus.dir/Drivers/LCD/st7735s_compat.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/A36Plus.dir/Drivers/LCD/st7735s_compat.s"
 	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\1-MyFiles\2-Dev\3-A36Plus\Drivers\LCD\st7735s_compat.c -o CMakeFiles\A36Plus.dir\Drivers\LCD\st7735s_compat.s
 
+CMakeFiles/A36Plus.dir/Hardware/Src/dma.o: CMakeFiles/A36Plus.dir/flags.make
+CMakeFiles/A36Plus.dir/Hardware/Src/dma.o: D:/1-MyFiles/2-Dev/3-A36Plus/Hardware/Src/dma.c
+CMakeFiles/A36Plus.dir/Hardware/Src/dma.o: CMakeFiles/A36Plus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/dma.o"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/A36Plus.dir/Hardware/Src/dma.o -MF CMakeFiles\A36Plus.dir\Hardware\Src\dma.o.d -o CMakeFiles\A36Plus.dir\Hardware\Src\dma.o -c D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\dma.c
+
+CMakeFiles/A36Plus.dir/Hardware/Src/dma.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/A36Plus.dir/Hardware/Src/dma.i"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\dma.c > CMakeFiles\A36Plus.dir\Hardware\Src\dma.i
+
+CMakeFiles/A36Plus.dir/Hardware/Src/dma.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/A36Plus.dir/Hardware/Src/dma.s"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\dma.c -o CMakeFiles\A36Plus.dir\Hardware\Src\dma.s
+
 CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o: CMakeFiles/A36Plus.dir/flags.make
 CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o: D:/1-MyFiles/2-Dev/3-A36Plus/Hardware/Src/gpio.c
 CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o: CMakeFiles/A36Plus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o"
 	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o -MF CMakeFiles\A36Plus.dir\Hardware\Src\gpio.o.d -o CMakeFiles\A36Plus.dir\Hardware\Src\gpio.o -c D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\gpio.c
 
 CMakeFiles/A36Plus.dir/Hardware/Src/gpio.i: cmake_force
@@ -543,10 +557,24 @@ CMakeFiles/A36Plus.dir/Hardware/Src/gpio.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/A36Plus.dir/Hardware/Src/gpio.s"
 	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\gpio.c -o CMakeFiles\A36Plus.dir\Hardware\Src\gpio.s
 
+CMakeFiles/A36Plus.dir/Hardware/Src/key.o: CMakeFiles/A36Plus.dir/flags.make
+CMakeFiles/A36Plus.dir/Hardware/Src/key.o: D:/1-MyFiles/2-Dev/3-A36Plus/Hardware/Src/key.c
+CMakeFiles/A36Plus.dir/Hardware/Src/key.o: CMakeFiles/A36Plus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/key.o"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/A36Plus.dir/Hardware/Src/key.o -MF CMakeFiles\A36Plus.dir\Hardware\Src\key.o.d -o CMakeFiles\A36Plus.dir\Hardware\Src\key.o -c D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\key.c
+
+CMakeFiles/A36Plus.dir/Hardware/Src/key.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/A36Plus.dir/Hardware/Src/key.i"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\key.c > CMakeFiles\A36Plus.dir\Hardware\Src\key.i
+
+CMakeFiles/A36Plus.dir/Hardware/Src/key.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/A36Plus.dir/Hardware/Src/key.s"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\key.c -o CMakeFiles\A36Plus.dir\Hardware\Src\key.s
+
 CMakeFiles/A36Plus.dir/Hardware/Src/spi.o: CMakeFiles/A36Plus.dir/flags.make
 CMakeFiles/A36Plus.dir/Hardware/Src/spi.o: D:/1-MyFiles/2-Dev/3-A36Plus/Hardware/Src/spi.c
 CMakeFiles/A36Plus.dir/Hardware/Src/spi.o: CMakeFiles/A36Plus.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/spi.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/spi.o"
 	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/A36Plus.dir/Hardware/Src/spi.o -MF CMakeFiles\A36Plus.dir\Hardware\Src\spi.o.d -o CMakeFiles\A36Plus.dir\Hardware\Src\spi.o -c D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\spi.c
 
 CMakeFiles/A36Plus.dir/Hardware/Src/spi.i: cmake_force
@@ -556,6 +584,20 @@ CMakeFiles/A36Plus.dir/Hardware/Src/spi.i: cmake_force
 CMakeFiles/A36Plus.dir/Hardware/Src/spi.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/A36Plus.dir/Hardware/Src/spi.s"
 	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\spi.c -o CMakeFiles\A36Plus.dir\Hardware\Src\spi.s
+
+CMakeFiles/A36Plus.dir/Hardware/Src/usart.o: CMakeFiles/A36Plus.dir/flags.make
+CMakeFiles/A36Plus.dir/Hardware/Src/usart.o: D:/1-MyFiles/2-Dev/3-A36Plus/Hardware/Src/usart.c
+CMakeFiles/A36Plus.dir/Hardware/Src/usart.o: CMakeFiles/A36Plus.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building C object CMakeFiles/A36Plus.dir/Hardware/Src/usart.o"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/A36Plus.dir/Hardware/Src/usart.o -MF CMakeFiles\A36Plus.dir\Hardware\Src\usart.o.d -o CMakeFiles\A36Plus.dir\Hardware\Src\usart.o -c D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\usart.c
+
+CMakeFiles/A36Plus.dir/Hardware/Src/usart.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/A36Plus.dir/Hardware/Src/usart.i"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\usart.c > CMakeFiles\A36Plus.dir\Hardware\Src\usart.i
+
+CMakeFiles/A36Plus.dir/Hardware/Src/usart.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/A36Plus.dir/Hardware/Src/usart.s"
+	C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe --target=arm-arm-none-eabi $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\1-MyFiles\2-Dev\3-A36Plus\Hardware\Src\usart.c -o CMakeFiles\A36Plus.dir\Hardware\Src\usart.s
 
 # Object files for target A36Plus
 A36Plus_OBJECTS = \
@@ -592,8 +634,11 @@ A36Plus_OBJECTS = \
 "CMakeFiles/A36Plus.dir/Drivers/LCD/gfx.o" \
 "CMakeFiles/A36Plus.dir/Drivers/LCD/st7735s.o" \
 "CMakeFiles/A36Plus.dir/Drivers/LCD/st7735s_compat.o" \
+"CMakeFiles/A36Plus.dir/Hardware/Src/dma.o" \
 "CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o" \
-"CMakeFiles/A36Plus.dir/Hardware/Src/spi.o"
+"CMakeFiles/A36Plus.dir/Hardware/Src/key.o" \
+"CMakeFiles/A36Plus.dir/Hardware/Src/spi.o" \
+"CMakeFiles/A36Plus.dir/Hardware/Src/usart.o"
 
 # External object files for target A36Plus
 A36Plus_EXTERNAL_OBJECTS =
@@ -631,11 +676,14 @@ A36Plus.elf: CMakeFiles/A36Plus.dir/Drivers/LCD/fonts.o
 A36Plus.elf: CMakeFiles/A36Plus.dir/Drivers/LCD/gfx.o
 A36Plus.elf: CMakeFiles/A36Plus.dir/Drivers/LCD/st7735s.o
 A36Plus.elf: CMakeFiles/A36Plus.dir/Drivers/LCD/st7735s_compat.o
+A36Plus.elf: CMakeFiles/A36Plus.dir/Hardware/Src/dma.o
 A36Plus.elf: CMakeFiles/A36Plus.dir/Hardware/Src/gpio.o
+A36Plus.elf: CMakeFiles/A36Plus.dir/Hardware/Src/key.o
 A36Plus.elf: CMakeFiles/A36Plus.dir/Hardware/Src/spi.o
+A36Plus.elf: CMakeFiles/A36Plus.dir/Hardware/Src/usart.o
 A36Plus.elf: CMakeFiles/A36Plus.dir/build.make
 A36Plus.elf: CMakeFiles/A36Plus.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Linking C executable A36Plus.elf"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\1-MyFiles\2-Dev\3-A36Plus\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Linking C executable A36Plus.elf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\A36Plus.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Invoking: Cross ARM GNU Print Size"
 	arm-none-eabi-objcopy -Obinary A36Plus.elf A36Plus.bin
