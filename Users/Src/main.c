@@ -1,6 +1,38 @@
 #include "main.h"
 
 uint8_t usart_tx[10];
+uint8_t flash_data[W25Q16JV_SECTOR_SIZE] = {0};
+uint8_t flash_data_text[16] = {0};
+uint32_t current_addr = 0;
+void flash_dump(void)
+{
+    printf("0x%08x     ", current_addr);
+    for (uint8_t i = 0; i < 32; i++)
+    {
+        // printf("**************BLOCK %d*****************\n", i);
+        for (uint8_t j = 0; j < 16; j++)
+        {
+            /* code */
+            // printf("**************SECTOR %d*****************\n", j);
+            w25q16jv_read_sector((i + 1) * j * W25Q16JV_SECTOR_SIZE - j * W25Q16JV_SECTOR_SIZE, flash_data);
+            for (uint32_t k = 0; k < W25Q16JV_SECTOR_SIZE; k++)
+            {
+                // printf("**************PAGE %d*****************\n", k);
+                sprintf(flash_data_text[k % 16], "%s", flash_data[i]);
+                printf("%02x ", flash_data[k]);
+                current_addr++;
+
+                if (current_addr % 16 == 0)
+                    printf("    %s\n0x%08x     ", flash_data_text, current_addr);
+                // printf("**************END PAGE %d**	***************\n", k);
+                // delay_1ms(50);
+            }
+            // printf("**************EEND SECTOR %d*****************\n", j);
+            // delay_1ms(50);
+        }
+        // printf("**************END BLOCK %d**************\n", i);
+    }
+}
 
 int main(void)
 {
@@ -13,34 +45,26 @@ int main(void)
     uint8_t i;
 
     printf("Running...\n");
+    w25q16jv_write_reg1(W25Q16JV_REG1_WEL, 1);
     while (1)
     {
         printf("Testing...\n");
-
-        // st7735s_set_color(0xFF, 0x00, 0x00);
-
-        // st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-        // delay_1ms(10000);
-        st7735s_test();
-        // for (uint8_t i = 0; i < 10; i++)
-        //     usart_tx[i] = 0x30 + i;
-
-        // dma_transfer_number_config(DMA_CH1, 10);
-        // dma_memory_address_config(DMA_CH1, usart_tx);
-        // dma_channel_enable(DMA_CH1);
-        // while (dma_flag_get(DMA_CH1, DMA_FLAG_FTF) == RESET)
-        //     ;
-        // dma_flag_clear(DMA_CH1, DMA_FLAG_FTF);
-        // while (DMA_INTF & (1 << 17) != RESET)
+        printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
+        flash_dump();
+        // for (uint32_t i = 0; i < 16; i++)
         // {
         //     /* code */
+        //     w25q16jv_read_sector(i * 0xFF, flash_data);
+        //     for (uint32_t i = 0; i < W25Q16JV_SECTOR_SIZE; i++)
+        //     {
+
+        //         printf("%x ", flash_data[i]);
+        //         delay_1ms(100);
+        //     }
+        //     delay_1ms(500);
         // }
-        // DMA_INTC |= (1 << 17);
-        // dma_channel_disable(DMA_CH1);
-        /* code */
-        //        LCD_LIGHT_LOW;
-        //        delay_1us(100);
-        //        LCD_LIGHT_HIGH;
+
+        // st7735s_test();
         delay_1ms(1000);
     }
 }
