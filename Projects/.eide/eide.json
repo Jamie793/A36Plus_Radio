@@ -5,9 +5,9 @@
   "srcDirs": [
     ".eide/deps",
     "../Users/Src",
-    "../Drivers/LCD",
     "../Hardware/Src",
-    "../Libraries"
+    "../Libraries",
+    "../Drivers"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",
@@ -183,7 +183,8 @@
           ".eide/deps",
           "../Libraries/GD32",
           "../Hardware/Inc",
-          "../Drivers/LCD"
+          "../Drivers/LCD",
+          "../Drivers/EEPROM"
         ],
         "libList": [],
         "sourceDirList": [],
