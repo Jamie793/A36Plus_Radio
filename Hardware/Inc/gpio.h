@@ -11,6 +11,15 @@
 #define LCD_GPIO_LIGHT_PIN GPIO_PIN_7
 #define LCD_GPIO_RCU RCU_GPIOB
 
+
+#define EEPROM_GPIO_PORT GPIOA
+#define EEPROM_GPIO_CS_PIN GPIO_PIN_4
+#define EEPROM_GPIO_SCK_PIN GPIO_PIN_5
+#define EEPROM_GPIO_DIN_PIN GPIO_PIN_7
+#define EEPROM_GPIO_DOUT_PIN GPIO_PIN_6
+#define EEPROM_GPIO_RCU RCU_GPIOA
+
+
 #define KEY_PORT
 
 #define USART_GPIO_PORT GPIOA
@@ -21,6 +30,7 @@
 static void LCD_init(void);
 static void key_init(void);
 static void usart_init(void);
+static void eeprom_init(void);
 
 void gpio_config(void);
 

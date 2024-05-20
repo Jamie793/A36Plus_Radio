@@ -17,15 +17,27 @@ static void usart_init(void)
     gpio_output_options_set(USART_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_10MHZ, USART_GPIO_TX_PIN | USART_GPIO_RX_PIN);
 }
 
-static void key_init(void){
+static void eeprom_init(void)
+{
+    gpio_af_set(EEPROM_GPIO_PORT, GPIO_AF_0, EEPROM_GPIO_SCK_PIN | EEPROM_GPIO_DIN_PIN | EEPROM_GPIO_DOUT_PIN);
+    gpio_mode_set(EEPROM_GPIO_PORT, GPIO_MODE_AF, GPIO_PUPD_NONE, EEPROM_GPIO_SCK_PIN | EEPROM_GPIO_DIN_PIN | EEPROM_GPIO_DOUT_PIN);
+    gpio_output_options_set(EEPROM_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_10MHZ, EEPROM_GPIO_SCK_PIN | EEPROM_GPIO_DIN_PIN | EEPROM_GPIO_DOUT_PIN);
 
+    gpio_mode_set(EEPROM_GPIO_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, EEPROM_GPIO_CS_PIN);
+    gpio_output_options_set(EEPROM_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_10MHZ, EEPROM_GPIO_CS_PIN);
+}
+
+static void key_init(void)
+{
 }
 
 void gpio_config(void)
 {
     rcu_periph_clock_enable(LCD_GPIO_RCU);
     rcu_periph_clock_enable(USART_GPIO_RCU);
+    rcu_periph_clock_enable(EEPROM_GPIO_RCU);
     LCD_init();
     key_init();
+    eeprom_init();
     usart_init();
 }
