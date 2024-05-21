@@ -117,6 +117,11 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
+          <Key>ST-LINKIII-KEIL_SWO</Key>
+          <Name>-U50FF6E065075545353461187 -O206 -SF4000 -C0 -A0 -I0 -HNlocalhost -HP7184 -P2 -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC1000 -FN1 -FF0GD32F3x0.FLM -FS08000000 -FL020000 -FP0($$Device:GD32F330CB$Flash\GD32F3x0.FLM)</Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
           <Key>UL2CM3</Key>
           <Name>UL2CM3(-S0 -C0 -P0 )  -FN1 -FC1000 -FD20000000 -FF0GD32F3x0 -FL020000 -FS08000000 -FP0($$Device:GD32F330CB$Flash\GD32F3x0.FLM)</Name>
         </SetRegEntry>
@@ -1273,8 +1278,8 @@
   </Group>
 
   <Group>
-    <GroupName>../DRIVERS/EEPROM</GroupName>
-    <tvExp>1</tvExp>
+    <GroupName>../DRIVERS/FLASH</GroupName>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1285,8 +1290,28 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Drivers\EEPROM\w25q16jv.c</PathWithFileName>
+      <PathWithFileName>../Drivers/Flash/w25q16jv.c</PathWithFileName>
       <FilenameWithoutPath>w25q16jv.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>../DRIVERS/BK4819</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>22</GroupNumber>
+      <FileNumber>72</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>../Drivers/BK4819/bk4819.c</PathWithFileName>
+      <FilenameWithoutPath>bk4819.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
