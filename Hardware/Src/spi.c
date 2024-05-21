@@ -20,7 +20,7 @@ static void lcd_spi_config(void)
     spi_enable(SPI1);
 }
 
-static void eeprom_spi_config(void)
+static void flash_spi_config(void)
 {
     spi_parameter_struct spi_init_struct;
     /* deinitialize SPI and the parameters */
@@ -45,5 +45,5 @@ void spi_config(void)
     rcu_periph_clock_enable(RCU_SPI0);
     rcu_periph_clock_enable(RCU_SPI1);
     lcd_spi_config();
-    eeprom_spi_config();
+    flash_spi_config();
 }
