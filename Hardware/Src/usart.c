@@ -1,5 +1,6 @@
 #include "usart.h"
 
+// Written by Jamiexu
 
 void usart_config(void)
 {

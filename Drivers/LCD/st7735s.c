@@ -1,5 +1,7 @@
 #include "st7735s.h"
 
+// Written by Jamiexu
+
 static _color_format color_format = COLOR_FORMAT_RGB666;
 static _color_rgb444 color_rgb444;
 static _color_rgb565 color_rgb565;

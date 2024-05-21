@@ -1,5 +1,7 @@
 #include "main.h"
 
+// Written by Jamiexu
+
 uint8_t usart_tx[10];
 uint8_t flash_data[W25Q16JV_SECTOR_SIZE] = {0};
 uint8_t flash_data_text[16] = {0};

@@ -1,5 +1,7 @@
 #include "gpio.h"
 
+// Written by Jamiexu
+
 static void LCD_init(void)
 {
     gpio_af_set(LCD_GPIO_PORT, GPIO_AF_0, LCD_GPIO_SCK_PIN | LCD_GPIO_SDA_PIN);

@@ -7,5 +7,8 @@
 #include "st7735s.h"
 #include "usart.h"
 #include "w25q16jv.h"
+
+// Written by Jamiexu
+
 int main(void);
 #endif

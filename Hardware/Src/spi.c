@@ -1,5 +1,7 @@
 #include "spi.h"
 
+// Written by Jamiexu
+
 static void lcd_spi_config(void)
 {
     spi_parameter_struct spi_init_struct;

@@ -2,6 +2,7 @@
 #define __GPIO_JAMIEXU_H__
 #include "gd32f3x0.h"
 
+// Written by Jamiexu
 
 // LCD
 #define LCD_GPIO_PORT GPIOB

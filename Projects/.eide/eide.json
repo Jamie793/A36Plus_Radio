@@ -184,7 +184,8 @@
           "../Libraries/GD32",
           "../Hardware/Inc",
           "../Drivers/LCD",
-          "../Drivers/EEPROM"
+          "../Drivers/Flash",
+          "../Drivers/BK4819"
         ],
         "libList": [],
         "sourceDirList": [],

@@ -1,5 +1,7 @@
 #include "dma.h"
 
+// Written by Jamiexu
+
 extern uint8_t usart_tx[10];
 extern uint8_t frame_buffer[FRAME_SIZE];
 static void lcd_dma_init(void)

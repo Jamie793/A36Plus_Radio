@@ -6,6 +6,8 @@
 #include "stdio.h"
 #include "string.h"
 
+// Written by Jamiexu
+
 // replace your mcu gpio
 #define LCD_CS_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_CS_PIN)
 #define LCD_CS_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_CS_PIN)
