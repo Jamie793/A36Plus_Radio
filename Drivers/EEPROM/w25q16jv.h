@@ -2,8 +2,8 @@
 #define __W25Q16JV_JAMIEXU_H__
 #include "main.h"
 
-#define EEPROM_CS_HIGHT gpio_bit_set(EEPROM_GPIO_PORT, EEPROM_GPIO_CS_PIN);
-#define EEPROM_CS_LOW gpio_bit_reset(EEPROM_GPIO_PORT, EEPROM_GPIO_CS_PIN);
+#define FLASH_CS_HIGHT gpio_bit_set(FLASH_GPIO_PORT, FLASH_GPIO_CS_PIN)
+#define FLASH_CS_LOW gpio_bit_reset(FLASH_GPIO_PORT, FLASH_GPIO_CS_PIN)
 
 // REG 1
 #define W25Q16JV_REG1_BUSY 1       // read/write busy flag
