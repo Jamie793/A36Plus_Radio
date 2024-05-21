@@ -30,13 +30,13 @@
 
 // REG3
 #define W25Q16JV_REG3_R 1           // reserved
-#define W25Q16JV_REG3_R (1 << 1)    // reserved
+#define W25Q16JV_REG3_R1 (1 << 1)    // reserved
 #define W25Q16JV_REG3_WPS (1 << 2)  // write protect selection
-#define W25Q16JV_REG3_R (1 << 3)    // reserved
-#define W25Q16JV_REG3_R (1 << 4)    // reserved
+#define W25Q16JV_REG3_R2 (1 << 3)    // reserved
+#define W25Q16JV_REG3_R3 (1 << 4)    // reserved
 #define W25Q16JV_REG3_DRV2 (1 << 5) // ouput driver strength
 #define W25Q16JV_REG3_DRV1 (1 << 6) //
-#define W25Q16JV_REG3_R (1 << 7)    // reserved
+#define W25Q16JV_REG3_R4 (1 << 7)    // reserved
 
 #define W25Q16JV_SECTOR_SIZE 4096
 #define W25Q16JV_BLOCK_SIZE 65536
@@ -79,6 +79,11 @@ uint8_t w25q16jv_read_reg3(uint8_t reg);
 void w25q16jv_write_reg3(uint8_t reg, uint8_t bit);
 
 void w25q16jv_read_sector(uint32_t addr, uint8_t *readData);
+void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData);
+
 void w25q16jv_read_block(uint32_t addr, uint8_t *readData);
+void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData);
+
+void w25q16jv_page_program(uint32_t addr, uint8_t *readData);
 
 #endif

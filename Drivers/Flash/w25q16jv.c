@@ -66,7 +66,36 @@ void w25q16jv_read_sector(uint32_t addr, uint8_t *readData)
 
     // printf("address sent.\n");
 
-    for (uint32_t i = 0; i < W25Q16JV_SECTOR_SIZE; i++)
+    for (uint16_t i = 0; i < W25Q16JV_SECTOR_SIZE; i++)
+    {
+        readData[i] = SPI_read_data();
+        // printf("the number %d data: %d\n", i, readData[i]);
+    }
+
+    FLASH_CS_HIGHT;
+} 
+
+void w25q16jv_read_block(uint32_t addr, uint8_t *readData)
+{
+    for (uint8_t i = 0; i < 16; i++)
+        w25q16jv_read_sector(addr + i * W25Q16JV_SECTOR_SIZE, readData[i * W25Q16JV_SECTOR_SIZE]);
+}
+
+void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData)
+{
+    FLASH_CS_LOW;
+
+    SPI_send_data(W25Q16JV_CMD_FAST_READ);
+    SPI_send_data((addr >> 16) & 0xFF);
+    SPI_send_data((addr >> 8) & 0xFF);
+    SPI_send_data(addr & 0xFF);
+
+    // printf("address sent.\n");
+
+    for (uint8_t i = 0; i < 8; i++)
+        SPI_send_data(0xFF); // send dummy data to generate sck to start fast read
+
+    for (uint16_t i = 0; i < W25Q16JV_SECTOR_SIZE; i++)
     {
         readData[i] = SPI_read_data();
         // printf("the number %d data: %d\n", i, readData[i]);
@@ -75,22 +104,8 @@ void w25q16jv_read_sector(uint32_t addr, uint8_t *readData)
     FLASH_CS_HIGHT;
 }
 
-void w25q16jv_read_block(uint32_t addr, uint8_t *readData)
+void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData)
 {
-    FLASH_CS_LOW;
-
-    SPI_send_data(W25Q16JV_CMD_READ);
-    SPI_send_data((addr >> 16) & 0xFF);
-    SPI_send_data((addr >> 8) & 0xFF);
-    SPI_send_data(addr & 0xFF);
-
-    printf("address sent.\n");
-
-    for (uint32_t i = 0; i < W25Q16JV_BLOCK_SIZE; i++)
-    {
-        readData[i] = SPI_read_data();
-        // printf("the number %d data: %d\n", i, readData[i]);
-    }
-
-    FLASH_CS_HIGHT;
+    for (uint8_t i = 0; i < 16; i++)
+        w25q16jv_read_sector_fast(addr + i * W25Q16JV_SECTOR_SIZE, readData[i * W25Q16JV_SECTOR_SIZE]);
 }
