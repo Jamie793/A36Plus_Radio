@@ -1,5 +1,7 @@
 #include "w25q16jv.h"
 
+// Written by Jamiexu
+
 static void SPI_send_data(uint8_t data)
 {
     while (spi_i2s_flag_get(SPI0, SPI_FLAG_TBE) == RESET)
