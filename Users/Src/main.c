@@ -45,12 +45,12 @@ int main(void)
     uint8_t i;
 
     printf("Running...\n");
-    w25q16jv_write_reg1(W25Q16JV_REG1_WEL, 1);
+    w25q16jv_write_reg1(W25Q16JV_REG1_WEL, SET);
     while (1)
     {
         printf("Testing...\n");
         printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
-        flash_dump();
+        // flash_dump();
         // for (uint32_t i = 0; i < 16; i++)
         // {
         //     /* code */
