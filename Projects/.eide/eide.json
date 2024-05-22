@@ -185,7 +185,8 @@
           "../Hardware/Inc",
           "../Drivers/LCD",
           "../Drivers/Flash",
-          "../Drivers/BK4819"
+          "../Drivers/BK4819",
+          "../Drivers/BK1080"
         ],
         "libList": [],
         "sourceDirList": [],
