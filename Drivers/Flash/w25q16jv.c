@@ -1,6 +1,7 @@
 #include "w25q16jv.h"
 
 // Written by Jamiexu
+// Errors needs to fix
 
 static void SPI_send_data(uint8_t data)
 {
@@ -19,7 +20,7 @@ static uint8_t SPI_read_data(void)
     return spi_i2s_data_receive(SPI0);
 }
 
-uint8_t w25q16jv_read_reg1(uint8_t reg)
+uint8_t w25q16jv_read_reg1(w25q16jv_reg_t reg)
 {
     uint8_t data;
     FLASH_CS_LOW;
@@ -30,7 +31,7 @@ uint8_t w25q16jv_read_reg1(uint8_t reg)
     return (data & reg);
 }
 
-void w25q16jv_write_reg1(uint8_t reg, uint8_t bit)
+void w25q16jv_write_reg1(w25q16jv_reg_t reg, uint8_t bit)
 {
     uint8_t data;
 
@@ -108,4 +109,9 @@ void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData)
 {
     for (uint8_t i = 0; i < 16; i++)
         w25q16jv_read_sector_fast(addr + i * W25Q16JV_SECTOR_SIZE, readData[i * W25Q16JV_SECTOR_SIZE]);
+}
+
+
+void w25q16jv_page_program(uint32_t addr, uint8_t *readData){
+
 }
