@@ -75,10 +75,13 @@
 #define USART_GPIO_RX_PIN GPIO_PIN_10
 #define USART_GPIO_RCU RCU_GPIOA
 
+
+
 static void LCD_init(void);
 static void key_init(void);
 static void usart_init(void);
 static void eeprom_init(void);
+static void bk4819_init(void);
 
 void gpio_config(void);
 
