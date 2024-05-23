@@ -4,15 +4,22 @@
 // Written by Jamiexu
 
 #define BK4819_SCK_LOW gpio_bit_reset(BK4819_GPIO_PORT, BK4819_GPIO_SCK_PIN)
-#define BK4819_SCK_HIGHT gpio_bit_set(BK4819_GPIO_PORT, BK4819_GPIO_SCK_PIN)
+#define BK4819_SCK_HIGH gpio_bit_set(BK4819_GPIO_PORT, BK4819_GPIO_SCK_PIN)
 
 #define BK4819_SDA_LOW gpio_bit_reset(BK4819_GPIO_PORT, BK4819_GPIO_SDA_PIN)
-#define BK4819_SDA_HIGHT gpio_bit_set(BK4819_GPIO_PORT, BK4819_GPIO_SDA_PIN)
+#define BK4819_SDA_HIGH gpio_bit_set(BK4819_GPIO_PORT, BK4819_GPIO_SDA_PIN)
 
 #define BK4819_SCN_LOW gpio_bit_reset(BK4819_GPIO_SCN_PORT, BK4819_GPIO_SCN_PIN)
-#define BK4819_SCN_HIGHT gpio_bit_set(BK4819_GPIO_SCN_PORT, BK4819_GPIO_SCN_PIN)
+#define BK4819_SCN_HIGH gpio_bit_set(BK4819_GPIO_SCN_PORT, BK4819_GPIO_SCN_PIN)
 
-#define BK4819_SDA_READ gpio_input_bit_get(BK4819_GPIO_PORT, BK1080_GPIO_SDA_PIN);
+#define BK4819_SDA_READ gpio_input_bit_get(BK4819_GPIO_PORT, BK1080_GPIO_SDA_PIN)
+
+// #define BK4819_SDA_DIR_OUT gpio_mode_set(BK4819_GPIO_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, BK4819_GPIO_SDA_PIN);
+
+// #define BK4819_SDA_DIR_IN gpio_mode_set(BK4819_GPIO_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, BK4819_GPIO_SDA_PIN);
+
+#define BK4819_REG_READ 0x80
+#define BK4819_REG_WRITE 0x00
 
 typedef enum
 {
@@ -112,14 +119,17 @@ typedef enum
     BK4819_REG_7E = 0x7E,
 } bk4819_reg_t;
 
+static void spi_write_byte(uint8_t data);
 
-static void spi_send_bytes(uint8_t len, uint8_t *data);
+static void spi_write_half_word(uint16_t data);
 
-static void spi_send_byte(uint8_t data);
-
-static uint8_t spi_receive_byte(void);
+static uint16_t spi_read_half_word(void);
 
 static void bk4819_delay(uint32_t count);
 
-void bk4819_read_reg(bk4819_reg_t reg);
+uint16_t bk4819_read_reg(bk4819_reg_t reg);
+
+void bk4819_write_reg(bk4819_reg_t reg, uint16_t data);
+
+void bk4819_init(void);
 #endif

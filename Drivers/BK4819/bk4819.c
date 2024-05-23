@@ -1,54 +1,85 @@
 #include "bk4819.h"
 // Written by Jamiexu
 
-static void spi_send_bytes(uint8_t len, uint8_t *data)
+static void spi_write_byte(uint8_t data)
 {
-    for (uint8_t i = 0; i < len; i++)
-        spi_send_byte(data[i]);
-}
-
-static void spi_send_byte(uint8_t data)
-{
-    BK4819_SCN_LOW;
-
+    BK4819_SCK_LOW;
     for (uint8_t i = 0; i < 8; i++)
     {
-        LCD_SCK_LOW;
         if (data & 0x80)
-            LCD_SDA_HIGH;
+            BK4819_SDA_HIGH;
         else
-            LCD_SDA_LOW;
-        LCD_SCK_HIGH;
+            BK4819_SDA_LOW;
+        bk4819_delay(1);
+        BK4819_SCK_HIGH;
+        bk4819_delay(1);
+        BK4819_SCK_LOW;
         data <<= 1;
     }
-
-    BK4819_SCN_HIGHT;
 }
 
-static uint8_t spi_receive_byte(void)
+static void spi_write_half_word(uint16_t data)
 {
-    uint8_t data;
-    BK4819_SCN_LOW;
+    spi_write_byte((data >> 8) & 0xFF);
+    spi_write_byte(data & 0xFF);
+}
 
-    for (uint8_t i = 0; i < 8; i++)
+static uint16_t spi_read_half_word(void)
+{
+    uint16_t data = 0;
+    BK4819_SCK_LOW;
+    for (uint8_t i = 0; i < 16; i++)
     {
         data <<= 1;
+        BK4819_SCK_HIGH;
+        bk4819_delay(1);
         BK4819_SCK_LOW;
+        bk4819_delay(1);
         data |= BK4819_SDA_READ;
-        BK4819_SCK_HIGHT;
+        // bk4819_delay(1);
     }
+    return data;
+}
 
-    BK4819_SCN_HIGHT;
+uint16_t bk4819_read_reg(bk4819_reg_t reg)
+{
+    uint16_t data;
+    BK4819_SCN_LOW;
+    bk4819_delay(1);
+
+    spi_write_byte(reg | BK4819_REG_READ);
+    // bk4819_delay(1);
+    data = spi_read_half_word();
+
+    bk4819_delay(1);
+    BK4819_SCN_HIGH;
 
     return data;
 }
 
-void bk4819_read_reg(bk4819_reg_t reg)
+void bk4819_write_reg(bk4819_reg_t reg, uint16_t data)
 {
-    
+    BK4819_SCN_LOW;
+    // bk4819_delay(1);
+
+    spi_write_byte(reg | BK4819_REG_WRITE);
+    spi_write_half_word(data);
+
+    // bk4819_delay(1);
+    BK4819_SCN_HIGH;
+}
+
+void bk4819_init(void)
+{
+    // BK4819_SCK_HIGH;
+    // BK4819_SDA_HIGH;
+    // BK4819_SCN_HIGH;
+    bk4819_write_reg(BK4819_REG_00, 0x01);
+    bk4819_delay(1000);
+    bk4819_write_reg(BK4819_REG_00, 0x00);
 }
 
 static void bk4819_delay(uint32_t count)
 {
-    delay_1ms(count);
+    delay_1us(count);
 }
