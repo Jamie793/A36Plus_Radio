@@ -121,21 +121,21 @@ typedef enum
 
 typedef enum
 {
-    BK4819_INT_FSKTF = (1 << 15),
-    BK4819_INT_FSKFFAE = (1 << 14),
-    BK4819_INT_FSKRXF = (1 << 13),
-    BK4819_INT_FSKFFAF = (1 << 12),
-    BK4819_INT_DTMFTF = (1 << 11),
-    BK4819_INT_CTDSTF = (1 << 10),
-    BK4819_INT_CDCSF = (1 << 9),
-    // BK4819_INT_ = (1 << 8),
-    // BK4819_INT_FSK_TX_F = (1 << 7),
-    // BK4819_INT_FSK_TX_F = (1 << 6),
-    // BK4819_INT_FSK_TX_F = (1 << 5),
-    // BK4819_INT_FSK_TX_F = (1 << 4),
-    // BK4819_INT_FSK_TX_F = (1 << 3),
-    // BK4819_INT_FSK_TX_F = (1 << 2),
-    // BK4819_INT_FSK_TX_F = (1 << 1)
+    BK4819_INT_FSKTF = (1 << 15),   // FSK TX Finished Interrupt
+    BK4819_INT_FSKFFAE = (1 << 14), // FSK FIFO Almost Empty interrupt
+    BK4819_INT_FSKRXF = (1 << 13),  // FSK RX Finished interrupt
+    BK4819_INT_FSKFFAF = (1 << 12), // FSK FIFO Almost Full interrupt
+    BK4819_INT_DTMFTF = (1 << 11),  // DTMF/5 TONE Found interrupt
+    BK4819_INT_CTDSTF = (1 << 10),  // CTCSS/CDCSS Tail Found interrupt
+    BK4819_INT_CDCSF = (1 << 9),    // CDCSS Found interrupt
+    BK4819_INT_CDCSL = (1 << 8),    // CDCSS Lost interrupt
+    BK4819_INT_CTSSF = (1 << 7),    // CTCSS Found interrupt
+    BK4819_INT_CTCSL = (1 << 6),    // CTCSS Lost interrupt
+    BK4819_INT_VOXF = (1 << 5),     // VOX Found interrupt
+    BK4819_INT_VOXL = (1 << 4),     // VOX Lost interrupt
+    BK4819_INT_SECF = (1 << 3),     // Squelch Found interrupt
+    BK4819_INT_SECL = (1 << 2),     // Squelch Lost interrupt
+    BK4819_INT_FSKRS = (1 << 1)     // FSK RX Sync interrupt
 } bk4819_int_t;
 
 static void spi_write_byte(uint8_t data);
