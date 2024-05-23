@@ -7,6 +7,8 @@
 #include "st7735s.h"
 #include "usart.h"
 #include "w25q16jv.h"
+#include "bk1080.h"
+#include "bk4819.h"
 
 // Written by Jamiexu
 
