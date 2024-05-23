@@ -46,13 +46,30 @@ volatile static uint32_t delay;
 void systick_config(void)
 {
     /* setup systick timer for 1000Hz interrupts */
-    if(SysTick_Config(SystemCoreClock / 1000U)) {
+    if (SysTick_Config(SystemCoreClock / 1000000U))
+    {
         /* capture error */
-        while(1) {
+        while (1)
+        {
         }
     }
     /* configure the systick handler priority */
     NVIC_SetPriority(SysTick_IRQn, 0x00U);
+}
+
+/*!
+    \brief      delay a time in microseconds
+    \param[in]  count: count in microseconds
+    \param[out] none
+    \retval     none
+*/
+void delay_1us(uint32_t count)
+{
+    delay = count;
+
+    while (0U != delay)
+    {
+    }
 }
 
 /*!
@@ -63,10 +80,8 @@ void systick_config(void)
 */
 void delay_1ms(uint32_t count)
 {
-    delay = count;
-
-    while(0U != delay) {
-    }
+    for (uint32_t i = 0; i < count; i++)
+        delay_1us(1000);
 }
 
 /*!
@@ -77,7 +92,8 @@ void delay_1ms(uint32_t count)
 */
 void delay_decrement(void)
 {
-    if(0U != delay) {
+    if (0U != delay)
+    {
         delay--;
     }
 }
