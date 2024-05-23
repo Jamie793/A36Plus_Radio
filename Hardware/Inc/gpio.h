@@ -77,11 +77,11 @@
 
 
 
-static void LCD_init(void);
-static void key_init(void);
-static void usart_init(void);
-static void eeprom_init(void);
-static void bk4819_init(void);
+static void LCD_gpio_init(void);
+static void key_gpio_init(void);
+static void usart_gpio_init(void);
+static void eeprom_gpio_init(void);
+static void bk4819_gpio_init(void);
 
 void gpio_config(void);
 
