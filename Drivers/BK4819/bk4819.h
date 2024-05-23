@@ -119,17 +119,32 @@ typedef enum
     BK4819_REG_7E = 0x7E,
 } bk4819_reg_t;
 
+typedef enum
+{
+    BK4819_INT_FSKTF = (1 << 15),
+    BK4819_INT_FSKFFAE = (1 << 14),
+    BK4819_INT_FSKRXF = (1 << 13),
+    BK4819_INT_FSKFFAF = (1 << 12),
+    BK4819_INT_DTMFTF = (1 << 11),
+    BK4819_INT_CTDSTF = (1 << 10),
+    BK4819_INT_CDCSF = (1 << 9),
+    // BK4819_INT_ = (1 << 8),
+    // BK4819_INT_FSK_TX_F = (1 << 7),
+    // BK4819_INT_FSK_TX_F = (1 << 6),
+    // BK4819_INT_FSK_TX_F = (1 << 5),
+    // BK4819_INT_FSK_TX_F = (1 << 4),
+    // BK4819_INT_FSK_TX_F = (1 << 3),
+    // BK4819_INT_FSK_TX_F = (1 << 2),
+    // BK4819_INT_FSK_TX_F = (1 << 1)
+} bk4819_int_t;
+
 static void spi_write_byte(uint8_t data);
-
 static void spi_write_half_word(uint16_t data);
-
 static uint16_t spi_read_half_word(void);
-
 static void bk4819_delay(uint32_t count);
 
 uint16_t bk4819_read_reg(bk4819_reg_t reg);
-
 void bk4819_write_reg(bk4819_reg_t reg, uint16_t data);
-
+void bk4819_interrupt_get();
 void bk4819_init(void);
 #endif
