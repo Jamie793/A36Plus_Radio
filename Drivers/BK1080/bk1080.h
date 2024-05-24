@@ -2,6 +2,16 @@
 #define __BK1080_JAMIEXU_H__
 #include "main.h"
 
+#define BK1080_SCK_LOW gpio_bit_reset(BK1080_GPIO_PORT, BK1080_GPIO_SCK_PIN)
+#define BK1080_SCK_HIGH gpio_bit_set(BK1080_GPIO_PORT, BK1080_GPIO_SCK_PIN)
+
+#define BK1080_SDA_LOW gpio_bit_reset(BK1080_GPIO_SDA_PORT, BK1080_GPIO_SDA_PIN)
+#define BK1080_SDA_HIGH gpio_bit_set(BK1080_GPIO_SDA_PORT, BK1080_GPIO_SDA_PIN)
+
+#define BK1080_SDA_READ gpio_input_bit_get(BK1080_GPIO_SDA_PORT, BK1080_GPIO_SDA_PIN)
+#define BK1080_SDA_DIR_IN gpio_mode_set(BK1080_GPIO_SDA_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, BK1080_GPIO_SDA_PIN)
+#define BK1080_SDA_DIR_OUT gpio_mode_set(BK1080_GPIO_SDA_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, BK1080_GPIO_SDA_PIN)
+
 typedef enum
 {
     BK1080_REG0 = 0X00,
@@ -20,16 +30,17 @@ typedef enum
 
 typedef enum
 {
-    IIC_ACK = 0,
-    IIC_NACK = !IIC_ACK
+    I2C_ACK = 0,
+    I2C_NACK = !IIC_ACK
 } iic_ack_t;
 
-void i2c_start(void);
-void i2c_stop(void);
-void i2c_send(uint8_t data);
-uint8_t i2c_read(void);
-void i2c_send_ack(iic_ack_t ack);
-uint8_t i2c_get_ack(void);
+static void i2c_start(void);
+static void i2c_stop(void);
+static void i2c_send(uint8_t data);
+static uint8_t i2c_read(void);
+static void i2c_send_ack(iic_ack_t ack);
+static uint8_t i2c_get_ack(void);
+static void bk1080_delay(uint32_t count);
 
 void bk1080_write_reg(bk1080_reg_t reg, uint16_t data);
 uint8_t bk1080_read_reg(bk1080_reg_t reg);
