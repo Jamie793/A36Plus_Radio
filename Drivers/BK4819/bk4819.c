@@ -7,7 +7,7 @@ static void spi_write_byte(uint8_t data)
     BK4819_SDA_DIR_OUT;
     for (uint8_t i = 0; i < 8; i++)
     {
-        if ((data & 0x80) != 0x00)
+        if (data & 0x80)
             BK4819_SDA_HIGH;
         else
             BK4819_SDA_LOW;
