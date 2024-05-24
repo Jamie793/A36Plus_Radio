@@ -7,7 +7,6 @@ uint8_t flash_data[W25Q16JV_SECTOR_SIZE] = {0};
 uint8_t flash_data_text[16] = {0};
 uint32_t current_addr = 0;
 
-
 void flash_dump(void)
 {
     printf("0x%08x     ", current_addr);
@@ -38,6 +37,24 @@ void flash_dump(void)
     }
 }
 
+void bk4819_test(void)
+{
+    bk4819_write_reg(BK4819_REG_10, 0x8085);
+    printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
+    printf("BK4819 REG_10: 0x%x\n", bk4819_read_reg(BK4819_REG_10));
+    printf("BK4819 REG_11: 0x%x\n", bk4819_read_reg(BK4819_REG_11));
+    printf("BK4819 REG_12: 0x%x\n", bk4819_read_reg(BK4819_REG_12));
+    printf("BK4819 REG_13: 0x%x\n", bk4819_read_reg(BK4819_REG_13));
+    printf("BK4819 REG_14: 0x%x\n", bk4819_read_reg(BK4819_REG_14));
+    printf("BK4819 REG_18: 0x%x\n", bk4819_read_reg(BK4819_REG_18));
+    printf("BK4819 REG_19: 0x%x\n", bk4819_read_reg(BK4819_REG_19));
+}
+
+void bk1080_test(void)
+{
+    bk1080_read_reg(BK1080_REG0);
+}
+
 int main(void)
 {
     systick_config();
@@ -50,19 +67,12 @@ int main(void)
     uint8_t i;
 
     printf("Running...\n");
-    bk4819_write_reg(BK4819_REG_10, 0x8085);
     while (1)
     {
         printf("Testing...\n");
-        // printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
-        printf("BK4819 REG_10: 0x%x\n", bk4819_read_reg(BK4819_REG_10));
-        printf("BK4819 REG_11: 0x%x\n", bk4819_read_reg(BK4819_REG_11));
-        printf("BK4819 REG_12: 0x%x\n", bk4819_read_reg(BK4819_REG_12));
-        printf("BK4819 REG_13: 0x%x\n", bk4819_read_reg(BK4819_REG_13));
-        printf("BK4819 REG_14: 0x%x\n", bk4819_read_reg(BK4819_REG_14));
-        printf("BK4819 REG_18: 0x%x\n", bk4819_read_reg(BK4819_REG_18));
-        printf("BK4819 REG_19: 0x%x\n", bk4819_read_reg(BK4819_REG_19));
-        // flash_dump();
+        bk1080_test();
+        // bk4819_test();
+        // // flash_dump();
         // for (uint32_t i = 0; i < 16; i++)
         // {
         //     /* code */
