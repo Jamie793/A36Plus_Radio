@@ -34,11 +34,11 @@ static uint16_t spi_read_half_word(void)
     for (uint8_t i = 0; i < 16; i++)
     {
         data <<= 1;
-        data |= BK4819_SDA_READ;
-        BK4819_SCK_HIGH;
-        bk4819_delay(1);
         BK4819_SCK_LOW;
         bk4819_delay(1);
+        BK4819_SCK_HIGH;
+        bk4819_delay(1);
+        data |= BK4819_SDA_READ;
     }
     return data;
 }
