@@ -50,18 +50,18 @@ int main(void)
     uint8_t i;
 
     printf("Running...\n");
-    bk4819_write_reg(BK4819_REG_10, 0x8888);
+    bk4819_write_reg(BK4819_REG_10, 0x8085);
     while (1)
     {
         printf("Testing...\n");
         // printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
-        printf("BK4819 REG_10: %x\n", bk4819_read_reg(BK4819_REG_10));
-        printf("BK4819 REG_11: %x\n", bk4819_read_reg(BK4819_REG_11));
-        printf("BK4819 REG_12: %x\n", bk4819_read_reg(BK4819_REG_12));
-        printf("BK4819 REG_13: %x\n", bk4819_read_reg(BK4819_REG_13));
-        printf("BK4819 REG_14: %x\n", bk4819_read_reg(BK4819_REG_14));
-        printf("BK4819 REG_18: %x\n", bk4819_read_reg(BK4819_REG_18));
-        printf("BK4819 REG_19: %x\n", bk4819_read_reg(BK4819_REG_19));
+        printf("BK4819 REG_10: 0x%x\n", bk4819_read_reg(BK4819_REG_10));
+        printf("BK4819 REG_11: 0x%x\n", bk4819_read_reg(BK4819_REG_11));
+        printf("BK4819 REG_12: 0x%x\n", bk4819_read_reg(BK4819_REG_12));
+        printf("BK4819 REG_13: 0x%x\n", bk4819_read_reg(BK4819_REG_13));
+        printf("BK4819 REG_14: 0x%x\n", bk4819_read_reg(BK4819_REG_14));
+        printf("BK4819 REG_18: 0x%x\n", bk4819_read_reg(BK4819_REG_18));
+        printf("BK4819 REG_19: 0x%x\n", bk4819_read_reg(BK4819_REG_19));
         // flash_dump();
         // for (uint32_t i = 0; i < 16; i++)
         // {
