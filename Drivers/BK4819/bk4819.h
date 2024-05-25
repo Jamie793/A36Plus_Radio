@@ -46,7 +46,7 @@ typedef enum
     BK4819_REG_24 = 0x24,
     BK4819_REG_28 = 0x28,
     BK4819_REG_29 = 0x29,
-
+    BK4819_REG_2A = 0X2A,
     BK4819_REG_2B = 0x2B,
     BK4819_REG_2E = 0x2E,
     BK4819_REG_30 = 0x30,
