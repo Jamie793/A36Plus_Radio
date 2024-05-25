@@ -9,6 +9,7 @@ uint32_t current_addr = 0;
 
 void flash_dump(void)
 {
+    printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
     printf("0x%08x     ", current_addr);
     for (uint8_t i = 0; i < 32; i++)
     {
@@ -40,7 +41,6 @@ void flash_dump(void)
 void bk4819_test(void)
 {
     bk4819_write_reg(BK4819_REG_10, 0x8085);
-    printf("EEPROM WEL: %d\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
     printf("BK4819 REG_10: 0x%x\n", bk4819_read_reg(BK4819_REG_10));
     printf("BK4819 REG_11: 0x%x\n", bk4819_read_reg(BK4819_REG_11));
     printf("BK4819 REG_12: 0x%x\n", bk4819_read_reg(BK4819_REG_12));
@@ -52,7 +52,12 @@ void bk4819_test(void)
 
 void bk1080_test(void)
 {
-    bk1080_read_reg(BK1080_REG0);
+
+    printf("Bk1080 REG0: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x0006
+    printf("Bk1080 REG1: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x1080
+    printf("Bk1080 REG2: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x0000
+    printf("Bk1080 REG3: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x0000
+    delay_1ms(1000);
 }
 
 int main(void)
@@ -63,7 +68,9 @@ int main(void)
     spi_config();
     usart_config();
     st7735s_init();
-    bk4819_init();
+    // bk4819_init();
+
+
     uint8_t i;
 
     printf("Running...\n");
