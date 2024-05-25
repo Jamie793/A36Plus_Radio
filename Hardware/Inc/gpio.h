@@ -82,7 +82,7 @@ static void key_gpio_init(void);
 static void usart_gpio_init(void);
 static void eeprom_gpio_init(void);
 static void bk4819_gpio_init(void);
-static void bk180_gpio_init(void);
+static void bk1080_gpio_init(void);
 
 void gpio_config(void);
 
