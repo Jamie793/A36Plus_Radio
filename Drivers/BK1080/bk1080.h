@@ -12,6 +12,8 @@
 #define BK1080_SDA_DIR_IN gpio_mode_set(BK1080_GPIO_SDA_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, BK1080_GPIO_SDA_PIN)
 #define BK1080_SDA_DIR_OUT gpio_mode_set(BK1080_GPIO_SDA_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, BK1080_GPIO_SDA_PIN)
 
+#define BK1080_ADDRESS 0x80
+
 typedef enum
 {
     BK1080_REG0 = 0X00,
@@ -31,7 +33,7 @@ typedef enum
 typedef enum
 {
     I2C_ACK = 0,
-    I2C_NACK = !IIC_ACK
+    I2C_NACK = !I2C_ACK
 } iic_ack_t;
 
 static void i2c_start(void);
@@ -43,6 +45,6 @@ static uint8_t i2c_get_ack(void);
 static void bk1080_delay(uint32_t count);
 
 void bk1080_write_reg(bk1080_reg_t reg, uint16_t data);
-uint8_t bk1080_read_reg(bk1080_reg_t reg);
+uint16_t bk1080_read_reg(bk1080_reg_t reg);
 
 #endif
