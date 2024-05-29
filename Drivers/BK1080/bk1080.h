@@ -33,13 +33,13 @@ typedef enum
 typedef enum
 {
     I2C_ACK = 0,
-    I2C_NACK = !I2C_ACK
+    I2C_NACK = 1
 } iic_ack_t;
 
 static void i2c_start(void);
 static void i2c_stop(void);
-static void i2c_send(uint8_t data);
-static uint8_t i2c_read(void);
+static void i2c_write_byte(uint8_t data);
+static uint8_t i2c_read_byte(void);
 static void i2c_send_ack(iic_ack_t ack);
 static uint8_t i2c_get_ack(void);
 static void bk1080_delay(uint32_t count);
