@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F3X0,GD32F330</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\GD32\CMSIS\GD\GD32F3x0\Include;..\Libraries\GD32\CMSIS\Keil;..\Users\Inc;..\Libraries\GD32\CMSIS\GD\GD32F3x0\Source\ARM;..\Libraries\GD32\GD32F3x0_standard_peripheral\Include;.cmsis\include;RTE\_GD32F330;.eide\deps;..\Libraries\GD32;..\Hardware\Inc;..\Drivers\LCD;..\Drivers\Flash;..\Drivers\BK4819;..\Drivers\BK1080</IncludePath>
+              <IncludePath>..\Libraries\GD32\CMSIS\GD\GD32F3x0\Include;..\Libraries\GD32\CMSIS\Keil;..\Users\Inc;..\Libraries\GD32\CMSIS\GD\GD32F3x0\Source\ARM;..\Libraries\GD32\GD32F3x0_standard_peripheral\Include;.cmsis\include;RTE\_GD32F330;.eide\deps;..\Libraries\GD32;..\Core\Inc;..\Drivers\LCD;..\Drivers\Flash;..\Drivers\BK4819;..\Drivers\BK1080;..\Drivers\Key</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -404,32 +404,27 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>../HARDWARE/SRC</GroupName>
+          <GroupName>../CORE/SRC</GroupName>
           <Files>
             <File>
               <FileName>dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Hardware/Src/dma.c</FilePath>
+              <FilePath>..\Core\Src\dma.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Hardware/Src/gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Hardware/Src/key.c</FilePath>
+              <FilePath>..\Core\Src\gpio.c</FilePath>
             </File>
             <File>
               <FileName>spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Hardware/Src/spi.c</FilePath>
+              <FilePath>..\Core\Src\spi.c</FilePath>
             </File>
             <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Hardware/Src/usart.c</FilePath>
+              <FilePath>..\Core\Src\usart.c</FilePath>
             </File>
           </Files>
         </Group>
