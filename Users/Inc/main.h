@@ -3,7 +3,6 @@
 #include "gd32f3x0.h"
 #include "systick.h"
 #include "gpio.h"
-#include "gfx.h"
 #include "st7735s.h"
 #include "usart.h"
 #include "w25q16jv.h"

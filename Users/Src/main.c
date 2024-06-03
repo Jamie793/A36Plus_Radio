@@ -53,10 +53,20 @@ void bk4819_test(void)
 void bk1080_test(void)
 {
 
-    printf("Bk1080 REG0: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x0006
-    printf("Bk1080 REG1: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x1080
-    printf("Bk1080 REG2: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x0000
-    printf("Bk1080 REG3: 0x%x\n", bk1080_read_reg(BK1080_REG0)); // default 0x0000
+    // bk1080_write_reg(BK1080_REG2, 0x8508);
+    // printf("Bk1080 REG0: 0x%x\n", bk1080_read_reg(BK1080_REG0));    // default 0x0006
+    printf("Bk1080 REG1: 0x%x\n", bk1080_read_reg(BK1080_REG1)); // default 0x1080
+    // printf("Bk1080 REG2: 0x%x\n", bk1080_read_reg(BK1080_REG2));    // default 0x0000
+    // printf("Bk1080 REG3: 0x%x\n", bk1080_read_reg(BK1080_REG3));    // default 0x0000
+    // printf("Bk1080 REG4: 0x%x\n", bk1080_read_reg(BK1080_REG4));    // default 0x0000
+    // printf("Bk1080 REG5: 0x%x\n", bk1080_read_reg(BK1080_REG5));    // default 0x0000
+    // printf("Bk1080 REG6: 0x%x\n", bk1080_read_reg(BK1080_REG6));    // default 0x0000
+    // printf("Bk1080 REG7: 0x%x\n", bk1080_read_reg(BK1080_REG7));    // default 0x0000
+    // printf("Bk1080 REG8: 0x%x\n", bk1080_read_reg(BK1080_REG8));    // default 0x0000
+    // printf("Bk1080 REG9: 0x%x\n", bk1080_read_reg(BK1080_REG9));    // default 0x0000
+    // printf("Bk1080 REG10: 0x%x\n", bk1080_read_reg(BK1080_REG10));  // default 0x0000
+    // printf("Bk1080 REG11: 0x%x\n", bk1080_read_reg(BK1080_REG11)); // default 0x0000
+
     delay_1ms(1000);
 }
 
@@ -67,17 +77,16 @@ int main(void)
     dma_config();
     spi_config();
     usart_config();
-    st7735s_init();
-    // bk4819_init();
-
+    // st7735s_init();
+    bk4819_init();
 
     uint8_t i;
 
     printf("Running...\n");
     while (1)
     {
-        printf("Testing...\n");
-        bk1080_test();
+        // printf("Testing...\n");
+        // bk1080_test();
         // bk4819_test();
         // // flash_dump();
         // for (uint32_t i = 0; i < 16; i++)

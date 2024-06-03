@@ -43,11 +43,14 @@ typedef enum
     BK4819_REG_19 = 0x19,
     BK4819_REG_1A = 0x1A,
     BK4819_REG_1F = 0x1F,
+    BK4819_REG_1E = 0x1E,
     BK4819_REG_24 = 0x24,
+    BK4819_REG_26 = 0x26,
     BK4819_REG_28 = 0x28,
     BK4819_REG_29 = 0x29,
     BK4819_REG_2A = 0X2A,
     BK4819_REG_2B = 0x2B,
+    BK4819_REG_2C = 0x2c,
     BK4819_REG_2E = 0x2E,
     BK4819_REG_30 = 0x30,
     BK4819_REG_31 = 0x31,
@@ -81,7 +84,7 @@ typedef enum
     BK4819_REG_51 = 0x51,
     BK4819_REG_52 = 0x52,
     BK4819_REG_54 = 0x54,
-
+    BK4819_REG_53 = 0x53,
     BK4819_REG_55 = 0x55,
     BK4819_REG_58 = 0x58,
     BK4819_REG_59 = 0x59,
@@ -137,6 +140,18 @@ typedef enum
     BK4819_INT_FSKRS = (1 << 1)     // FSK RX Sync interrupt
 } bk4819_int_t;
 
+// typedef enum
+// {
+//     BK4819_CTCSS_PHASE_120 = 0X01,
+//     BK4819_CTCSS_PHASE_180 = 0X02,
+//     BK4819_CTCSS_PHASE_240 = 0X03,
+// } BK4819_CTCSS_PHASE;
+
+// typedef enum
+// {
+//     BK4819_RX_ACG_GAIN_PAG =
+// } BK4819_RX_ACG_GAIN;
+
 static void spi_write_byte(uint8_t data);
 static void spi_write_half_word(uint16_t data);
 static uint16_t spi_read_half_word(void);
@@ -144,6 +159,11 @@ static void bk4819_delay(uint32_t count);
 
 uint16_t bk4819_read_reg(bk4819_reg_t reg);
 void bk4819_write_reg(bk4819_reg_t reg, uint16_t data);
-void bk4819_interrupt_get();
+uint8_t bk4819_int_get(bk4819_int_t interrupt);
+uint8_t bk4819_flag_get(void);
+void bk4819_set_frequency(uint32_t freq);
+void bk4819_on_tx(void);
+void bk4819_on_rx(void);
 void bk4819_init(void);
+
 #endif

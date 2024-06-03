@@ -12,7 +12,9 @@
         "inttypes.h": "c",
         "st7735s.h": "c",
         "fonts.h": "c",
-        "gfx.h": "c"
+        "gfx.h": "c",
+        "bk4819.h": "c",
+        "core_cm4.h": "c"
     },
     // "cmake.buildArgs": [
     //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/arm_toolchain.cmake"

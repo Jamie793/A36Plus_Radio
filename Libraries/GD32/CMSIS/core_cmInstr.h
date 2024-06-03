@@ -111,8 +111,7 @@
     \param [in]    value  Value to reverse
     \return               Reversed value
  */
-__attribute__((section(".rev16_text"))) 
-__STATIC_INLINE __ASM uint32_t __REV16(uint32_t value)
+__attribute__((section(".rev16_text"))) __STATIC_INLINE __ASM uint32_t __REV16(uint32_t value)
 {
     rev16 r0, r0
     bx lr
