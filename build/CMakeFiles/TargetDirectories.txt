@@ -1,3 +1,0 @@
-D:/1-MyFiles/2-Dev/3-A36Plus/build/CMakeFiles/A36Plus.dir
-D:/1-MyFiles/2-Dev/3-A36Plus/build/CMakeFiles/edit_cache.dir
-D:/1-MyFiles/2-Dev/3-A36Plus/build/CMakeFiles/rebuild_cache.dir
