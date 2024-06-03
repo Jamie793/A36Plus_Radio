@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.24.0)
 
 # GCC toolchain
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/arm_cc_toolchain.cmake)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/CMake/arm_cc_toolchain.cmake)
 
 # Project name, version and language
 project(A36Plus VERSION 0.1.0 LANGUAGES C ASM)
