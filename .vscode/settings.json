@@ -14,7 +14,8 @@
         "fonts.h": "c",
         "gfx.h": "c",
         "bk4819.h": "c",
-        "core_cm4.h": "c"
+        "core_cm4.h": "c",
+        "key.h": "c"
     },
     // "cmake.buildArgs": [
     //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/arm_toolchain.cmake"

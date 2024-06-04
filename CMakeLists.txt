@@ -22,7 +22,7 @@ include_directories(Drivers/BK1080)
 include_directories(Drivers/BK4819)
 include_directories(Drivers/Flash)
 
-include_directories(Hardware/Inc)
+include_directories(Core/Inc)
 
 # Add definition
 add_definitions(
@@ -42,7 +42,7 @@ file(GLOB_RECURSE FIRMWAR_SOURCE_DIR
 
 file(GLOB_RECURSE DRIVERS_SOURCE_DIR Drivers/*.c)
 
-file(GLOB_RECURSE HARDWARE_SOURCE_DIR Hardware/Src/*.c)
+file(GLOB_RECURSE HARDWARE_SOURCE_DIR Core/Src/*.c)
 
 file(GLOB_RECURSE USER_SOURCE_DIR Users/Src/*.c)
 
