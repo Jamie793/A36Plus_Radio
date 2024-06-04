@@ -15,7 +15,11 @@
         "gfx.h": "c",
         "bk4819.h": "c",
         "core_cm4.h": "c",
-        "key.h": "c"
+        "key.h": "c",
+        "tim.h": "c",
+        "usart.h": "c",
+        "bk1080.h": "c",
+        "nvic.h": "c"
     },
     // "cmake.buildArgs": [
     //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/arm_toolchain.cmake"

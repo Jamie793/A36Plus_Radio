@@ -48,6 +48,7 @@ SECTIONS
 		. = . + STACK_SIZE;
 		. = ALIGN(8);
 		_estack = .;
+		end = .;
 	} >RAM
 	_eheap = ORIGIN(RAM) + LENGTH(RAM);
 }

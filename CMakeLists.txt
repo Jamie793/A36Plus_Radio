@@ -11,7 +11,10 @@ project(A36Plus VERSION 0.1.0 LANGUAGES C ASM)
 set(CMAKE_BUILD_TYPE Debug)
 
 # Include all of the head need
+include_directories(Core/Inc)
 include_directories(Users/Inc)
+
+
 include_directories(Libraries/GD32/)
 include_directories(Libraries/GD32/CMSIS)
 include_directories(Libraries/GD32/CMSIS/GD/GD32F3x0/Include)
@@ -21,8 +24,8 @@ include_directories(Drivers/LCD)
 include_directories(Drivers/BK1080)
 include_directories(Drivers/BK4819)
 include_directories(Drivers/Flash)
+include_directories(Drivers/Key)
 
-include_directories(Core/Inc)
 
 # Add definition
 add_definitions(
@@ -42,14 +45,14 @@ file(GLOB_RECURSE FIRMWAR_SOURCE_DIR
 
 file(GLOB_RECURSE DRIVERS_SOURCE_DIR Drivers/*.c)
 
-file(GLOB_RECURSE HARDWARE_SOURCE_DIR Core/Src/*.c)
+file(GLOB_RECURSE CORE_SOURCE_DIR Core/Src/*.c)
 
 file(GLOB_RECURSE USER_SOURCE_DIR Users/Src/*.c)
 
 
 
 # compile and link
-add_executable(A36Plus ${FIRMWAR_SOURCE_DIR} ${USER_SOURCE_DIR} ${DRIVERS_SOURCE_DIR} ${HARDWARE_SOURCE_DIR})
+add_executable(A36Plus ${FIRMWAR_SOURCE_DIR} ${USER_SOURCE_DIR} ${DRIVERS_SOURCE_DIR} ${CORE_SOURCE_DIR})
 
 
 # Execute custom command after compiling
