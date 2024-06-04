@@ -321,7 +321,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
@@ -425,6 +425,16 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>nvic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\nvic.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3528,6 +3538,16 @@
               <FileName>bk1080.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Drivers/BK1080/bk1080.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>../DRIVERS/KEY</GroupName>
+          <Files>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Drivers\Key\key.c</FilePath>
             </File>
           </Files>
         </Group>
