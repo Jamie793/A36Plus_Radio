@@ -70,12 +70,15 @@ void bk1080_test(void)
     delay_1ms(1000);
 }
 
+
 int main(void)
 {
     systick_config();
     gpio_config();
+    nvic_config();
     dma_config();
     spi_config();
+    tim_config();
     usart_config();
     // st7735s_init();
     bk4819_init();
@@ -85,6 +88,14 @@ int main(void)
     printf("Running...\n");
     while (1)
     {
+        printf("Running...\n");
+        if (++time1_current_ms >= 1000){
+            printf("1s...\n");
+            time1_current_ms = 0;
+        }
+
+        // if (key_get() != KEY_NONE)
+        //     printf("KEY: %d\n", key_get());
         // printf("Testing...\n");
         // bk1080_test();
         // bk4819_test();

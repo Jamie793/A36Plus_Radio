@@ -33,7 +33,7 @@ static void bk4819_gpio_init(void)
 {
     gpio_mode_set(BK4819_GPIO_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLDOWN, BK4819_GPIO_SCK_PIN | BK4819_GPIO_SDA_PIN);
     gpio_output_options_set(BK4819_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, BK4819_GPIO_SCK_PIN | BK4819_GPIO_SDA_PIN);
-    
+
     gpio_mode_set(BK4819_GPIO_SCN_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, BK4819_GPIO_SCN_PIN);
     gpio_output_options_set(BK4819_GPIO_SCN_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, BK4819_GPIO_SCN_PIN);
 }
@@ -49,6 +49,12 @@ static void bk1080_gpio_init(void)
 
 static void key_gpio_init(void)
 {
+    gpio_mode_set(KEY_GPIO_PORT, GPIO_MODE_OUTPUT, GPIO_PUPD_PULLUP, KEY_GPIO_ROW0_PIN | KEY_GPIO_ROW1_PIN | KEY_GPIO_ROW2_PIN | KEY_GPIO_ROW3_PIN);
+    gpio_output_options_set(KEY_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, KEY_GPIO_ROW0_PIN | KEY_GPIO_ROW1_PIN | KEY_GPIO_ROW2_PIN | KEY_GPIO_ROW3_PIN);
+
+    gpio_mode_set(KEY_GPIO_PORT, GPIO_MODE_INPUT, GPIO_PUPD_NONE, KEY_GPIO_COL0_PIN | KEY_GPIO_COL1_PIN | KEY_GPIO_COL2_PIN | KEY_GPIO_COL3_PIN);
+
+    gpio_mode_set(KEY_GPIO_PTT_PORT, GPIO_MODE_INPUT, GPIO_PUPD_PULLUP, KEY_GPIO_PTT_PIN);
 }
 
 void gpio_config(void)
@@ -60,6 +66,8 @@ void gpio_config(void)
     rcu_periph_clock_enable(BK4819_GPIO_SCN_RCU);
     rcu_periph_clock_enable(BK1080_GPIO_RCU);
     rcu_periph_clock_enable(BK1080_GPIO_SDA_PORT);
+    rcu_periph_clock_enable(KEY_GPIO_RCU);
+    rcu_periph_clock_enable(KEY_GPIO_PTT_RCU);
 
     LCD_gpio_init();
     key_gpio_init();
@@ -67,4 +75,5 @@ void gpio_config(void)
     usart_gpio_init();
     bk4819_gpio_init();
     bk1080_gpio_init();
+    key_gpio_init();
 }
