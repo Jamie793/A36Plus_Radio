@@ -80,7 +80,7 @@ int main(void)
     spi_config();
     tim_config();
     usart_config();
-    // st7735s_init();
+    st7735s_init();
     bk4819_init();
 
     uint8_t i;
