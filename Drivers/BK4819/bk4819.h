@@ -142,15 +142,15 @@ typedef enum
 
 // typedef enum
 // {
-//     BK4819_CTCSS_PHASE_120 = 0X01,
-//     BK4819_CTCSS_PHASE_180 = 0X02,
-//     BK4819_CTCSS_PHASE_240 = 0X03,
-// } BK4819_CTCSS_PHASE;
+//     bk4819_CTCSS_PHASE_120 = 0X01,
+//     bk4819_CTCSS_PHASE_180 = 0X02,
+//     bk4819_CTCSS_PHASE_240 = 0X03,
+// } bk4819_CTCSS_PHASE;
 
 // typedef enum
 // {
-//     BK4819_RX_ACG_GAIN_PAG =
-// } BK4819_RX_ACG_GAIN;
+//     bk4819_RX_ACG_GAIN_PAG =
+// } bk4819_RX_ACG_GAIN;
 
 static void spi_write_byte(uint8_t data);
 static void spi_write_half_word(uint16_t data);
@@ -159,11 +159,113 @@ static void bk4819_delay(uint32_t count);
 
 uint16_t bk4819_read_reg(bk4819_reg_t reg);
 void bk4819_write_reg(bk4819_reg_t reg, uint16_t data);
+
 uint8_t bk4819_int_get(bk4819_int_t interrupt);
 uint8_t bk4819_flag_get(void);
-void bk4819_set_frequency(uint32_t freq);
+
+
+void bk4819_init(void);
 void bk4819_on_tx(void);
 void bk4819_on_rx(void);
-void bk4819_init(void);
+
+
+// void bk4819_set_frequency(uint32_t freq);
+// void bk4819_set_AGC(bool enable);
+// void bk4819_init_aGC(bool amModulation);
+
+
+// void bk4819_set_CDCSS(uint32_t );
+// void bk4819_set_CTCSS_frequency(uint32_t baud_rate);
+// void bk4819_set_tail_detection(const uint32_t freq_10Hz);
+// void bk4819_nable_Vox(uint16_t Vox1Threshold, uint16_t Vox0Threshold);
+// void bk4819_set_filter_Bandwidth(const bk4819_FilterBandwidth_t Bandwidth, const bool weak_no_different);
+// void bk4819_set_upPower_Amplifier(const uint8_t bias, const uint32_t frequency);
+// void bk4819_set_frequency(uint32_t Frequency);
+// void bk4819_set_upSquelch(
+//     uint8_t SquelchOpenRSSIThresh,
+//     uint8_t SquelchCloseRSSIThresh,
+//     uint8_t SquelchOpenNoiseThresh,
+//     uint8_t SquelchCloseNoiseThresh,
+//     uint8_t SquelchCloseGlitchThresh,
+//     uint8_t SquelchOpenGlitchThresh);
+
+// void bk4819_Set_AF(bk4819_AF_Type_t AF);
+// void bk4819_RX_TurnOn(void);
+// void bk4819_PickRXFilterPathBasedOnFrequency(uint32_t Frequency);
+// void bk4819_DisableScramble(void);
+// void bk4819_EnableScramble(uint8_t Type);
+
+// bool bk4819_CompanderEnabled(void);
+// void bk4819_SetCompander(const unsigned int mode);
+
+// void bk4819_DisableVox(void);
+// void bk4819_DisableDTMF(void);
+// void bk4819_EnableDTMF(void);
+// void bk4819_PlayTone(uint16_t Frequency, bool bTuningGainSwitch);
+// void bk4819_PlaySingleTone(const unsigned int tone_Hz, const unsigned int delay, const unsigned int level, const bool play_speaker);
+// void bk4819_EnterTxMute(void);
+// void bk4819_ExitTxMute(void);
+// void bk4819_Sleep(void);
+// void bk4819_TurnsOffTones_TurnsOnRX(void);
+// #ifdef ENABLE_AIRCOPY
+// void bk4819_SetupAircopy(void);
+// #endif
+// void bk4819_ResetFSK(void);
+// void bk4819_Idle(void);
+// void bk4819_ExitBypass(void);
+// void bk4819_PrepareTransmit(void);
+// void bk4819_TxOn_Beep(void);
+// void bk4819_ExitSubAu(void);
+
+// void bk4819_Conditional_RX_TurnOn_and_GPIO6_Enable(void);
+
+// void bk4819_EnterDTMF_TX(bool bLocalLoopback);
+// void bk4819_ExitDTMF_TX(bool bKeep);
+// void bk4819_EnableTXLink(void);
+
+// void bk4819_PlayDTMF(char Code);
+// void bk4819_PlayDTMFString(const char *pString, bool bDelayFirst, uint16_t FirstCodePersistTime, uint16_t HashCodePersistTime, uint16_t CodePersistTime, uint16_t CodeInternalTime);
+
+// void bk4819_TransmitTone(bool bLocalLoopback, uint32_t Frequency);
+
+// void bk4819_GenTail(uint8_t Tail);
+// void bk4819_PlayCDCSSTail(void);
+// void bk4819_PlayCTCSSTail(void);
+
+// uint16_t bk4819_GetRSSI(void);
+// int8_t bk4819_GetRxGain_dB(void);
+// int16_t bk4819_GetRSSI_dBm(void);
+// uint8_t bk4819_GetGlitchIndicator(void);
+// uint8_t bk4819_GetExNoiceIndicator(void);
+// uint16_t bk4819_GetVoiceAmplitudeOut(void);
+// uint8_t bk4819_GetAfTxRx(void);
+
+// bool bk4819_GetFrequencyScanResult(uint32_t *pFrequency);
+// bk4819_CssScanResult_t bk4819_GetCxCSSScanResult(uint32_t *pCdcssFreq, uint16_t *pCtcssFreq);
+// void bk4819_Disable_Frequency_Scan(void);
+// void bk4819_Enable_Frequency_Scan(void);
+// void bk4819_Set_Scan_Frequency(uint32_t Frequency);
+
+// void bk4819_Disable(void);
+
+// void bk4819_Stop_Scan(void);
+
+// uint8_t bk4819_GetDTMF_5TONE_Code(void);
+
+// uint8_t bk4819_Get_CDCSS_CodeType(void);
+// uint8_t bk4819_Get_CTC_Shift(void);
+// uint8_t bk4819_Get_CTC_Type(void);
+
+// void bk4819_Send_FSKData(uint16_t *pData);
+// void bk4819_Prepare_FSKReceive(void);
+
+// void bk4819_Play_Roger(void);
+
+// void bk4819_Enable_AfDac_DiscMode_TxDsp(void);
+
+// void bk4819_Get_Vox_Amp(uint16_t *pResult);
+// void bk4819_Set_Scramble_Frequency_Control_Word(uint32_t Frequency);
+// void bk4819_Play_DTMFEx(bool bLocalLoopback, char Code);
+
 
 #endif

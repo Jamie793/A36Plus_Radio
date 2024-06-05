@@ -124,7 +124,7 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_31, bk4819_read_reg(BK4819_REG_31) & 0xfffffff7);
     bk4819_write_reg(BK4819_REG_28, 0x6b38);
     bk4819_write_reg(BK4819_REG_29, 0xb4cb);
-    bk4819_set_frequency(40976500);
+    bk4819_set_frequency(439490);
     bk4819_on_rx();
 }
 
@@ -135,22 +135,23 @@ static void bk4819_delay(uint32_t count)
 
 void bk4819_set_frequency(uint32_t freq)
 {
+    freq *= 100;
     bk4819_write_reg(BK4819_REG_39, (freq >> 16) & 0xFFFF);
     bk4819_write_reg(BK4819_REG_38, freq & 0xFFFF);
 }
 
 void bk4819_on_rx(void)
 {
-    bk4819_write_reg(BK4819_REG_30, 0x0000);  //reset
+    bk4819_write_reg(BK4819_REG_37, 0x1F0F);
 
-    bk4819_write_reg(BK4819_REG_30, 0xBAF9);
+    bk4819_write_reg(BK4819_REG_30, 0x0000);  //reset
+    bk4819_write_reg(BK4819_REG_30, 0xBEF9);
 }
 
 void bk4819_on_tx(void)
 {
     bk4819_write_reg(BK4819_REG_30, 0x0000);  //reset
- 
-    bk4819_write_reg(BK4819_REG_30, 0x82FE);
+    bk4819_write_reg(BK4819_REG_30, 0xBFFF);
 }
 
 uint8_t bk4819_int_get(bk4819_int_t interrupt)
