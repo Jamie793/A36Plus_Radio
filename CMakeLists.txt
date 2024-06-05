@@ -52,12 +52,12 @@ file(GLOB_RECURSE USER_SOURCE_DIR Users/Src/*.c)
 
 
 # compile and link
-add_executable(A36Plus ${FIRMWAR_SOURCE_DIR} ${USER_SOURCE_DIR} ${DRIVERS_SOURCE_DIR} ${CORE_SOURCE_DIR})
+add_executable(A36Plus.elf ${FIRMWAR_SOURCE_DIR} ${USER_SOURCE_DIR} ${DRIVERS_SOURCE_DIR} ${CORE_SOURCE_DIR})
 
 
 # Execute custom command after compiling
 add_custom_command(
-    TARGET "${PROJECT_NAME}"
+    TARGET "${PROJECT_NAME}.elf"
     POST_BUILD
     # Build .hex and .bin files
     COMMAND arm-none-eabi-objcopy -Obinary "${PROJECT_NAME}.elf" "${PROJECT_NAME}.bin"
