@@ -2,7 +2,9 @@
 cmake_minimum_required(VERSION 3.24.0)
 
 # GCC toolchain
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/CMake/arm_cc_toolchain.cmake)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/CMake/arm_gcc_toolchain.cmake)
+
+set(OpenOCD openocd)
 
 # Project name, version and language
 project(A36Plus VERSION 0.1.0 LANGUAGES C ASM)
@@ -52,7 +54,7 @@ file(GLOB_RECURSE USER_SOURCE_DIR Users/Src/*.c)
 
 
 # compile and link
-add_executable(A36Plus.elf ${FIRMWAR_SOURCE_DIR} ${USER_SOURCE_DIR} ${DRIVERS_SOURCE_DIR} ${CORE_SOURCE_DIR})
+add_executable(${PROJECT_NAME}.elf ${FIRMWAR_SOURCE_DIR} ${USER_SOURCE_DIR} ${DRIVERS_SOURCE_DIR} ${CORE_SOURCE_DIR})
 
 
 # Execute custom command after compiling
@@ -66,5 +68,13 @@ add_custom_command(
     # Display sizes
     COMMAND arm-none-eabi-size --format=berkeley ${PROJECT_NAME}.elf ${PROJECT_NAME}.hex
     COMMENT "Invoking: Cross ARM GNU Print Size"
+)
+
+
+add_custom_target(flash
+    COMMAND ${OpenOCD} -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin
+    COMMENT "Flashing ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin"
+    
 )
 
