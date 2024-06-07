@@ -1,5 +1,15 @@
+/**
+ * @file bk4819.c
+ * @author Jamiexu (doxm@foxmail.com)
+ * @brief
+ * @version 0.1
+ * @date 2024-06-06
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
+
 #include "bk4819.h"
-// Written by Jamiexu
 
 static void spi_write_byte(uint8_t data)
 {
@@ -73,10 +83,9 @@ void bk4819_write_reg(bk4819_reg_t reg, uint16_t data)
 void bk4819_init(void)
 {
     uint8_t data;
-    bk4819_write_reg(BK4819_REG_00, 0x8000); //reset
+    bk4819_write_reg(BK4819_REG_00, 0x8000); // reset
     bk4819_delay(1000);
     bk4819_write_reg(BK4819_REG_00, 0x00);
-
 
     bk4819_write_reg(BK4819_REG_37, 0x1d0f);
     bk4819_write_reg(BK4819_REG_13, 0x3be);
@@ -124,8 +133,10 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_31, bk4819_read_reg(BK4819_REG_31) & 0xfffffff7);
     bk4819_write_reg(BK4819_REG_28, 0x6b38);
     bk4819_write_reg(BK4819_REG_29, 0xb4cb);
-    bk4819_set_frequency(439490);
-    bk4819_on_rx();
+    bk4819_set_freq(43949500);
+    // bk4819_CTDCSS_set(0, 1485);
+    // bk4819_rx_on();
+    bk4819_tx_on();
 }
 
 static void bk4819_delay(uint32_t count)
@@ -133,28 +144,99 @@ static void bk4819_delay(uint32_t count)
     delay_1us(count);
 }
 
-void bk4819_set_frequency(uint32_t freq)
+/**
+ * @brief Get interrupt
+ *
+ * @param interrupt Interrupt type
+ * @return uint8_t 0:SET 1:RESET
+ */
+uint8_t bk4819_int_get(bk4819_int_t interrupt)
 {
-    freq *= 100;
+    return bk4819_read_reg(BK4819_REG_02 & interrupt);
+}
+
+/**
+ * @brief Set frequency
+ *
+ * @param freq
+ */
+void bk4819_set_freq(uint32_t freq)
+{
     bk4819_write_reg(BK4819_REG_39, (freq >> 16) & 0xFFFF);
     bk4819_write_reg(BK4819_REG_38, freq & 0xFFFF);
 }
 
-void bk4819_on_rx(void)
+/**
+ * @brief Rx ON
+ *
+ */
+void bk4819_rx_on(void)
 {
-    bk4819_write_reg(BK4819_REG_37, 0x1F0F);
+    bk4819_write_reg(BK4819_REG_30, 0x00); // reset
 
-    bk4819_write_reg(BK4819_REG_30, 0x0000);  //reset
-    bk4819_write_reg(BK4819_REG_30, 0xBEF9);
+    bk4819_write_reg(BK4819_REG_30, 0b1011111011111001);
 }
 
-void bk4819_on_tx(void)
+/**
+ * @brief Tx ON
+ *
+ */
+void bk4819_tx_on(void)
 {
-    bk4819_write_reg(BK4819_REG_30, 0x0000);  //reset
-    bk4819_write_reg(BK4819_REG_30, 0xBFFF);
+    bk4819_write_reg(BK4819_REG_30, 0x00); // reset
+
+    bk4819_write_reg(0x52, 0x028F);
+	bk4819_write_reg(0x30, 0x0200);
+    bk4819_write_reg(BK4819_REG_30, 0xC3FA);
 }
 
-uint8_t bk4819_int_get(bk4819_int_t interrupt)
+/**
+ * @brief Set CTCSS/CDCSS
+ *
+ * @param sel 0:CTC1 1:CTC2 2:CSCSS
+ * @param frequency frquency control word
+ */
+void bk4819_CTDCSS_set(uint8_t sel, uint16_t frequency)
 {
-    return bk4819_read_reg(BK4819_REG_02 & interrupt);
+    bk4819_write_reg(BK4819_REG_07, (sel << 13) | frequency);
+}
+
+/**
+ * @brief Set squelch threshold
+ *
+ * @param RTSO RSSI threshold for Squelch=1, 0.5dB/step
+ * @param RTSC RSSI threshold for Squelch =0, 0.5dB/step
+ * @param ETSO Ex-noise threshold for Squelch =1
+ * @param ETSC Ex-noise threshold for Squelch =0
+ * @param GTSO Glitch threshold for Squelch =1
+ * @param GTSC Glitch threshold for Squelch =0
+ */
+void bk4819_set_Squelch(uint8_t RTSO, uint8_t RTSC, uint8_t ETSO, uint8_t ETSC, uint8_t GTSO, uint8_t GTSC)
+{
+    bk1080_write_reg(BK4819_REG_78, (RTSO << 8) | RTSC);
+    bk1080_write_reg(BK4819_REG_4F, (ETSC << 8) | ETSO);
+    bk1080_write_reg(BK4819_REG_4D, GTSC);
+    bk1080_write_reg(BK4819_REG_4E, GTSO);
+}
+
+/**
+ * @brief Set CDCSS code
+ *
+ * @param sel  0:CDCSS high 12 bits     1:CDCSS low 12 bits
+ * @param code CDCSS code
+ */
+void bk4819_CDCSS_set(uint8_t sel, uint16_t code)
+{
+    bk1080_write_reg(BK4819_REG_08, (BK4819_REG_08, sel << 15) | code);
+}
+
+/**
+ * @brief Set Conefficient for detection
+ *
+ * @param number Symbol number
+ * @param coeff Coefficient
+ */
+void bk4819_DTMF_SELCall_set(uint8_t number, uint8_t coeff)
+{
+    bk1080_write_reg(BK4819_REG_09, (number << 12) | (coeff));
 }
