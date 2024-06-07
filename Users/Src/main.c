@@ -40,14 +40,20 @@ void flash_dump(void)
 
 void bk4819_test(void)
 {
-    bk4819_write_reg(BK4819_REG_10, 0x8085);
-    printf("BK4819 REG_10: 0x%x\n", bk4819_read_reg(BK4819_REG_10));
-    printf("BK4819 REG_11: 0x%x\n", bk4819_read_reg(BK4819_REG_11));
-    printf("BK4819 REG_12: 0x%x\n", bk4819_read_reg(BK4819_REG_12));
-    printf("BK4819 REG_13: 0x%x\n", bk4819_read_reg(BK4819_REG_13));
-    printf("BK4819 REG_14: 0x%x\n", bk4819_read_reg(BK4819_REG_14));
-    printf("BK4819 REG_18: 0x%x\n", bk4819_read_reg(BK4819_REG_18));
-    printf("BK4819 REG_19: 0x%x\n", bk4819_read_reg(BK4819_REG_19));
+    // bk4819_write_reg(BK4819_REG_10, 0x8085);
+    // printf("BK4819 REG_10: 0x%x\n", bk4819_read_reg(BK4819_REG_10));
+    // printf("BK4819 REG_11: 0x%x\n", bk4819_read_reg(BK4819_REG_11));
+    // printf("BK4819 REG_12: 0x%x\n", bk4819_read_reg(BK4819_REG_12));
+    // printf("BK4819 REG_13: 0x%x\n", bk4819_read_reg(BK4819_REG_13));
+    // printf("BK4819 REG_14: 0x%x\n", bk4819_read_reg(BK4819_REG_14));
+    // printf("BK4819 REG_18: 0x%x\n", bk4819_read_reg(BK4819_REG_18));
+    // printf("BK4819 REG_19: 0x%x\n", bk4819_read_reg(BK4819_REG_19));
+
+    printf("Running...\n");
+    printf("RSSI: %d\n", bk1080_read_reg(0x67) & 0x0F);
+    printf("Ex-noise: %d\n", bk1080_read_reg(0x65) & 0x0b111111);
+    printf("Glitch: %d\n", bk1080_read_reg(0x63) & 0x0b01111111);
+    printf("Squelch: %d\n", bk1080_read_reg(0x0C) & 0x01);
 }
 
 void bk1080_test(void)
@@ -70,7 +76,6 @@ void bk1080_test(void)
     delay_1ms(1000);
 }
 
-
 int main(void)
 {
     systick_config();
@@ -80,7 +85,7 @@ int main(void)
     spi_config();
     tim_config();
     usart_config();
-    st7735s_init();
+    // st7735s_init();
     bk4819_init();
 
     uint8_t i;
@@ -88,17 +93,17 @@ int main(void)
     printf("Running...\n");
     while (1)
     {
-        printf("Running...\n");
-        if (++time1_current_ms >= 1000){
-            printf("1s...\n");
-            time1_current_ms = 0;
-        }
+
+        // if (++time1_current_ms >= 1000){
+        //     printf("1s...\n");
+        //     time1_current_ms = 0;
+        // }
 
         // if (key_get() != KEY_NONE)
         //     printf("KEY: %d\n", key_get());
         // printf("Testing...\n");
         // bk1080_test();
-        // bk4819_test();
+        bk4819_test();
         // // flash_dump();
         // for (uint32_t i = 0; i < 16; i++)
         // {
@@ -114,6 +119,10 @@ int main(void)
         // }
 
         // st7735s_test();
+        // delay_1ms(10);
+        // LCD_LIGHT_LOW;
+        // delay_1ms(10);
+        // LCD_LIGHT_HIGH;
         delay_1ms(1000);
     }
 }
