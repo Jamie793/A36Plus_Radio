@@ -4,7 +4,16 @@ cmake_minimum_required(VERSION 3.24.0)
 # GCC toolchain
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/CMake/arm_gcc_toolchain.cmake)
 
+###################  CUSTOM  Options ##################
+
 set(OpenOCD openocd)
+
+# "Use start c"
+set(USE_START_C ON)
+
+message(STATUS "Use start c: ${USE_START_C}")
+
+###################  CUSTOM Options ###################
 
 # Project name, version and language
 project(A36Plus VERSION 0.1.0 LANGUAGES C ASM)
@@ -39,9 +48,16 @@ add_definitions(
 # Add all source files by recurse
 file(GLOB_RECURSE FIRMWAR_SOURCE_DIR 
     Libraries/GD32/GD32F3x0_standard_peripheral/*.c 
-    Libraries/GD32/CMSIS/GD/GD32F3x0/Source/*.c  
-    Libraries/GD32/CMSIS/GD/GD32F3x0/Source/GNU/*.s
+    Libraries/GD32/CMSIS/GD/GD32F3x0/Source/syscall.c  
+    Libraries/GD32/CMSIS/GD/GD32F3x0/Source/system_gd32f3x0.c  
+    # Libraries/GD32/CMSIS/GD/GD32F3x0/Source/GNU/*.s
 )
+
+if (USE_START_C)
+    set(FIRMWAR_SOURCE_DIR "${FIRMWAR_SOURCE_DIR};${CMAKE_CURRENT_SOURCE_DIR}/Libraries/GD32/CMSIS/GD/GD32F3x0/Source/start.c")
+else ()
+    set(FIRMWAR_SOURCE_DIR "${FIRMWAR_SOURCE_DIR};${CMAKE_CURRENT_SOURCE_DIR}/Libraries/GD32/CMSIS/GD/GD32F3x0/Source/GNU/startup_gd32f3x0.s")
+endif()
 
 # message(STATUS "FIRMWAR_SOURCE_DIR: ${FIRMWAR_SOURCE_DIR}")
 
@@ -72,7 +88,7 @@ add_custom_command(
 
 
 add_custom_target(flash
-    COMMAND ${OpenOCD} -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
+    COMMAND ${OpenOCD} -f D:/2-Software/3-Env/xpack-openocd-0.12.0-3/openocd/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin
     COMMENT "Flashing ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin"
     

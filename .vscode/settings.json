@@ -19,9 +19,12 @@
         "tim.h": "c",
         "usart.h": "c",
         "bk1080.h": "c",
-        "nvic.h": "c"
+        "nvic.h": "c",
+        "bit": "c",
+        "compare": "c",
+        "limits": "c",
+        "new": "c"
     },
-    // "cmake.buildArgs": [
-    //     "-DCMAKE_TOOLCHAIN_FILE=${workspaceFolder}/arm_toolchain.cmake"
-    // ]
+    "cortex-debug.gdbPath": "arm-none-eabi-gdb",
+    "cortex-debug.openocdPath": "openocd"
 }

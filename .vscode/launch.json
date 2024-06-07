@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/A36Plus.elf",
+            "name": "Debug with OpenOCD",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                "D:/2-Software/3-Env/xpack-openocd-0.12.0-3/openocd/scripts/interface/stlink.cfg",
+                "./gd32f3x0.cfg"
+            ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+        }
+    ]
+}
