@@ -84,7 +84,7 @@ uint16_t bk4819_read_reg(bk4819_reg_t reg)
 
     bk4819_delay(1);
     BK4819_SCN_HIGH;
-    delay_1ms(1000);
+    delay_1ms(10);
     return data;
 }
 
