@@ -31,7 +31,7 @@ set(CMAKE_RANLIB ${TOOLCHAIN_PREFIX}ranlib)
 
 set(CMAKE_SIZE ${TOOLCHAIN_PREFIX}size)
 
-set(CMAKE_C_FLAGS  "-std=c99 -w -mthumb --specs=nosys.specs -mcpu=cortex-m4 -mfloat-abi=soft -fno-builtin -fno-strict-aliasing -fdata-sections -fms-extensions -ffunction-sections -Os" CACHE INTERNAL "C Compiler options")
+set(CMAKE_C_FLAGS  "-std=c99 -w -mthumb --specs=nosys.specs -mcpu=cortex-m4 -mfloat-abi=soft -fno-builtin -fno-strict-aliasing -fdata-sections -fms-extensions -ffunction-sections -Os -Wno-int-conversion" CACHE INTERNAL "C Compiler options")
 
 # set(CMAKE_ASM_FLAGS "-mcpu=cortex-m4" CACHE INTERNAL "ASM Compiler options")
 
