@@ -57,7 +57,7 @@ uint8_t w25q16jv_read_reg1(w25q16jv_reg_t reg)
     SPI_send_data(W25Q16JV_CMD_READ_REG1);
     data = SPI_read_data();
     FLASH_CS_HIGHT;
-    printf("EEPROM Status: %d\n", data);
+    printf("EEPROM Status: %d\r\n", data);
     return (data & reg);
 }
 
@@ -95,12 +95,12 @@ void w25q16jv_read_sector(uint32_t addr, uint8_t *readData)
     SPI_send_data((addr >> 8) & 0xFF);
     SPI_send_data(addr & 0xFF);
 
-    // printf("address sent.\n");
+    // printf("address sent.\r\n");
 
     for (uint16_t i = 0; i < W25Q16JV_SECTOR_SIZE; i++)
     {
         readData[i] = SPI_read_data();
-        // printf("the number %d data: %d\n", i, readData[i]);
+        // printf("the number %d data: %d\r\n", i, readData[i]);
     }
 
     FLASH_CS_HIGHT;
@@ -121,7 +121,7 @@ void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData)
     SPI_send_data((addr >> 8) & 0xFF);
     SPI_send_data(addr & 0xFF);
 
-    // printf("address sent.\n");
+    // printf("address sent.\r\n");
 
     for (uint8_t i = 0; i < 8; i++)
         SPI_send_data(0xFF); // send dummy data to generate sck to start fast read
@@ -129,7 +129,7 @@ void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData)
     for (uint16_t i = 0; i < W25Q16JV_SECTOR_SIZE; i++)
     {
         readData[i] = SPI_read_data();
-        // printf("the number %d data: %d\n", i, readData[i]);
+        // printf("the number %d data: %d\r\n", i, readData[i]);
     }
 
     FLASH_CS_HIGHT;

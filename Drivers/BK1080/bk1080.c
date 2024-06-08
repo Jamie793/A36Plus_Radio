@@ -142,14 +142,14 @@ void bk1080_write_reg(bk1080_reg_t reg, uint16_t data)
             if (i2c_get_ack() == I2C_ACK)
                 i2c_write_byte(data & 0xFF);
             else
-                printf("wACK3 Not in...\n");
+                printf("wACK3 Not in...\r\n");
         }
         else
-            printf("wACK2 Not in...\n");
+            printf("wACK2 Not in...\r\n");
     }
     else
     {
-        printf("wACK1 Not in...\n");
+        printf("wACK1 Not in...\r\n");
     }
     i2c_stop();
 }
@@ -170,11 +170,11 @@ uint16_t bk1080_read_reg(bk1080_reg_t reg)
             i2c_send_ack(I2C_NACK);
         }
         else
-            printf("ACK2 Not in...\n");
+            printf("ACK2 Not in...\r\n");
     }
     else
     {
-        printf("ACK1 Not in...\n");
+        printf("ACK1 Not in...\r\n");
     }
     i2c_stop();
     return data;
