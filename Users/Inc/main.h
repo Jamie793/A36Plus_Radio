@@ -1,9 +1,12 @@
 #ifndef __MAIN_JAMIEXU_H__
 #define __MAIN_JAMIEXU_H__
 #include "gd32f3x0.h"
+#include "../printf/printf.h"
 #include "gpio.h"
 #include "systick.h"
 #include "nvic.h"
+#include "dma.h"
+#include "spi.h"
 #include "usart.h"
 #include "st7735s.h"
 #include "w25q16jv.h"
