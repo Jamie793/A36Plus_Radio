@@ -3,7 +3,7 @@
 #ifndef __ST7735S_JAMIEXU_H_
 #define __ST7735S_JAMIEXU_H_
 #include "main.h"
-#include "stdio.h"
+#include "../printf/printf.h"
 #include "string.h"
 
 // Written by Jamiexu
@@ -141,7 +141,7 @@ static void st7735s_delay(uint32_t count);            // st7735s data
 void st7735s_init(void);    
 void st7735s_test(void);                                     // st7735s init
 void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue); // st7735s set color
-void st7735s_set_color_hex(uint8_t *color); // st7735s set color by hex
+void st7735s_set_color_hex(uint32_t color); // st7735s set color by hex
 void st7735s_set_pixel_format(_color_format x);                    // st7735s set pixel format
 void st7735s_draw_pixel(uint8_t x, uint8_t y);
 void st7735s_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height); // st7735s fill react

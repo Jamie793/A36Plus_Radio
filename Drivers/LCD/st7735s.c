@@ -235,43 +235,40 @@ void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue)
     color_rgb666.b = blue;
 }
 
-void st7735s_set_color_hex(uint8_t *color)
+void st7735s_set_color_hex(uint32_t color)
 {
-    if (*color != '#')
-        return;
-    unsigned long hexValue = strtoul(color + 1, NULL, 16);
-    color_rgb666.r = (hexValue >> 18) & 0x3F;
-    color_rgb666.g = (hexValue >> 12) & 0x3F;
-    color_rgb666.b = (hexValue >> 6) & 0x3F;
+    color_rgb666.r = (color >> 16) & 0xFF;
+    color_rgb666.g = (color >> 8) & 0xFF;
+    color_rgb666.b = color & 0xFF;
 }
 
 void st7735s_test(void)
 {
-    st7735s_set_color_hex("#FF0000");
+    st7735s_set_color_hex(0xFF0000);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 
-    st7735s_set_color_hex("#00FF00");
+    st7735s_set_color_hex(0x00FF00);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 
-    st7735s_set_color_hex("#0000FF");
+    st7735s_set_color_hex(0x0000FF);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 
-    st7735s_set_color_hex("#FFFF00");
+    st7735s_set_color_hex(0xFFFF00);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 
-    st7735s_set_color_hex("#FF00FF");
+    st7735s_set_color_hex(0xFF00FF);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 
-    st7735s_set_color_hex("#00FFFF");
+    st7735s_set_color_hex(0x00FFFF);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 
-    st7735s_set_color_hex("#800080");
+    st7735s_set_color_hex(0x800080);
     st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
     st7735s_delay(500);
 }
