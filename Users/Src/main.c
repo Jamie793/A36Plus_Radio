@@ -80,10 +80,12 @@ void bk4819_test(void)
     // printf("BK4819 REG_19: 0x%x\n", bk4819_read_reg(BK4819_REG_19));
 
     printf("Running...\n");
-    printf("RSSI: %d\n", bk1080_read_reg(0x67) & 0x0F);
-    printf("Ex-noise: %d\n", bk1080_read_reg(0x65) & 0x0b111111);
-    printf("Glitch: %d\n", bk1080_read_reg(0x63) & 0x0b01111111);
-    printf("Squelch: %d\n", bk1080_read_reg(0x0C) & 0x01);
+    bk4819_set_freq(46255000);
+    printf("Current frequency: %d", (bk4819_read_reg(0x38) << 16 + bk4819_read_reg(0x39))*10);
+    printf("RSSI: %d\n", bk4819_read_reg(0x67) & 0x0F);
+    printf("Ex-noise: %d\n", bk4819_read_reg(0x65) & 0x0b111111);
+    printf("Glitch: %d\n", bk4819_read_reg(0x63) & 0x0b01111111);
+    printf("Squelch: %d\n", bk4819_read_reg(0x0C) & 0x01);
 }
 
 void bk1080_test(void)
@@ -115,7 +117,7 @@ int main(void)
     spi_config();
     tim_config();
     usart_config();
-    // st7735s_init();
+    //st7735s_init();
     bk4819_init();
 
     uint8_t i;
@@ -148,11 +150,11 @@ int main(void)
         //     delay_1ms(500);
         // }
 
-        // st7735s_test();
-        // delay_1ms(10);
-        // LCD_LIGHT_LOW;
-        // delay_1ms(10);
-        // LCD_LIGHT_HIGH;
+        //st7735s_test();
+        delay_1ms(10);
+        LCD_LIGHT_LOW;
+        delay_1ms(10);
+        LCD_LIGHT_HIGH;
         delay_1ms(1000);
     }
 }
