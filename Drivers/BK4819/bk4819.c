@@ -194,7 +194,16 @@ void bk4819_rx_on(void)
 {
     bk4819_write_reg(BK4819_REG_30, 0x00); // reset
 
-    bk4819_write_reg(BK4819_REG_30, 0b1011111011111001);
+    bk4819_write_reg(BK4819_REG_30,
+                     BK4819_REG30_REVERSE2_ENABLE |
+                         BK4819_REG30_REVERSE1_ENABLE |
+                         BK4819_REG30_VCO_CALIBRATION |
+                         BK4819_REG30_RX_LINK_ENABLE |
+                         BK4819_REG30_AF_DAC_ENABLE |
+                         BK4819_REG30_PLL_VCO_ENABLE |
+                         BK4819_REG30_MIC_ADC_ENABLE |
+                         BK4819_REG30_PA_GAIN_ENABLE |
+                         BK4819_REG30_RX_DSP_ENABLE);
 }
 
 /**
@@ -203,11 +212,18 @@ void bk4819_rx_on(void)
  */
 void bk4819_tx_on(void)
 {
+    gpio_bit_reset(MIC_EN_GPIO_PORT, MIC_EN_GPIO_PIN); // open microphone
+
     bk4819_write_reg(BK4819_REG_30, 0x00); // reset
 
-    bk4819_write_reg(0x52, 0x028F);
-    bk4819_write_reg(0x30, 0x0200);
-    bk4819_write_reg(BK4819_REG_30, 0xC3FA);
+    bk4819_write_reg(BK4819_REG_30,
+                     BK4819_REG30_REVERSE1_ENABLE |
+                         BK4819_REG30_REVERSE2_ENABLE |
+                         BK4819_REG30_VCO_CALIBRATION |
+                         BK4819_REG30_MIC_ADC_ENABLE |
+                         BK4819_REG30_TX_DSP_ENABLE |
+                         BK4819_REG30_PLL_VCO_ENABLE |
+                         BK4819_REG30_PA_GAIN_ENABLE);
 }
 
 /**
