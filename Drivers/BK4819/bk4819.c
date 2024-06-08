@@ -3,9 +3,29 @@
  * @author Jamiexu (doxm@foxmail.com)
  * @brief
  * @version 0.1
- * @date 2024-06-06
+ * @date 2024-05-24
  *
- * @copyright Copyright (c) 2024
+ * @copyright MIT License
+
+Copyright (c) 2024 (Jamiexu or Jamie793)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
  *
  */
 
@@ -87,7 +107,7 @@ void bk4819_init(void)
     bk4819_delay(1000);
     bk4819_write_reg(BK4819_REG_00, 0x00);
 
-    bk4819_write_reg(BK4819_REG_37, 0x1d0f);
+    bk4819_write_reg(BK4819_REG_37, 0x1d0f); //
     bk4819_write_reg(BK4819_REG_13, 0x3be);
     bk4819_write_reg(BK4819_REG_12, 0x37b);
     bk4819_write_reg(BK4819_REG_11, 0x27b);
@@ -134,7 +154,7 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_28, 0x6b38);
     bk4819_write_reg(BK4819_REG_29, 0xb4cb);
     bk4819_set_freq(43949500);
-    // bk4819_CTDCSS_set(0, 1485);
+    bk4819_CTDCSS_set(0, 1485);
     // bk4819_rx_on();
     bk4819_tx_on();
 }
@@ -186,7 +206,7 @@ void bk4819_tx_on(void)
     bk4819_write_reg(BK4819_REG_30, 0x00); // reset
 
     bk4819_write_reg(0x52, 0x028F);
-	bk4819_write_reg(0x30, 0x0200);
+    bk4819_write_reg(0x30, 0x0200);
     bk4819_write_reg(BK4819_REG_30, 0xC3FA);
 }
 
