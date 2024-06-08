@@ -27,9 +27,10 @@ include_directories(Users/Inc)
 
 
 include_directories(Libraries/GD32/)
+include_directories(Libraries/printf/)
 include_directories(Libraries/GD32/CMSIS)
 include_directories(Libraries/GD32/CMSIS/GD/GD32F3x0/Include)
-include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/include)
+include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/Include)
 
 include_directories(Drivers/LCD)
 include_directories(Drivers/BK1080)
@@ -47,6 +48,7 @@ add_definitions(
 
 # Add all source files by recurse
 file(GLOB_RECURSE FIRMWAR_SOURCE_DIR 
+    Libraries/printf/*.c
     Libraries/GD32/GD32F3x0_standard_peripheral/*.c 
     Libraries/GD32/CMSIS/GD/GD32F3x0/Source/syscall.c  
     Libraries/GD32/CMSIS/GD/GD32F3x0/Source/system_gd32f3x0.c  
