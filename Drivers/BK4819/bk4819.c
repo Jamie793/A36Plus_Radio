@@ -110,12 +110,13 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_37, 0x1d0f); //
     bk4819_write_reg(BK4819_REG_13, 0x3be);
     bk4819_write_reg(BK4819_REG_12, 0x37b);
+    bk4819_write_reg(BK4819_REG_53, 59000);
+    bk4819_write_reg(BK4819_REG_09, 0x603a);
     bk4819_write_reg(BK4819_REG_11, 0x27b);
     bk4819_write_reg(BK4819_REG_10, 0x7a);
     bk4819_write_reg(BK4819_REG_14, 0x19);
     bk4819_write_reg(BK4819_REG_49, 0x2a38);
     bk4819_write_reg(BK4819_REG_7B, 0x8420);
-    bk4819_write_reg(BK4819_REG_7D, 0xe952);
     bk4819_write_reg(BK4819_REG_48, 0xb3ff);
     bk4819_write_reg(BK4819_REG_1E, 0x4c58);
     bk4819_write_reg(BK4819_REG_1F, 0xa656);
@@ -123,10 +124,9 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_3F, 0x7fe);
     bk4819_write_reg(BK4819_REG_2A, 0x7fff);
     bk4819_write_reg(BK4819_REG_28, 0x6b00);
-    bk4819_write_reg(BK4819_REG_53, 59000);
+    bk4819_write_reg(BK4819_REG_7D, 0xe952);
     bk4819_write_reg(BK4819_REG_2C, 0x5705);
     bk4819_write_reg(BK4819_REG_4B, 0x7102);
-    bk4819_write_reg(BK4819_REG_40, bk4819_read_reg(BK4819_REG_40) & 0xf000 | 0x4d2);
     bk4819_write_reg(BK4819_REG_77, 0x88ef);
     bk4819_write_reg(BK4819_REG_26, 0x13a0);
     bk4819_write_reg(BK4819_REG_4E, 0x6f15);
@@ -137,10 +137,10 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_09, 0x3062);
     bk4819_write_reg(BK4819_REG_09, 0x4050);
     bk4819_write_reg(BK4819_REG_09, 0x5047);
-    bk4819_write_reg(BK4819_REG_09, 0x603a);
     bk4819_write_reg(BK4819_REG_09, 0x702c);
     bk4819_write_reg(BK4819_REG_09, 0x8041);
     bk4819_write_reg(BK4819_REG_09, 0x9037);
+    bk4819_write_reg(BK4819_REG_28, 0x6b38);
     bk4819_write_reg(BK4819_REG_09, 0xa025);
     bk4819_write_reg(BK4819_REG_09, 0xb017);
     bk4819_write_reg(BK4819_REG_09, 0xc0e4);
@@ -150,10 +150,11 @@ void bk4819_init(void)
     bk4819_write_reg(BK4819_REG_74, 0xfa02);
     bk4819_write_reg(BK4819_REG_44, 0x8f88);
     bk4819_write_reg(BK4819_REG_45, 0x3201);
-    bk4819_write_reg(BK4819_REG_31, bk4819_read_reg(BK4819_REG_31) & 0xfffffff7);
-    bk4819_write_reg(BK4819_REG_28, 0x6b38);
     bk4819_write_reg(BK4819_REG_29, 0xb4cb);
+    bk4819_write_reg(BK4819_REG_40, bk4819_read_reg(BK4819_REG_40) & 0xf000 | 0x4d2);
+    bk4819_write_reg(BK4819_REG_31, bk4819_read_reg(BK4819_REG_31) & 0xfffffff7);
     bk4819_set_freq(43949500);
+    bk4819_CTDCSS_enable(1);
     bk4819_CTDCSS_set(0, 1485);
     // bk4819_rx_on();
     bk4819_tx_on();
@@ -253,6 +254,28 @@ void bk4819_set_Squelch(uint8_t RTSO, uint8_t RTSC, uint8_t ETSO, uint8_t ETSC, 
     bk1080_write_reg(BK4819_REG_4F, (ETSC << 8) | ETSO);
     bk1080_write_reg(BK4819_REG_4D, GTSC);
     bk1080_write_reg(BK4819_REG_4E, GTSO);
+}
+
+/**
+ * @brief Enable CTCSS/CDCSS
+ *
+ * @param sel 0:CDCSS   1:CTCSS
+ */
+void bk4819_CTDCSS_enable(uint8_t sel)
+{
+    uint16_t reg = bk4819_read_reg(BK4819_REG_51);
+    reg |= BK4819_REG51_TX_CTCDSS_ENABLE;
+    if (sel)
+        reg |= BK4819_REG51_CTCSCSS_MODE_SEL;
+    else
+        reg &= ~BK4819_REG51_CTCSCSS_MODE_SEL;
+}
+
+void bk4819_CTDCSS_disable(void)
+{
+    uint16_t reg = bk4819_read_reg(BK4819_REG_51);
+    reg &= ~BK4819_REG51_TX_CTCDSS_ENABLE;
+    bk4819_write_reg(BK4819_REG_51, reg);
 }
 
 /**

@@ -34,6 +34,15 @@
 #define BK4819_REG30_TX_DSP_ENABLE BIT(1)
 #define BK4819_REG30_RX_DSP_ENABLE BIT(0)
 
+#define BK4819_REG51_TX_CTCDSS_ENABLE BIT(15)
+#define BK4819_REG51_GPIO6_CDCSS BIT(14)
+#define BK4819_REG51_TRANSMIT_NEG_CDCSS_CODE BIT(13)
+#define BK4819_REG51_CTCSCSS_MODE_SEL BIT(12)
+#define BK4819_REG51_CDCSS_BIT_SEL BIT(11)
+#define BK4819_REG51_1050HZ_DET_MOD BIT(10)
+#define BK4819_REG51_AUTO_CDCSS_BW_MOD BIT(9)
+#define BK4819_REG51_AUTO_CTCSS_BW_MOD BIT(8)
+#define BK4819_REG51_CTCDCSS_TX_GAIN1T(x) BITV((x), 0)
 
 typedef enum
 {
@@ -138,31 +147,31 @@ typedef enum
 
 typedef enum
 {
-    BK4819_INT_FSKTF = (1 << 15),   // FSK TX Finished Interrupt
-    BK4819_INT_FSKFFAE = (1 << 14), // FSK FIFO Almost Empty interrupt
-    BK4819_INT_FSKRXF = (1 << 13),  // FSK RX Finished interrupt
-    BK4819_INT_FSKFFAF = (1 << 12), // FSK FIFO Almost Full interrupt
-    BK4819_INT_DTMFTF = (1 << 11),  // DTMF/5 TONE Found interrupt
-    BK4819_INT_CTDSTF = (1 << 10),  // CTCSS/CDCSS Tail Found interrupt
-    BK4819_INT_CDCSF = (1 << 9),    // CDCSS Found interrupt
-    BK4819_INT_CDCSL = (1 << 8),    // CDCSS Lost interrupt
-    BK4819_INT_CTSSF = (1 << 7),    // CTCSS Found interrupt
-    BK4819_INT_CTCSL = (1 << 6),    // CTCSS Lost interrupt
-    BK4819_INT_VOXF = (1 << 5),     // VOX Found interrupt
-    BK4819_INT_VOXL = (1 << 4),     // VOX Lost interrupt
-    BK4819_INT_SECF = (1 << 3),     // Squelch Found interrupt
-    BK4819_INT_SECL = (1 << 2),     // Squelch Lost interrupt
-    BK4819_INT_FSKRS = (1 << 1)     // FSK RX Sync interrupt
+    BK4819_INT_FSKTF = BIT(15),   // FSK TX Finished Interrupt
+    BK4819_INT_FSKFFAE = BIT(14), // FSK FIFO Almost Empty interrupt
+    BK4819_INT_FSKRXF = BIT(13),  // FSK RX Finished interrupt
+    BK4819_INT_FSKFFAF = BIT(12), // FSK FIFO Almost Full interrupt
+    BK4819_INT_DTMFTF = BIT(11),  // DTMF/5 TONE Found interrupt
+    BK4819_INT_CTDSTF = BIT(10),  // CTCSS/CDCSS Tail Found interrupt
+    BK4819_INT_CDCSF = BIT(9),    // CDCSS Found interrupt
+    BK4819_INT_CDCSL = BIT(8),    // CDCSS Lost interrupt
+    BK4819_INT_CTSSF = BIT(7),    // CTCSS Found interrupt
+    BK4819_INT_CTCSL = BIT(6),    // CTCSS Lost interrupt
+    BK4819_INT_VOXF = BIT(5),     // VOX Found interrupt
+    BK4819_INT_VOXL = BIT(4),     // VOX Lost interrupt
+    BK4819_INT_SECF = BIT(3),     // Squelch Found interrupt
+    BK4819_INT_SECL = BIT(2),     // Squelch Lost interrupt
+    BK4819_INT_FSKRS = BIT(1)     // FSK RX Sync interrupt
 } bk4819_int_t;
 
 typedef enum
 {
-    BK4819_FLAG_DTMF_REV = (0x8 << 11), // DTMF/5 Tone code received
-    BK4819_FLAG_FSK_RX_SNF = (1 << 7),  // FSK RX Sync Negative has been found
-    BK4819_FLAG_FSK_RX_SPF = (1 << 6),  // FSK RX Sync Positive has been found
-    BK4819_FLAG_FSK_RX_CRC = (1 << 4),  // FSK RX CRC indicator
-    BK4819_FLAG_CDCSS_PCR = (1 << 14),  // CDCSS positive code received
-    BK4819_FLAG_CDCSS_PNR = (1 << 15),  //  CDCSS negative code received
+    BK4819_FLAG_DTMF_REV = BITV(0x8, 11), // DTMF/5 Tone code received
+    BK4819_FLAG_FSK_RX_SNF = BIT(7),      // FSK RX Sync Negative has been found
+    BK4819_FLAG_FSK_RX_SPF = BIT(6),      // FSK RX Sync Positive has been found
+    BK4819_FLAG_FSK_RX_CRC = BIT(4),      // FSK RX CRC indicator
+    BK4819_FLAG_CDCSS_PCR = BIT(14),      // CDCSS positive code received
+    BK4819_FLAG_CDCSS_PNR = BIT(15),      //  CDCSS negative code received
 } bk4819_flag_t;
 
 typedef enum
@@ -200,6 +209,10 @@ void bk4819_set_freq(uint32_t frq);
 void bk4819_rx_on(void);
 
 void bk4819_tx_on(void);
+
+void bk4819_CTDCSS_enable(uint8_t sel);
+
+void bk4819_CTDCSS_disable(void);
 
 void bk4819_set_Squelch(uint8_t RTSO, uint8_t RTSC, uint8_t ETSO, uint8_t ETSC, uint8_t GTSO, uint8_t GTSC);
 
