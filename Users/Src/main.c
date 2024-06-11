@@ -32,10 +32,14 @@ SOFTWARE.
 
 // Written by Jamiexu
 
+extern void vtasks_init(void);
+
+
 uint8_t usart_tx[10];
 uint8_t flash_data[W25Q16JV_SECTOR_SIZE] = {0};
 uint8_t flash_data_text[16] = {0};
 uint32_t current_addr = 0;
+
 
 void flash_dump(void)
 {
@@ -108,6 +112,8 @@ void bk1080_test(void)
     delay_1ms(1000);
 }
 
+
+
 int main(void)
 {
     systick_config();
@@ -118,9 +124,11 @@ int main(void)
     tim_config();
     usart_config();
     //st7735s_init();
-    bk4819_init();
-
-    uint8_t i;
+    // bk4819_init();
+    
+    vtasks_init();
+    vTaskStartScheduler();
+    
 
     printf("Running...\r\n");
     while (1)
@@ -135,7 +143,7 @@ int main(void)
         //     printf("KEY: %d\r\n", key_get());
         // printf("Testing...\r\n");
         // bk1080_test();
-        bk4819_test();
+        // bk4819_test();
         // // flash_dump();
         // for (uint32_t i = 0; i < 16; i++)
         // {
@@ -151,10 +159,10 @@ int main(void)
         // }
 
         //st7735s_test();
-        delay_1ms(10);
-        LCD_LIGHT_LOW;
-        delay_1ms(10);
-        LCD_LIGHT_HIGH;
-        delay_1ms(1000);
+        // delay_1ms(1000);
+        // LCD_LIGHT_LOW;
+        // delay_1ms(1000);
+        // LCD_LIGHT_HIGH;
+        // delay_1ms(1000);
     }
 }

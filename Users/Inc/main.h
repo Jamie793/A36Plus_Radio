@@ -13,6 +13,8 @@
 #include "bk1080.h"
 #include "bk4819.h"
 #include "key.h"
+#include "FreeRTOS.h"
+#include "task.h"
 // Written by Jamiexu
 
 extern uint32_t time1_current_ms;
