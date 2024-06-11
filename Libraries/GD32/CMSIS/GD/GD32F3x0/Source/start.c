@@ -28,11 +28,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdint.h>
 
+
 extern uint32_t _sdata, _edata, _rdata, _sbss, _ebss, _estack;
 
 void main(void);
 
 extern void SystemInit(void);
+extern void xPortPendSVHandler( void ) __attribute__( ( naked ) );
+extern void xPortSysTickHandler( void );
+extern void vPortSVCHandler( void ) __attribute__( ( naked ) );
 
 void Reset_Handler(void)
 {
@@ -113,11 +117,11 @@ const __attribute__((section(".vectors"))) uint32_t _VECTORS[] =
 		(uint32_t)BusFault_Handler,	  // Bus Fault
 		(uint32_t)UsageFault_Handler, // Usage Fault
 		0, 0, 0, 0,
-		(uint32_t)SVC_Handler,		// SVC
+		(uint32_t)vPortSVCHandler,//SVC_Handler,		// SVC
 		(uint32_t)DebugMon_Handler, // Debug Monitor
 		0,
-		(uint32_t)PendSV_Handler,					// PendSV
-		(uint32_t)SysTick_Handler,					// SysTick
+		(uint32_t)xPortPendSVHandler,//PendSV_Handler,					// PendSV
+		(uint32_t)xPortSysTickHandler,//SysTick_Handler,					// SysTick
 		(uint32_t)WWDGT_IRQHandler,					// WDT
 		(uint32_t)LVD_IRQHandler,					// LVD
 		(uint32_t)RTC_IRQHandler,					// RTC

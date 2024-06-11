@@ -29,6 +29,9 @@ include_directories(Users/Inc)
 include_directories(Libraries/GD32/)
 include_directories(Libraries/printf/)
 include_directories(Libraries/GD32/CMSIS)
+include_directories(Libraries/FreeRTOS-Kernel/include)
+include_directories(Libraries/FreeRTOS-Kernel/portable/GCC/ARM_CM4F)
+include_directories(Libraries/FreeRTOS-Kernel/examples/template_configuration)
 include_directories(Libraries/GD32/CMSIS/GD/GD32F3x0/Include)
 include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/Include)
 
@@ -42,6 +45,7 @@ include_directories(Drivers/Key)
 # Add definition
 add_definitions(
     -DUSE_STDPERIPH_DRIVER
+    -D__ARM_FP
     -DGD32F3X0
     -DGD32F330
 )
@@ -49,6 +53,15 @@ add_definitions(
 # Add all source files by recurse
 file(GLOB_RECURSE FIRMWAR_SOURCE_DIR 
     Libraries/printf/*.c
+    Libraries/FreeRTOS-Kernel/queue.c
+    Libraries/FreeRTOS-Kernel/croutine.c
+    Libraries/FreeRTOS-Kernel/list.c
+    Libraries/FreeRTOS-Kernel/event-groups.c
+    Libraries/FreeRTOS-Kernel/stream_buffer.c
+    Libraries/FreeRTOS-Kernel/tasks.c
+    Libraries/FreeRTOS-Kernel/timers.c
+    Libraries/FreeRTOS-Kernel/portable/MemMang/heap_4.c
+    Libraries/FreeRTOS-Kernel/portable/GCC/ARM_CM4F/*.c
     Libraries/GD32/GD32F3x0_standard_peripheral/*.c 
     Libraries/GD32/CMSIS/GD/GD32F3x0/Source/syscall.c  
     Libraries/GD32/CMSIS/GD/GD32F3x0/Source/system_gd32f3x0.c  
@@ -93,6 +106,11 @@ add_custom_target(flash
     COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin
     COMMENT "Flashing ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin"
-    
 )
 
+
+add_custom_target(debug
+    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.elf
+    COMMENT "Debugging ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.elf"
+)
