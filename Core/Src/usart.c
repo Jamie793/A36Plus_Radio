@@ -20,9 +20,16 @@ void usart_config(void)
 }
 
 /* retarget the C library printf function to the USART */
-int fputc(int ch, FILE *f)
+int fputc(int ch, unsigned char *f)
 {
     usart_data_transmit(USART0, (uint8_t) ch);
     while(RESET == usart_flag_get(USART0, USART_FLAG_TBE));
     return ch;
+}
+
+// This function is called by printf to output data
+void _putchar(char character)
+{
+        usart_data_transmit(USART0, character);
+        while(usart_flag_get(USART0, USART_FLAG_TBE)==RESET);
 }

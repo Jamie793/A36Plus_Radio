@@ -1,7 +1,7 @@
 #ifndef __USART_JAMIEXU_H__
 #define __USART_JAMIEXU_H__
 #include "main.h"
-#include "stdio.h"
+#include "../printf/printf.h"
 
 // Written by Jamiexu
 

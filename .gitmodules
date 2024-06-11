@@ -1,0 +1,3 @@
+[submodule "Libraries/printf"]
+	path = Libraries/printf
+	url = git@github.com:mpaland/printf.git

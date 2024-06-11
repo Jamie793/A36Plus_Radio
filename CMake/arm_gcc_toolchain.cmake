@@ -31,11 +31,11 @@ set(CMAKE_RANLIB ${TOOLCHAIN_PREFIX}ranlib)
 
 set(CMAKE_SIZE ${TOOLCHAIN_PREFIX}size)
 
-set(CMAKE_C_FLAGS  "-std=c99 -w -mthumb --specs=nosys.specs -mcpu=cortex-m4 -mfloat-abi=soft -fno-builtin -fno-strict-aliasing -fdata-sections -fms-extensions -ffunction-sections -Os" CACHE INTERNAL "C Compiler options")
+set(CMAKE_C_FLAGS  "-std=c99 -w -mthumb -mcpu=cortex-m4 -mfloat-abi=soft -fno-builtin -fno-strict-aliasing -fdata-sections -fms-extensions -ffunction-sections -Os -Wno-int-conversion" CACHE INTERNAL "C Compiler options")
 
 # set(CMAKE_ASM_FLAGS "-mcpu=cortex-m4" CACHE INTERNAL "ASM Compiler options")
 
-set(CMAKE_EXE_LINKER_FLAGS_INIT "-mcpu=cortex-m4 -mfloat-abi=soft -Wl,--gc-sections -flto -specs=nano.specs -T ${CMAKE_CURRENT_SOURCE_DIR}/gd32f3x0.ld -Xlinker -Map=output.map ")
+set(CMAKE_EXE_LINKER_FLAGS_INIT "-mcpu=cortex-m4 --specs=nosys.specs -mfloat-abi=soft -Wl,--gc-sections -flto -T ${CMAKE_CURRENT_SOURCE_DIR}/gd32f3x0.ld -Xlinker -Map=output.map ")
 
 
 message(STATUS "gcc toolchain is used")

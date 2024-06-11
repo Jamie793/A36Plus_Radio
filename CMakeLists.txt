@@ -27,9 +27,10 @@ include_directories(Users/Inc)
 
 
 include_directories(Libraries/GD32/)
+include_directories(Libraries/printf/)
 include_directories(Libraries/GD32/CMSIS)
 include_directories(Libraries/GD32/CMSIS/GD/GD32F3x0/Include)
-include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/include)
+include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/Include)
 
 include_directories(Drivers/LCD)
 include_directories(Drivers/BK1080)
@@ -47,6 +48,7 @@ add_definitions(
 
 # Add all source files by recurse
 file(GLOB_RECURSE FIRMWAR_SOURCE_DIR 
+    Libraries/printf/*.c
     Libraries/GD32/GD32F3x0_standard_peripheral/*.c 
     Libraries/GD32/CMSIS/GD/GD32F3x0/Source/syscall.c  
     Libraries/GD32/CMSIS/GD/GD32F3x0/Source/system_gd32f3x0.c  
@@ -88,7 +90,7 @@ add_custom_command(
 
 
 add_custom_target(flash
-    COMMAND ${OpenOCD} -f D:/2-Software/3-Env/xpack-openocd-0.12.0-3/openocd/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
+    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin
     COMMENT "Flashing ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin"
     
