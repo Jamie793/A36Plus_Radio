@@ -1,10 +1,6 @@
 [submodule "Libraries/printf"]
 	path = Libraries/printf
 	url = git@github.com:mpaland/printf.git
-
-[submodule "Libraries/FreeRTOS"]
-	path = Libraries/FreeRTOS
-	url = https://github.com/FreeRTOS/FreeRTOS.git
 [submodule "Libraries/FreeRTOS-Kernel"]
 	path = Libraries/FreeRTOS-Kernel
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
