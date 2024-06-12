@@ -31,7 +31,6 @@ include_directories(Libraries/printf/)
 include_directories(Libraries/GD32/CMSIS)
 include_directories(Libraries/FreeRTOS-Kernel/include)
 include_directories(Libraries/FreeRTOS-Kernel/portable/GCC/ARM_CM4F)
-include_directories(Libraries/FreeRTOS-Kernel/examples/template_configuration)
 include_directories(Libraries/GD32/CMSIS/GD/GD32F3x0/Include)
 include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/Include)
 
@@ -103,14 +102,14 @@ add_custom_command(
 
 
 add_custom_target(flash
-    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
+    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin
     COMMENT "Flashing ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin"
 )
 
 
 add_custom_target(debug
-    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg
+    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.elf
     COMMENT "Debugging ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.elf"
 )
