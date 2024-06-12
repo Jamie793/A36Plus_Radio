@@ -15,4 +15,5 @@ void vTestings(void *pvParameters)
 void vtasks_init(void)
 {
     xTaskCreate(vTestings, "Test", 128, NULL, 0, NULL);
+    // xTaskCreateStatic(vTestings, "Test", 128, NULL, 0, NULL);
 }

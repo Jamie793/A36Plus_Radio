@@ -29,6 +29,8 @@ SOFTWARE.
  * 
  */
 #include "main.h"
+#include "string.h"
+#include "stdlib.h"
 
 // Written by Jamiexu
 
@@ -112,7 +114,14 @@ void bk1080_test(void)
     delay_1ms(1000);
 }
 
-
+void vApplicationStackOverflowHook( TaskHandle_t xTask,
+                                        char * pcTaskName )
+    {
+        /* Check pcTaskName for the name of the offending task,
+         * or pxCurrentTCB if pcTaskName has itself been corrupted. */
+        ( void ) xTask;
+        ( void ) pcTaskName;
+    }
 
 int main(void)
 {
@@ -123,8 +132,11 @@ int main(void)
     spi_config();
     tim_config();
     usart_config();
+
     //st7735s_init();
     // bk4819_init();
+    uint8_t *data = (uint8_t *)malloc(10);
+    memset(data, 0, 1024);
     
     vtasks_init();
     vTaskStartScheduler();
