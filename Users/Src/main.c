@@ -45,33 +45,33 @@ uint32_t current_addr = 0;
 
 void flash_dump(void)
 {
-    printf("EEPROM WEL: %d\r\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
-    printf("0x%08x     ", current_addr);
-    for (uint8_t i = 0; i < 32; i++)
-    {
-        // printf("**************BLOCK %d*****************\r\n", i);
-        for (uint8_t j = 0; j < 16; j++)
-        {
-            /* code */
-            // printf("**************SECTOR %d*****************\r\n", j);
-            w25q16jv_read_sector((i + 1) * j * W25Q16JV_SECTOR_SIZE - j * W25Q16JV_SECTOR_SIZE, flash_data);
-            for (uint32_t k = 0; k < W25Q16JV_SECTOR_SIZE; k++)
-            {
-                // printf("**************PAGE %d*****************\r\n", k);
-                sprintf(flash_data_text[k % 16], "%s", flash_data[i]);
-                printf("%02x ", flash_data[k]);
-                current_addr++;
+    // printf("EEPROM WEL: %d\r\n", w25q16jv_read_reg1(W25Q16JV_REG1_WEL));
+    // printf("0x%08x     ", current_addr);
+    // for (uint8_t i = 0; i < 32; i++)
+    // {
+    //     // printf("**************BLOCK %d*****************\r\n", i);
+    //     for (uint8_t j = 0; j < 16; j++)
+    //     {
+    //         /* code */
+    //         // printf("**************SECTOR %d*****************\r\n", j);
+    //         w25q16jv_read_sector((i + 1) * j * W25Q16JV_SECTOR_SIZE - j * W25Q16JV_SECTOR_SIZE, flash_data);
+    //         for (uint32_t k = 0; k < W25Q16JV_SECTOR_SIZE; k++)
+    //         {
+    //             // printf("**************PAGE %d*****************\r\n", k);
+    //             sprintf(flash_data_text[k % 16], "%s", flash_data[i]);
+    //             printf("%02x ", flash_data[k]);
+    //             current_addr++;
 
-                if (current_addr % 16 == 0)
-                    printf("    %s\n0x%08x     ", flash_data_text, current_addr);
-                // printf("**************END PAGE %d**	***************\r\n", k);
-                // delay_1ms(50);
-            }
-            // printf("**************EEND SECTOR %d*****************\r\n", j);
-            // delay_1ms(50);
-        }
-        // printf("**************END BLOCK %d**************\r\n", i);
-    }
+    //             if (current_addr % 16 == 0)
+    //                 printf("    %s\n0x%08x     ", flash_data_text, current_addr);
+    //             // printf("**************END PAGE %d**	***************\r\n", k);
+    //             // delay_1ms(50);
+    //         }
+    //         // printf("**************EEND SECTOR %d*****************\r\n", j);
+    //         // delay_1ms(50);
+    //     }
+    //     // printf("**************END BLOCK %d**************\r\n", i);
+    // }
 }
 
 void bk4819_test(void)
@@ -133,16 +133,14 @@ int main(void)
     tim_config();
     usart_config();
 
-    //st7735s_init();
+    // st7735s_init();
     // bk4819_init();
-    uint8_t *data = (uint8_t *)malloc(10);
-    memset(data, 0, 1024);
     
     vtasks_init();
     vTaskStartScheduler();
     
 
-    printf("Running...\r\n");
+    // printf("Running...\r\n");
     while (1)
     {
 
