@@ -2,11 +2,11 @@
 
 // Written by Jamiexu
 
-extern uint8_t usart_tx[10];
+uint8_t usart_tx[10];
 extern uint8_t frame_buffer[FRAME_SIZE];
 static void lcd_dma_init(void)
 {
-     dma_parameter_struct dma_init_struct;
+    dma_parameter_struct dma_init_struct;
 
     /* initialize DMA channel1 */
     dma_deinit(DMA_CH4);
@@ -21,7 +21,7 @@ static void lcd_dma_init(void)
     dma_init_struct.priority = DMA_PRIORITY_ULTRA_HIGH;
     dma_init(DMA_CH4, &dma_init_struct);
 
-    dma_memory_to_memory_disable(DMA_CH4);      
+    dma_memory_to_memory_disable(DMA_CH4);
     dma_circulation_disable(DMA_CH4);
     dma_channel_disable(DMA_CH4);
 }
@@ -43,7 +43,7 @@ static void usart_dma_init(void)
     dma_init_struct.priority = DMA_PRIORITY_ULTRA_HIGH;
     dma_init(DMA_CH1, &dma_init_struct);
 
-    dma_memory_to_memory_disable(DMA_CH1);      
+    dma_memory_to_memory_disable(DMA_CH1);
     dma_circulation_disable(DMA_CH1);
     dma_channel_disable(DMA_CH1);
 }
