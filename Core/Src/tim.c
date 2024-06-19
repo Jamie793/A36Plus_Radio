@@ -1,5 +1,5 @@
 #include "tim.h"
-uint32_t time1_current_ms = 0;
+// uint32_t time1_current_ms = 0;
 void key_tim_config(void)
 {
     timer_parameter_struct timer_initpara;
@@ -24,7 +24,8 @@ void TIMER1_IRQHandler(void)
 {
     if (timer_interrupt_flag_get(TIMER1, TIMER_INT_UP) != RESET)
     {
-        time1_current_ms++;
+        // time1_current_ms++;
+        xPortSysTickHandler();
         timer_interrupt_flag_clear(TIMER1, TIMER_INT_UP);
     }
 }
