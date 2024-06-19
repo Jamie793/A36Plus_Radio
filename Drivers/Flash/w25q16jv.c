@@ -109,7 +109,7 @@ void w25q16jv_read_sector(uint32_t addr, uint8_t *readData)
 void w25q16jv_read_block(uint32_t addr, uint8_t *readData)
 {
     for (uint8_t i = 0; i < 16; i++)
-        w25q16jv_read_sector(addr + i * W25Q16JV_SECTOR_SIZE, readData[i * W25Q16JV_SECTOR_SIZE]);
+        w25q16jv_read_sector(addr + i * W25Q16JV_SECTOR_SIZE, (uint8_t *)readData[i * W25Q16JV_SECTOR_SIZE]);
 }
 
 void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData)
@@ -138,7 +138,7 @@ void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData)
 void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData)
 {
     for (uint8_t i = 0; i < 16; i++)
-        w25q16jv_read_sector_fast(addr + i * W25Q16JV_SECTOR_SIZE, readData[i * W25Q16JV_SECTOR_SIZE]);
+        w25q16jv_read_sector_fast(addr + i * W25Q16JV_SECTOR_SIZE, (uint8_t *)readData[i * W25Q16JV_SECTOR_SIZE]);
 }
 
 
