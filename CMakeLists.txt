@@ -6,12 +6,20 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/CMake/arm_gcc_toolchain.cma
 
 ###################  CUSTOM  Options ##################
 
-set(OpenOCD openocd)
+set(OPENOCD openocd)
 
-# "Use start c"
+# "Using start c"
 set(USE_START_C ON)
-
 message(STATUS "Use start c: ${USE_START_C}")
+
+# "Setting up OpenOCD based on system"
+if (WIN32)
+    set(OPENOCD_CFG_PATH "D:/2-Software/3-Env/xpack-openocd-0.12.0-3/openocd")
+else()
+    set(OPENOCD_CFG_PATH "/usr/share/openocd")
+endif()
+message(STATUS "OPENOCD_CFG_PATH: ${OPENOCD_CFG_PATH}")
+
 
 ###################  CUSTOM Options ###################
 
@@ -31,6 +39,7 @@ include_directories(Libraries/printf/)
 include_directories(Libraries/GD32/CMSIS)
 include_directories(Libraries/FreeRTOS-Kernel/include)
 include_directories(Libraries/FreeRTOS-Kernel/portable/GCC/ARM_CM4F)
+include_directories(Libraries/lvgl/src)
 include_directories(Libraries/GD32/CMSIS/GD/GD32F3x0/Include)
 include_directories(Libraries/GD32/GD32F3x0_standard_peripheral/Include)
 
@@ -47,11 +56,13 @@ add_definitions(
     -D__ARM_FP
     -DGD32F3X0
     -DGD32F330
+    -DLV_CONF_INCLUDE_SIMPLE
 )
 
 # Add all source files by recurse
 file(GLOB_RECURSE FIRMWAR_SOURCE_DIR 
     Libraries/printf/*.c
+    Libraries/lvgl/src/*.c
     Libraries/FreeRTOS-Kernel/queue.c
     Libraries/FreeRTOS-Kernel/croutine.c
     Libraries/FreeRTOS-Kernel/list.c
@@ -102,14 +113,14 @@ add_custom_command(
 
 
 add_custom_target(flash
-    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
+    COMMAND ${OPENOCD} -f ${OPENOCD_CFG_PATH}/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg -c "program ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin verify reset exit 0x08000000"
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin
     COMMENT "Flashing ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.bin"
 )
 
 
 add_custom_target(debug
-    COMMAND ${OpenOCD} -f /usr/share/openocd/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg
+    COMMAND ${OPENOCD} -f ${OPENOCD_CFG_PATH}/scripts/interface/stlink.cfg -f ${CMAKE_CURRENT_SOURCE_DIR}/gd32f33x.cfg
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.elf
     COMMENT "Debugging ${CMAKE_CURRENT_SOURCE_DIR}/build/${PROJECT_NAME}.elf"
 )
