@@ -84,8 +84,8 @@ __Vectors       DCD     __initial_sp                      ; Top of Stack
                 DCD     0                                 ; Reserved
                 ;DCD     PendSV_Handler                    ; PendSV Handler
                 DCD     xPortPendSVHandler                    ; PendSV Handler
-                ;DCD     SysTick_Handler                   ; SysTick Handler
-                DCD     xPortSysTickHandler                   ; SysTick Handler
+                DCD     SysTick_Handler                   ; SysTick Handler
+                ;DCD     xPortSysTickHandler                   ; SysTick Handler
 
 ;               /* external interrupts handler */
                 DCD     WWDGT_IRQHandler                  ; 16:Window Watchdog Timer
@@ -167,7 +167,8 @@ Reset_Handler   PROC
                 EXPORT  Reset_Handler                     [WEAK]
                 IMPORT  SystemInit
                 IMPORT  __main
-                LDR     R0, =SystemInit
+
+				LDR     R0, =SystemInit
                 BLX     R0
                 LDR     R0, =__main
                 BX      R0

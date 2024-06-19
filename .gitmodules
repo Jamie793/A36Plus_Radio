@@ -6,4 +6,5 @@
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
 [submodule "Libraries/lvgl"]
 	path = Libraries/lvgl
-	url = https://github.com/lvgl/lvgl
+	url = https://github.com/lvgl/lvgl.git
+	branch = release/8.4
