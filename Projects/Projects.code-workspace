@@ -1,0 +1,24 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "lv_port_disp.h": "c",
+            "fstream": "c",
+            "*.tcc": "c",
+            "bitset": "c",
+            "algorithm": "c",
+            "random": "c",
+            "streambuf": "c",
+            "regex": "c",
+            "type_traits": "c",
+            "lvgl.h": "c",
+            "st7735s.h": "c",
+            "main.h": "c"
+        }
+    },
+    "extensions": {}
+}
