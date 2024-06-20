@@ -328,7 +328,7 @@ void st7735s_init(void)
 
     // clear screen
     st7735s_set_color(0x00, 0x00, 0x00);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    // st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
 
     // display on
     st7735s_send_command(ST7735S_CMD_DISPON);

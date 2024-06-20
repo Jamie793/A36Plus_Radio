@@ -34,7 +34,7 @@ static void gpu_fill(lv_disp_drv_t *disp_drv, lv_color_t *dest_buf, lv_coord_t d
 /**********************
  *  STATIC VARIABLES
  **********************/
-
+static uint8_t lcd_bus_busy = 0;
 /**********************
  *      MACROS
  **********************/
@@ -42,6 +42,15 @@ static void gpu_fill(lv_disp_drv_t *disp_drv, lv_color_t *dest_buf, lv_coord_t d
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
+
+void lv_flush_finish_cb(void)
+{
+    LCD_CS_HIGH;
+    spi_dma_disable(SPI1, SPI_DMA_TRANSMIT);
+    dma_channel_disable(DMA_CH4);
+    lv_disp_flush_ready(&(lv_disp_get_default()->driver));
+    lcd_bus_busy = 0;
+}
 
 void lv_port_disp_init(void)
 {
@@ -141,38 +150,29 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
 {
     /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
 
-    int32_t x;
-    int32_t y;
-    int height = area->y2 - area->y1 + 1;
-    int width = area->x2 - area->x1 + 1;
+    uint32_t height = area->y2 - area->y1 + 1;
+    uint32_t width = area->x2 - area->x1 + 1;
 
     st7735s_set_window(area->x1, area->x2, area->y1, area->y2);
-    for (size_t i = 0; i < width * height; i++)
-    {
-        st7735s_send_data(((color_p->full) >> 8) & 0xFF);
-        st7735s_send_data((color_p->full) & 0xFF);
-        color_p++;
-    }
+    // for (size_t i = 0; i < width * height; i++)
+    // {
+    //     st7735s_send_data(((color_p->full) >> 8) & 0xFF);
+    //     st7735s_send_data((color_p->full) & 0xFF);
+    //     color_p++;
+    // }
 
     LCD_CS_LOW;
     LCD_DC_HIGH;
     DMA_CHMADDR(DMA_CH4) = (uint32_t)color_p;
-    dma_transfer_number_config(DMA_CH4, height * width * 2); //times 2. dma bit width is 8 bits but RGB565 is 2bytes = 16bits
+    dma_transfer_number_config(DMA_CH4, height * width * 2); // times 2. dma bit width is 8 bits but RGB565 is 2bytes = 16bits
     spi_dma_enable(SPI1, SPI_DMA_TRANSMIT);
     dma_channel_enable(DMA_CH4);
 
-    while (dma_flag_get(DMA_CH4, DMA_FLAG_FTF) == RESET)
-        ;
-
-    dma_flag_clear(DMA_CH4, DMA_FLAG_FTF);
-
-    LCD_CS_HIGH;
-    spi_dma_disable(SPI1, SPI_DMA_TRANSMIT);
-    dma_channel_disable(DMA_CH4);
+    lcd_bus_busy = 1;
 
     /* IMPORTANT!!!
      * Inform the graphics library that you are ready with the flushing*/
-    lv_disp_flush_ready(disp_drv);
+    // lv_disp_flush_ready(disp_drv);
 }
 
 /*OPTIONAL: GPU INTERFACE*/

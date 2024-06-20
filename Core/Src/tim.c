@@ -17,7 +17,7 @@ void key_tim_config(void)
     timer_interrupt_enable(TIMER1, TIMER_INT_UP);
 
     /* TIMER1 counter enable */
-    timer_enable(TIMER1);
+    // timer_enable(TIMER1);
 }
 
 void TIMER1_IRQHandler(void)
@@ -25,7 +25,7 @@ void TIMER1_IRQHandler(void)
     if (timer_interrupt_flag_get(TIMER1, TIMER_INT_UP) != RESET)
     {
         // time1_current_ms++;
-        xPortSysTickHandler();
+        // xPortSysTickHandler();
         timer_interrupt_flag_clear(TIMER1, TIMER_INT_UP);
     }
 }

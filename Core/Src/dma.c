@@ -4,6 +4,7 @@
 
 uint8_t usart_tx[10];
 extern uint8_t frame_buffer[FRAME_SIZE];
+extern void lv_flush_finish_cb(void);
 static void lcd_dma_init(void)
 {
     dma_parameter_struct dma_init_struct;
@@ -20,6 +21,7 @@ static void lcd_dma_init(void)
     dma_init_struct.periph_width = DMA_PERIPHERAL_WIDTH_8BIT;
     dma_init_struct.priority = DMA_PRIORITY_ULTRA_HIGH;
     dma_init(DMA_CH4, &dma_init_struct);
+    dma_interrupt_enable(DMA_CH4, DMA_INT_FTF);
 
     dma_memory_to_memory_disable(DMA_CH4);
     dma_circulation_disable(DMA_CH4);
@@ -47,6 +49,14 @@ static void usart_dma_init(void)
     dma_circulation_disable(DMA_CH1);
     dma_channel_disable(DMA_CH1);
 }
+
+void DMA_Channel3_4_IRQHandler(void){
+    if (dma_interrupt_flag_get(DMA_CH4, DMA_INT_FTF) != RESET){
+        lv_flush_finish_cb();
+        dma_interrupt_flag_clear(DMA_CH4, DMA_INT_FTF);
+    }
+}
+
 
 void dma_config(void)
 {
