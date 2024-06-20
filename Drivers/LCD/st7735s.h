@@ -89,9 +89,9 @@ typedef enum
     ST7735S_CMD_GCV = 0xFC        //
 } st7735s_cmd_t;
 
-#define DISPLAY_W 161
+#define DISPLAY_W 162
 #define DISPLAY_H 128
-#define FRAME_SIZE 1024
+#define FRAME_SIZE DISPLAY_W
 
 // define piexel rgb depth format
 typedef struct
