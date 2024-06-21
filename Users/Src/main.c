@@ -57,7 +57,7 @@ int main(void)
     usart_config();
     st7735s_init();
 
-    // bk4819_init();
+    // bk4819_init();b
     lv_init();
     lv_port_disp_init();
 
@@ -67,19 +67,18 @@ int main(void)
     // lv_obj_set_pos(btn, 10, 10);                       /*Set its position*/
     // lv_obj_set_size(btn, 100, 50);                     /*Set its size*/
 
-    
-    lv_obj_t *label = lv_label_create(lv_scr_act(), NULL);   /*Add a label to the button*/
-    lv_label_set_text(label, "Testing");           /*Set the labels text*/
-    lv_obj_set_pos(label, 30, 30); 
+    lv_obj_t *label = lv_label_create(lv_scr_act(), NULL); /*Add a label to the button*/
+    lv_label_set_text(label, "Testing");                   /*Set the labels text*/
+    lv_obj_set_pos(label, 30, 30);
     lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xFF0000));
 
-    // vtasks_init();
-    // vTaskStartScheduler();
+    vtasks_init();
+    vTaskStartScheduler();
 
     // printf("Running...\r\n");
     while (1)
     {
-        lv_task_handler();
+
         // if (++time1_current_ms >= 1000){
         //     printf("1s...\r\n");
         //     time1_current_ms = 0;
