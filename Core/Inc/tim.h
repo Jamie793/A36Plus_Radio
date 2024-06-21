@@ -5,7 +5,7 @@
 
 #include "main.h"
 
-void key_tim_config(void);
+void rtos_tim_config(void);
 
 void tim_config(void);
 

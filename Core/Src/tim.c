@@ -1,6 +1,6 @@
 #include "tim.h"
 // uint32_t time1_current_ms = 0;
-void key_tim_config(void)
+void rtos_tim_config(void)
 {
     timer_parameter_struct timer_initpara;
     timer_deinit(TIMER1);
@@ -14,10 +14,11 @@ void key_tim_config(void)
     timer_init(TIMER1, &timer_initpara);
     /* auto-reload preload enable */
     timer_auto_reload_shadow_enable(TIMER1);
-    timer_interrupt_enable(TIMER1, TIMER_INT_UP);
 
     /* TIMER1 counter enable */
-    // timer_enable(TIMER1);
+    
+    timer_interrupt_flag_clear(TIMER1, TIMER_INT_UP);
+    timer_interrupt_enable(TIMER1, TIMER_INT_UP);
 }
 
 void TIMER1_IRQHandler(void)
@@ -25,7 +26,7 @@ void TIMER1_IRQHandler(void)
     if (timer_interrupt_flag_get(TIMER1, TIMER_INT_UP) != RESET)
     {
         // time1_current_ms++;
-        // xPortSysTickHandler();
+        xPortSysTickHandler();
         timer_interrupt_flag_clear(TIMER1, TIMER_INT_UP);
     }
 }
@@ -33,5 +34,5 @@ void TIMER1_IRQHandler(void)
 void tim_config(void)
 {
     rcu_periph_clock_enable(RCU_TIMER1);
-    key_tim_config();
+    rtos_tim_config();
 }

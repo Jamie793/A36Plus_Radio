@@ -6,7 +6,7 @@ void tim_nvic_config(void){
 }
 
 void dma_nvic_config(void){
-    nvic_irq_enable(DMA_Channel3_4_IRQn, 1, 2);
+    nvic_irq_enable(DMA_Channel3_4_IRQn, 2, 1);
 }
 
 void nvic_config(void){

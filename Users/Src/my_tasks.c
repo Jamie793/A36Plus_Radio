@@ -1,8 +1,9 @@
 #include "main.h"
 #include "portmacro.h"
 
-void vTestings(void *pvParameters)
+void vTaskTestings(void *pvParameters)
 {
+
     for (;;)
     {
         LCD_LIGHT_LOW;
@@ -12,10 +13,19 @@ void vTestings(void *pvParameters)
     }
 }
 
+void vTaskLvglRfer(void)
+{
+    for (;;)
+    {
+        lv_task_handler();
+    }
+}
+
 void vtasks_init(void)
 {
     // nvic_priority_group_set(NVIC_PRIGROUP_PRE0_SUB4);
 
-    xTaskCreate(vTestings, "Test", 128, NULL, 0, NULL);
-    // xTaskCreateStatic(vTestings, "Test", 128, NULL, 0, NULL);
+    xTaskCreate(vTaskTestings, "Test", 128, NULL, 0, NULL);
+    xTaskCreate(vTaskLvglRfer, "LCD handler", 512, NULL, 0, NULL);
+    timer_enable(TIMER1);
 }
