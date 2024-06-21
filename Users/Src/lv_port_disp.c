@@ -152,18 +152,31 @@ static void disp_flush(lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_
 
     uint32_t height = area->y2 - area->y1 + 1;
     uint32_t width = area->x2 - area->x1 + 1;
+    uint16_t bytes[width * height];
+    while (lcd_bus_busy)
+        ;
+        // spi_disable(SPI1);
+        // SPI_CTL0(SPI1) &= ~(1 << 7);
+        // spi_enable(SPI1);
 
     st7735s_set_window(area->x1, area->x2, area->y1, area->y2);
-    // for (size_t i = 0; i < width * height; i++)
-    // {
-    //     st7735s_send_data(((color_p->full) >> 8) & 0xFF);
-    //     st7735s_send_data((color_p->full) & 0xFF);
-    //     color_p++;
-    // }
+
+    for (size_t i = 0; i < width * height; i++)
+    {
+        // st7735s_send_data(((color_p->full) >> 8) & 0xFF);
+        // st7735s_send_data((color_p->full) & 0xFF);
+        bytes[i] = (uint16_t)(((color_p->full >> 8) & 0xFF) | (color_p->full << 8));
+        color_p++;
+    }
+
+    // DMA refresh
+    // spi_disable(SPI1);
+    // SPI_CTL0(SPI1) |= (1 << 7);
+    // spi_enable(SPI1);
 
     LCD_CS_LOW;
     LCD_DC_HIGH;
-    DMA_CHMADDR(DMA_CH4) = (uint32_t)color_p;
+    DMA_CHMADDR(DMA_CH4) = (uint32_t)bytes;
     dma_transfer_number_config(DMA_CH4, height * width * 2); // times 2. dma bit width is 8 bits but RGB565 is 2bytes = 16bits
     spi_dma_enable(SPI1, SPI_DMA_TRANSMIT);
     dma_channel_enable(DMA_CH4);
