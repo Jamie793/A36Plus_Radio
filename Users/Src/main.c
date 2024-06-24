@@ -57,20 +57,12 @@ int main(void)
     usart_config();
     st7735s_init();
 
-    // bk4819_init();b
+    // bk4819_init();
     lv_init();
     lv_port_disp_init();
+    ui_init();
 
-    /*Change the active screen's background color*/
-    // st7735s_set_color(0xFF, 0x00, 0x00);
-    // lv_obj_t *btn = lv_btn_create(lv_scr_act(), NULL); /*Add a button to the current screen*/
-    // lv_obj_set_pos(btn, 10, 10);                       /*Set its position*/
-    // lv_obj_set_size(btn, 100, 50);                     /*Set its size*/
 
-    lv_obj_t *label = lv_label_create(lv_scr_act(), NULL); /*Add a label to the button*/
-    lv_label_set_text(label, "Testing");                   /*Set the labels text*/
-    lv_obj_set_pos(label, 30, 30);
-    lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xFF0000));
 
     vtasks_init();
     vTaskStartScheduler();

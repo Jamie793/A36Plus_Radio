@@ -16,6 +16,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "lvgl.h"
+#include "ui.h"
 // Written by Jamiexu
 
 extern uint32_t time1_current_ms;
