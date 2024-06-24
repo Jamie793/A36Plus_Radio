@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F3X0,GD32F330,LV_CONF_INCLUDE_SIMPLE</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\GD32\CMSIS\GD\GD32F3x0\Include;..\Libraries\GD32\CMSIS\Keil;..\Users\Inc;..\Libraries\GD32\CMSIS\GD\GD32F3x0\Source\ARM;..\Libraries\GD32\GD32F3x0_standard_peripheral\Include;.cmsis\include;RTE\_GD32F330;.eide\deps;..\Libraries\GD32;..\Core\Inc;..\Drivers\LCD;..\Drivers\Flash;..\Drivers\BK4819;..\Drivers\BK1080;..\Drivers\Key;..\Libraries\FreeRTOS-Kernel\include;..\Libraries\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;..\Libraries\lvgl\src;RTE\_Project</IncludePath>
+              <IncludePath>..\Libraries\GD32\CMSIS\GD\GD32F3x0\Include;..\Libraries\GD32\CMSIS\Keil;..\Users\Inc;..\Libraries\GD32\CMSIS\GD\GD32F3x0\Source\ARM;..\Libraries\GD32\GD32F3x0_standard_peripheral\Include;.cmsis\include;RTE\_GD32F330;.eide\deps;..\Libraries\GD32;..\Core\Inc;..\Drivers\LCD;..\Drivers\Flash;..\Drivers\BK4819;..\Drivers\BK1080;..\Drivers\Key;..\Libraries\FreeRTOS-Kernel\include;..\Libraries\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;..\Libraries\lvgl\src;RTE\_Project;..\GUI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -4213,6 +4213,21 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/usart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>../GUI/SRC</GroupName>
+          <Files>
+            <File>
+              <FileName>ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI\ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\GUI\ui_menu.c</FilePath>
             </File>
           </Files>
         </Group>
