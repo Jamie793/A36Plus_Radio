@@ -28,17 +28,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  *
  */
+
 #include "st7735s.h"
 
 // Written by Jamiexu
 
-static _color_format color_format = COLOR_FORMAT_RGB565;
-static _color_rgb444 color_rgb444;
-static _color_rgb565 color_rgb565;
-static _color_rgb666 color_rgb666;
-static st7735s_window_t window;
-uint8_t frame_buffer[FRAME_SIZE] = {0};
-uint32_t fram_buffer_pos = 0;
+
 
 static void spi_send_bytes(uint8_t len, uint8_t *data)
 {
@@ -49,17 +44,6 @@ static void spi_send_bytes(uint8_t len, uint8_t *data)
 static void spi_send_byte(uint8_t data)
 {
     LCD_CS_LOW;
-
-    // for (uint8_t i = 0; i < 8; i++)
-    // {
-    //     LCD_SCK_LOW;
-    //     if (data & 0x80)
-    //         LCD_SDA_HIGH;
-    //     else
-    //         LCD_SDA_LOW;
-    //     LCD_SCK_HIGH;
-    //     data <<= 1;
-    // }
     while (spi_i2s_flag_get(SPI1, SPI_FLAG_TBE) == RESET)
         ;
     spi_i2s_data_transmit(SPI1, data);
@@ -99,34 +83,6 @@ void st7735s_send_data(uint8_t data)
     spi_send_byte(data);
 }
 
-void st7735s_set_pixel_format(_color_format x)
-{
-    color_format = x;
-    st7735s_send_command(ST7735S_CMD_COLMOD);
-    st7735s_send_data(x);
-}
-
-static void st7735s_reset_window(void)
-{
-    window.xs = DISPLAY_W - 1;
-    window.xe = 0;
-    window.ys = DISPLAY_H - 1;
-    window.ye = 0;
-}
-
-static void st7735s_update_window(uint16_t x, uint16_t y)
-{
-    if (x > window.xe)
-        window.xe = x;
-    else if (x < window.xs)
-        window.xs = x;
-
-    if (y > window.ye)
-        window.xe = y;
-    else if (y < window.ys)
-        window.ys = y;
-}
-
 void st7735s_set_window(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2)
 {
 
@@ -145,148 +101,6 @@ void st7735s_set_window(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2)
     st7735s_send_command(ST7735S_CMD_RAMWR);
 }
 
-void st7735s_send_color(void)
-{
-    if (color_format == COLOR_FORMAT_RGB666)
-    {
-        st7735s_send_data(color_rgb666.ch.r << 2);
-        st7735s_send_data(color_rgb666.ch.g << 2);
-        st7735s_send_data(color_rgb666.ch.b << 2);
-    }
-    else if (color_format == COLOR_FORMAT_RGB565)
-    {
-        st7735s_send_data((color_rgb565.ch.r << 5) | (color_rgb565.ch.g & 0x38));
-        st7735s_send_data(((color_rgb565.ch.g & 0x07) << 5) | color_rgb565.ch.b << 2);
-    }
-    else if (color_format == COLOR_FORMAT_RGB444)
-    {
-        st7735s_send_data((color_rgb444.ch.r << 4) | (color_rgb444.ch.g));
-        st7735s_send_data(color_rgb444.ch.b << 4);
-    }
-}
-
-void st7735s_draw_pixel(uint8_t x, uint8_t y)
-{
-    // st7735s_set_window(x, x + 1, y, y + 1);
-    // st7735s_send_color();
-}
-
-void st7735s_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
-{
-    st7735s_set_window(x, x + width, y, y + height);
-    for (uint16_t i = 0; i < width; i++)
-    {
-        for (uint16_t j = 0; j < height; j++)
-        {
-            if (color_format == COLOR_FORMAT_RGB666)
-            {
-                frame_buffer[fram_buffer_pos++] = color_rgb666.ch.r << 2;
-                frame_buffer[fram_buffer_pos++] = color_rgb666.ch.g << 2;
-                frame_buffer[fram_buffer_pos++] = color_rgb666.ch.b << 2;
-            }
-            else if (color_format == COLOR_FORMAT_RGB565)
-            {
-                frame_buffer[fram_buffer_pos++] = color_rgb565.ch.r << 2;
-                frame_buffer[fram_buffer_pos++] = color_rgb565.ch.g << 2;
-                frame_buffer[fram_buffer_pos++] = color_rgb565.ch.b << 2;
-            }
-            else if (color_format == COLOR_FORMAT_RGB444)
-            {
-                frame_buffer[fram_buffer_pos++] = color_rgb444.ch.r << 2;
-                frame_buffer[fram_buffer_pos++] = color_rgb444.ch.g << 2;
-                frame_buffer[fram_buffer_pos++] = color_rgb444.ch.b << 2;
-            }
-
-            if (fram_buffer_pos >= FRAME_SIZE)
-                st7735s_flush();
-        }
-    }
-    if (fram_buffer_pos > 0)
-        st7735s_flush();
-}
-
-void st7735s_flush()
-{
-    LCD_CS_LOW;
-    LCD_DC_HIGH;
-
-    // for (uint32_t i = 0; i < fram_buffer_pos; i++)
-    //     st7735s_send_data(frame_buffer[i]);
-
-    dma_transfer_number_config(DMA_CH4, fram_buffer_pos);
-    spi_dma_enable(SPI1, SPI_DMA_TRANSMIT);
-    dma_channel_enable(DMA_CH4);
-
-    while (dma_flag_get(DMA_CH4, DMA_FLAG_FTF) == RESET)
-        ;
-
-    dma_flag_clear(DMA_CH4, DMA_FLAG_FTF);
-
-    LCD_CS_HIGH;
-    fram_buffer_pos = 0;
-    spi_dma_disable(SPI1, SPI_DMA_TRANSMIT);
-    dma_channel_disable(DMA_CH4);
-}
-
-void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue)
-{
-    if (color_format == COLOR_FORMAT_RGB666)
-    {
-        color_rgb666.ch.r = red;
-        color_rgb666.ch.g = green;
-        color_rgb666.ch.b = blue;
-    }
-    else if (color_format == COLOR_FORMAT_RGB565)
-    {
-        color_rgb565.ch.r = red;
-        color_rgb565.ch.g = green;
-        color_rgb565.ch.b = blue;
-    }
-    else if (color_format == COLOR_FORMAT_RGB444)
-    {
-        color_rgb444.ch.r = red;
-        color_rgb444.ch.g = green;
-        color_rgb444.ch.b = blue;
-    }
-}
-
-void st7735s_set_color_hex(uint32_t color)
-{
-    color_rgb666.ch.r = (color >> 16) & 0xFF;
-    color_rgb666.ch.g = (color >> 8) & 0xFF;
-    color_rgb666.ch.b = color & 0xFF;
-}
-
-void st7735s_test(void)
-{
-    st7735s_set_color_hex(0xFF0000);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-
-    st7735s_set_color_hex(0x00FF00);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-
-    st7735s_set_color_hex(0x0000FF);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-
-    st7735s_set_color_hex(0xFFFF00);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-
-    st7735s_set_color_hex(0xFF00FF);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-
-    st7735s_set_color_hex(0x00FFFF);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-
-    st7735s_set_color_hex(0x800080);
-    st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
-    st7735s_delay(500);
-}
 
 void st7735s_init(void)
 {
@@ -323,11 +137,11 @@ void st7735s_init(void)
     // frame rate control
     //
 
-    st7735s_set_pixel_format(COLOR_FORMAT_RGB565);
+    // st7735s_set_pixel_format(COLOR_FORMAT_RGB565);
     //
 
     // clear screen
-    st7735s_set_color(0x00, 0x00, 0x00);
+    // st7735s_set_color(0x00, 0x00, 0x00);
     // st7735s_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
 
     // display on

@@ -27,9 +27,6 @@
 #define LCD_SCK_LOW gpio_bit_reset(LCD_GPIO_PORT, LCD_GPIO_SCK_PIN)
 #define LCD_SCK_HIGH gpio_bit_set(LCD_GPIO_PORT, LCD_GPIO_SCK_PIN)
 
-#define RGB565_TO_RGB666(rgb565) \
-    ((((rgb565 >> 11) & 0x1F) << 18) | (((rgb565 >> 5) & 0x3F) << 12) | ((rgb565 & 0x1F) << 6))
-
 typedef enum
 {
     ST7735S_CMD_NOP = 0x00,       // NOP
@@ -91,60 +88,6 @@ typedef enum
 
 #define DISPLAY_W 162
 #define DISPLAY_H 128
-#define FRAME_SIZE DISPLAY_W
-
-// define piexel rgb depth format
-typedef struct
-{
-    union
-    {
-        uint8_t r : 4;
-        uint8_t g : 4;
-        uint8_t b : 4;
-    } ch;
-    uint16_t full;
-} _color_rgb444;
-
-typedef struct
-{
-    union
-    {
-        uint8_t r : 5;
-        uint8_t g : 6;
-        uint8_t b : 5;
-    } ch;
-    uint16_t full;
-} _color_rgb565;
-
-typedef struct
-{
-    union
-    {
-        uint8_t r : 6;
-        uint8_t reserved1 : 2;
-        uint8_t g : 6;
-        uint8_t reserved2 : 2;
-        uint8_t b : 6;
-        uint8_t reserved3 : 2;
-    } ch;
-    uint32_t full;
-} _color_rgb666;
-
-typedef enum
-{
-    COLOR_FORMAT_RGB444 = 0x03,
-    COLOR_FORMAT_RGB565 = 0x05,
-    COLOR_FORMAT_RGB666 = 0x06,
-    COLOR_FORMAT_NO_USED = 0x07
-} _color_format;
-
-typedef struct
-{
-    uint16_t xs;
-    uint16_t xe;
-    uint16_t ys;
-    uint16_t ye;
-} st7735s_window_t;
 
 static void spi_send_bytes(uint8_t len, uint8_t *data); // spi send data
 static void spi_send_byte(uint8_t data);                // spi send one byte data
@@ -152,19 +95,7 @@ static void spi_send_bit(uint8_t data);                 // spi send one bit data
 void st7735s_send_command(st7735s_cmd_t cmd);           // st7735s send command
 void st7735s_send_data(uint8_t data);                   // st7735s data
 static void st7735s_delay(uint32_t count);              // st7735s data
-
 void st7735s_init(void);
-void st7735s_test(void);                                          // st7735s init
-void st7735s_set_color(uint8_t red, uint8_t green, uint8_t blue); // st7735s set color
-void st7735s_set_color_hex(uint32_t color);                       // st7735s set color by hex
-void st7735s_set_pixel_format(_color_format x);                   // st7735s set pixel format
-void st7735s_draw_pixel(uint8_t x, uint8_t y);
-void st7735s_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height); // st7735s fill react
-void st7735s_flush(void);
-
-static void st7735s_reset_window(void);                                      // st7735s reset window
-static void st7735s_update_window(uint16_t x, uint16_t y);                   // st7735s update window
 void st7735s_set_window(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2); // st7735s set window
-void st7735s_send_color(void);
 
 #endif
