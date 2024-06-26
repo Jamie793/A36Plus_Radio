@@ -64,8 +64,8 @@ void jgfx_send_color(void)
     }
     else if (color_format == COLOR_FORMAT_RGB565)
     {
-        st7735s_send_data((color_rgb565.ch.r << 5) | (color_rgb565.ch.g & 0x38));
-        st7735s_send_data(((color_rgb565.ch.g & 0x07) << 5) | color_rgb565.ch.b << 2);
+        // st7735s_send_data((color_rgb565.ch.r << 5) | (color_rgb565.ch.g & 0x38));
+        // st7735s_send_data(((color_rgb565.ch.g & 0x07) << 5) | color_rgb565.ch.b << 2);
     }
     else if (color_format == COLOR_FORMAT_RGB444)
     {
@@ -87,21 +87,20 @@ void jgfx_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
     // jgfx_update_area(x + width - 1, y + height - 1);
     // st7735s_set_window(jgfx->area.xs, jgfx->area.xe, jgfx->area.ys, jgfx->area.ye);
     st7735s_set_window(x, x + width - 1, y, y + height - 1);
-
     for (uint16_t j = 0; j < height; j++)
     {
         for (uint16_t i = 0; i < width; i++)
         {
-            *(jgfx->draw_buf.buf_act + jgfx->draw_buf.buf_point) = color_rgb565;
-
+            (jgfx->draw_buf.buf_act + jgfx->draw_buf.buf_point)->full = color_rgb565.full;
+            jgfx->draw_buf.buf_point++;
             if (jgfx->draw_buf.buf_act == jgfx->draw_buf.buf1)
             {
-                if (++jgfx->draw_buf.buf_point >= jgfx->draw_buf.buf1_size)
+                if (jgfx->draw_buf.buf_point >= jgfx->draw_buf.buf1_size)
                     jgfx_flush();
             }
             else if (jgfx->draw_buf.buf_act == jgfx->draw_buf.buf2)
             {
-                if (++jgfx->draw_buf.buf_point >= jgfx->draw_buf.buf2_size)
+                if (jgfx->draw_buf.buf_point >= jgfx->draw_buf.buf2_size)
                     jgfx_flush();
             }
         }
@@ -158,7 +157,8 @@ void jgfx_set_color(uint8_t red, uint8_t green, uint8_t blue)
     else if (color_format == COLOR_FORMAT_RGB565)
     {
         color_rgb565.ch.r = red;
-        color_rgb565.ch.g = green;
+        color_rgb565.ch.g1 = green >> 3;
+        color_rgb565.ch.g2 = green;
         color_rgb565.ch.b = blue;
     }
     else if (color_format == COLOR_FORMAT_RGB444)
@@ -179,7 +179,7 @@ void jgfx_set_color_hex(uint32_t color)
     }
     else if (color_format == COLOR_FORMAT_RGB565)
     {
-        color_rgb565.full = color;
+        color_rgb565.full = (color);
     }
     else if (color_format == COLOR_FORMAT_RGB444)
     {

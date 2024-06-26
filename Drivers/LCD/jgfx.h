@@ -7,12 +7,15 @@
 #define RGB565_TO_RGB666(rgb565) \
     ((((rgb565 >> 11) & 0x1F) << 18) | (((rgb565 >> 5) & 0x3F) << 12) | ((rgb565 & 0x1F) << 6))
 
+#define RGB888_TO_RGB565(rgb888) \
+    ((((rgb888 >> 19) & 0x1F) << 11) | (((rgb888 >> 10) & 0x3F) << 5) | ((rgb888 >> 3) & 0x1F))
+
 #define BUFFER_SIZE DISPLAY_W
 
 // define piexel rgb depth format
-typedef struct
+typedef union
 {
-    union
+    struct
     {
         uint8_t r : 4;
         uint8_t g : 4;
@@ -21,20 +24,21 @@ typedef struct
     uint16_t full;
 } jgfx_color_rgb444;
 
-typedef struct
+typedef union
 {
-    union
+    struct
     {
         uint8_t r : 5;
-        uint8_t g : 6;
+        uint8_t g1 : 3;
+        uint8_t g2 : 3;
         uint8_t b : 5;
     } ch;
     uint16_t full;
 } jgfx_color_rgb565;
 
-typedef struct
+typedef union
 {
-    union
+    struct
     {
         uint8_t r : 6;
         uint8_t reserved1 : 2;
