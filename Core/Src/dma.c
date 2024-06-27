@@ -3,8 +3,8 @@
 // Written by Jamiexu
 
 uint8_t usart_tx[10];
-extern uint8_t frame_buffer[FRAME_SIZE];
-extern void lv_flush_finish_cb(void);
+// extern uint8_t frame_buffer[FRAME_SIZE];
+extern void lcd_flush_finish_cb(void);
 static void lcd_dma_init(void)
 {
     dma_parameter_struct dma_init_struct;
@@ -12,7 +12,6 @@ static void lcd_dma_init(void)
     /* initialize DMA channel1 */
     dma_deinit(DMA_CH4);
     dma_init_struct.direction = DMA_MEMORY_TO_PERIPHERAL;
-    dma_init_struct.memory_addr = (uint32_t)frame_buffer;
     dma_init_struct.memory_inc = DMA_MEMORY_INCREASE_ENABLE;
     dma_init_struct.memory_width = DMA_MEMORY_WIDTH_8BIT;
     dma_init_struct.number = 0;
@@ -52,7 +51,7 @@ static void usart_dma_init(void)
 
 void DMA_Channel3_4_IRQHandler(void){
     if (dma_interrupt_flag_get(DMA_CH4, DMA_INT_FTF) != RESET){
-        lv_flush_finish_cb();
+        lcd_flush_finish_cb();
         dma_interrupt_flag_clear(DMA_CH4, DMA_INT_FTF);
     }
 }
