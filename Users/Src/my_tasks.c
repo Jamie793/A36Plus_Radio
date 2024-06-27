@@ -1,6 +1,7 @@
 #include "main.h"
 #include "portmacro.h"
 
+extern void jgfx_test(void);
 // void vTaskTestings(void *pvParameters)
 // {
 
@@ -17,7 +18,8 @@ void vTaskLvglRfer(void)
 {
     for (;;)
     {
-        lv_task_handler();
+        // lv_task_handler(); 
+        jgfx_test();
     }
 }
 
@@ -25,13 +27,13 @@ void vTaskEvent(void)
 {
     for (;;)
     {
-        ui_event_cb();
+        // ui_event_cb();
     }
 }
 
 void vtasks_init(void)
 {
-    xTaskCreate(vTaskEvent, "Event handler", 128, NULL, 0, NULL);
-    xTaskCreate(vTaskLvglRfer, "LCD refresh", 512, NULL, 0, NULL);
+    // xTaskCreate(vTaskEvent, "Event handler", 128, NULL, 0, NULL);
+    // xTaskCreate(vTaskLvglRfer, "LCD refresh", 512, NULL, 0, NULL);
     timer_enable(TIMER1);
 }

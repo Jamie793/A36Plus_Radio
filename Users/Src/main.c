@@ -56,13 +56,11 @@ int main(void)
     tim_config();
     usart_config();
     st7735s_init();
-
+    jgfx_init();
     // bk4819_init();
-    lv_init();
-    lv_port_disp_init();
-    ui_init();
 
-
+    // ui_init();
+    jgfx_test();
 
     vtasks_init();
     vTaskStartScheduler();

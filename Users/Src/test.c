@@ -1,5 +1,5 @@
 #include "main.h"
-uint8_t usart_tx[10];
+// uint8_t usart_tx[10];
 uint8_t flash_data[W25Q16JV_SECTOR_SIZE] = {0};
 uint8_t flash_data_text[16] = {0};
 uint32_t current_addr = 0;
@@ -33,6 +33,37 @@ void flash_dump(void)
     //     }
     //     // printf("**************END BLOCK %d**************\r\n", i);
     // }
+}
+
+void jgfx_test(void)
+{
+    jgfx_set_color_hex(0xFF0000);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
+
+    jgfx_set_color_hex(0x00FF00);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
+
+    jgfx_set_color_hex(0x0000FF);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
+
+    jgfx_set_color_hex(0xFFFF00);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
+
+    jgfx_set_color_hex(0xFF00FF);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
+
+    jgfx_set_color_hex(0x00FFFF);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
+
+    jgfx_set_color_hex(0x800080);
+    jgfx_fill_react(0, 0, DISPLAY_W, DISPLAY_H);
+    delay_1ms(500);
 }
 
 void bk4819_test(void)

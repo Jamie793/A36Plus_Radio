@@ -15,7 +15,7 @@
 #include "key.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "lvgl.h"
+#include "jgfx.h"
 #include "ui.h"
 // Written by Jamiexu
 
