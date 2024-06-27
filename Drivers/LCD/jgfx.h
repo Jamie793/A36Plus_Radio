@@ -28,10 +28,9 @@ typedef union
 {
     struct
     {
-        uint8_t r : 5;
-        uint8_t g1 : 3;
-        uint8_t g2 : 3;
-        uint8_t b : 5;
+        uint16_t r : 5;
+        uint16_t g : 6;
+        uint16_t b : 5;
     } ch;
     uint16_t full;
 } jgfx_color_rgb565;
@@ -92,6 +91,7 @@ void jgfx_set_color_hex(uint32_t color);                       //  set color by 
 void jgfx_set_pixel_format(jgfx_color_format x);               //  set pixel format
 void jgfx_draw_pixel(uint8_t x, uint8_t y);
 void jgfx_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height); //  fill react
+void jgfx_draw_circle(uint16_t x, uint16_t y, uint16_t radius);
 void jgfx_set_buff_size(uint32_t buf1_size, uint32_t buf2_size);
 void jgfx_flush(void);
 

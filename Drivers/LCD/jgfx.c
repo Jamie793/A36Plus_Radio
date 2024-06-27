@@ -93,6 +93,7 @@ void jgfx_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
         {
             (jgfx->draw_buf.buf_act + jgfx->draw_buf.buf_point)->full = color_rgb565.full;
             jgfx->draw_buf.buf_point++;
+
             if (jgfx->draw_buf.buf_act == jgfx->draw_buf.buf1)
             {
                 if (jgfx->draw_buf.buf_point >= jgfx->draw_buf.buf1_size)
@@ -106,6 +107,37 @@ void jgfx_fill_react(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
         }
     }
 }
+
+// void jgfx_draw_circle(uint16_t x, uint16_t y, uint16_t radius)
+// {
+//     int x = r;
+//     int y = 0;
+//     int err = 0;
+
+//     while (x >= y)
+//     {
+//         // 在屏幕上绘制八个对称的点
+//         // plot_pixel(x0 + x, y0 + y); // 第一象限
+//         // plot_pixel(x0 + y, y0 + x);
+//         // plot_pixel(x0 - y, y0 + x); // 第二象限
+//         // plot_pixel(x0 - x, y0 + y);
+//         // plot_pixel(x0 - x, y0 - y); // 第三象限
+//         // plot_pixel(x0 - y, y0 - x);
+//         // plot_pixel(x0 + y, y0 - x); // 第四象限
+//         // plot_pixel(x0 + x, y0 - y);
+
+//         if (err <= 0)
+//         {
+//             y += 1;
+//             err += 2 * y + 1;
+//         }
+//         if (err > 0)
+//         {
+//             x -= 1;
+//             err -= 2 * x + 1;
+//         }
+//     }
+// }
 
 static void jgfx_reset_area(void)
 {
@@ -157,8 +189,7 @@ void jgfx_set_color(uint8_t red, uint8_t green, uint8_t blue)
     else if (color_format == COLOR_FORMAT_RGB565)
     {
         color_rgb565.ch.r = red;
-        color_rgb565.ch.g1 = green >> 3;
-        color_rgb565.ch.g2 = green;
+        color_rgb565.ch.g = green;
         color_rgb565.ch.b = blue;
     }
     else if (color_format == COLOR_FORMAT_RGB444)
