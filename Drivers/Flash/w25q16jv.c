@@ -1,10 +1,10 @@
 /**
  * @file w25q16jv.c
  * @author Jamiexu (doxm@foxmail.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2024-05-20
- * 
+ *
  * @copyright MIT License
 
 Copyright (c) 2024 (Jamiexu or Jamie793)
@@ -26,7 +26,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
- * 
+ *
  */
 #include "w25q16jv.h"
 
@@ -50,6 +50,13 @@ static uint8_t SPI_read_data(void)
     return spi_i2s_data_receive(SPI0);
 }
 
+void w25q16jv_send_cmd(w25q16jv_cmd_t cmd)
+{
+    FLASH_CS_LOW;
+    SPI_send_data(cmd);
+    FLASH_CS_HIGHT;
+}
+
 uint8_t w25q16jv_read_reg1(w25q16jv_reg_t reg)
 {
     uint8_t data;
@@ -57,8 +64,27 @@ uint8_t w25q16jv_read_reg1(w25q16jv_reg_t reg)
     SPI_send_data(W25Q16JV_CMD_READ_REG1);
     data = SPI_read_data();
     FLASH_CS_HIGHT;
-    printf("EEPROM Status: %d\r\n", data);
-    return (data & reg);
+    return ((data & reg) != 0) ? W25Q16JV_SET : W25Q16JV_RESET;
+}
+
+uint8_t w25q16jv_read_reg2(w25q16jv_reg_t reg)
+{
+    uint8_t data;
+    FLASH_CS_LOW;
+    SPI_send_data(W25Q16JV_CMD_READ_REG2);
+    data = SPI_read_data();
+    FLASH_CS_HIGHT;
+    return ((data & reg) != 0) ? W25Q16JV_SET : W25Q16JV_RESET;
+}
+
+uint8_t w25q16jv_read_reg3(w25q16jv_reg_t reg)
+{
+    uint8_t data;
+    FLASH_CS_LOW;
+    SPI_send_data(W25Q16JV_CMD_READ_REG3);
+    data = SPI_read_data();
+    FLASH_CS_HIGHT;
+    return ((data & reg) != 0) ? W25Q16JV_SET : W25Q16JV_RESET;
 }
 
 void w25q16jv_write_reg1(w25q16jv_reg_t reg, uint8_t bit)
@@ -77,6 +103,46 @@ void w25q16jv_write_reg1(w25q16jv_reg_t reg, uint8_t bit)
 
     FLASH_CS_LOW;
     SPI_send_data(W25Q16JV_CMD_WRITE_REG1);
+    SPI_send_data(data);
+    FLASH_CS_HIGHT;
+}
+
+void w25q16jv_write_reg2(w25q16jv_reg_t reg, uint8_t bit)
+{
+    uint8_t data;
+
+    FLASH_CS_LOW;
+    SPI_send_data(W25Q16JV_CMD_READ_REG2);
+    data = SPI_read_data();
+    FLASH_CS_HIGHT;
+
+    if (bit != RESET)
+        data |= reg;
+    else
+        data &= ~reg;
+
+    FLASH_CS_LOW;
+    SPI_send_data(W25Q16JV_CMD_WRITE_REG2);
+    SPI_send_data(data);
+    FLASH_CS_HIGHT;
+}
+
+void w25q16jv_write_reg3(w25q16jv_reg_t reg, uint8_t bit)
+{
+    uint8_t data;
+
+    FLASH_CS_LOW;
+    SPI_send_data(W25Q16JV_CMD_READ_REG3);
+    data = SPI_read_data();
+    FLASH_CS_HIGHT;
+
+    if (bit != RESET)
+        data |= reg;
+    else
+        data &= ~reg;
+
+    FLASH_CS_LOW;
+    SPI_send_data(W25Q16JV_CMD_WRITE_REG3);
     SPI_send_data(data);
     FLASH_CS_HIGHT;
 }
@@ -104,7 +170,7 @@ void w25q16jv_read_sector(uint32_t addr, uint8_t *readData)
     }
 
     FLASH_CS_HIGHT;
-} 
+}
 
 void w25q16jv_read_block(uint32_t addr, uint8_t *readData)
 {
@@ -141,7 +207,71 @@ void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData)
         w25q16jv_read_sector_fast(addr + i * W25Q16JV_SECTOR_SIZE, (uint8_t *)readData[i * W25Q16JV_SECTOR_SIZE]);
 }
 
+void w25q16jv_sector_erase(uint32_t addr)
+{
+    if ((addr % W25Q16JV_SECTOR_SIZE) != 0)
+        return;
+    FLASH_CS_LOW;
 
-void w25q16jv_page_program(uint32_t addr, uint8_t *readData){
+    delay_1ms(10);
+    SPI_send_data(W25Q16JV_CMD_SECTOR_ERASE);
+    SPI_send_data((addr >> 16) & 0xFF);
+    SPI_send_data((addr >> 8) & 0xFF);
+    SPI_send_data(addr & 0xFF);
 
+    FLASH_CS_HIGHT;
+}
+
+void w25q16jv_block32_erase(uint32_t addr)
+{
+    if ((addr % W25Q16JV_BLOCK32_SIZE) != 0)
+        return;
+    FLASH_CS_LOW;
+
+    delay_1ms(10);
+    SPI_send_data(W25Q16JV_CMD_BLOCK32_ERASE);
+    SPI_send_data((addr >> 16) & 0xFF);
+    SPI_send_data((addr >> 8) & 0xFF);
+    SPI_send_data(addr & 0xFF);
+
+    FLASH_CS_HIGHT;
+}
+
+void w25q16jv_block64_erase(uint32_t addr)
+{
+    if ((addr % W25Q16JV_BLOCK64_SIZE) != 0)
+        return;
+    FLASH_CS_LOW;
+
+    delay_1ms(10);
+    SPI_send_data(W25Q16JV_CMD_BLOCK64_ERASE);
+    SPI_send_data((addr >> 16) & 0xFF);
+    SPI_send_data((addr >> 8) & 0xFF);
+    SPI_send_data(addr & 0xFF);
+
+    FLASH_CS_HIGHT;
+}
+
+void w25q16jv_page_program(uint32_t addr, uint8_t *raw_data, uint16_t size)
+{
+    FLASH_CS_LOW;
+
+    delay_1ms(10);
+    SPI_send_data(W25Q16JV_CMD_PAGE_PROGRAM);
+    SPI_send_data((addr >> 16) & 0xFF);
+    SPI_send_data((addr >> 8) & 0xFF);
+    SPI_send_data(addr & 0xFF);
+
+    for (uint16_t i = 0; i < size; i++)
+    {
+        SPI_send_data(*raw_data);
+        raw_data++;
+    }
+
+    FLASH_CS_HIGHT;
+}
+
+void w25q16jv_chip_erase(void)
+{
+    w25q16jv_send_cmd(W25Q16JV_CMD_CHIP_ERASE);
 }

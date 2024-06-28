@@ -70,10 +70,13 @@ typedef enum
 } w25q16jv_cmd_t;
 
 #define W25Q16JV_SECTOR_SIZE 4096
-#define W25Q16JV_BLOCK_SIZE 65536
+#define W25Q16JV_BLOCK32_SIZE W25Q16JV_SECTOR_SIZE * 8
+#define W25Q16JV_BLOCK64_SIZE W25Q16JV_SECTOR_SIZE * 16
 
 static void SPI_send_data(uint8_t data);
 static uint8_t SPI_read_data(void);
+
+void w25q16jv_send_cmd(w25q16jv_cmd_t cmd);
 
 uint8_t w25q16jv_read_reg1(w25q16jv_reg_t reg);
 void w25q16jv_write_reg1(w25q16jv_reg_t reg, uint8_t bit);
@@ -90,6 +93,10 @@ void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData);
 void w25q16jv_read_block(uint32_t addr, uint8_t *readData);
 void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData);
 
-void w25q16jv_page_program(uint32_t addr, uint8_t *readData);
+void w25q16jv_page_program(uint32_t addr, uint8_t *raw_data, uint16_t size);
+void w25q16jv_sector_erase(uint32_t addr);
+void w25q16jv_block32_erase(uint32_t addr);
+void w25q16jv_block64_erase(uint32_t addr);
+void w25q16jv_chip_erase(void);
 
 #endif
