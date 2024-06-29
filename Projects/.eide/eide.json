@@ -46,28 +46,10 @@
             "files": [],
             "folders": [
               {
-                "name": "LCD",
+                "name": "BK1080",
                 "files": [
                   {
-                    "path": "../Drivers/LCD/fonts.c"
-                  },
-                  {
-                    "path": "../Drivers/LCD/gfx.c"
-                  },
-                  {
-                    "path": "../Drivers/LCD/st7735s.c"
-                  },
-                  {
-                    "path": "../Drivers/LCD/st7735s_compat.c"
-                  }
-                ],
-                "folders": []
-              },
-              {
-                "name": "FLASH",
-                "files": [
-                  {
-                    "path": "../Drivers/Flash/w25q16jv.c"
+                    "path": "../Drivers/BK1080/bk1080.c"
                   }
                 ],
                 "folders": []
@@ -82,10 +64,10 @@
                 "folders": []
               },
               {
-                "name": "BK1080",
+                "name": "FLASH",
                 "files": [
                   {
-                    "path": "../Drivers/BK1080/bk1080.c"
+                    "path": "../Drivers/Flash/w25q16jv.c"
                   }
                 ],
                 "folders": []
@@ -95,6 +77,27 @@
                 "files": [
                   {
                     "path": "../Drivers/Key/key.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "LCD",
+                "files": [
+                  {
+                    "path": "../Drivers/LCD/fonts.c"
+                  },
+                  {
+                    "path": "../Drivers/LCD/jgfx.c"
+                  },
+                  {
+                    "path": "../Drivers/LCD/st7735s_compat.c"
+                  },
+                  {
+                    "path": "../Drivers/LCD/st7735s.c"
+                  },
+                  {
+                    "path": "../Drivers/LCD/ugui.c"
                   }
                 ],
                 "folders": []
@@ -109,10 +112,10 @@
                 "name": "SRC",
                 "files": [
                   {
-                    "path": "../GUI/ui.c"
+                    "path": "../GUI/ui_menu.c"
                   },
                   {
-                    "path": "../GUI/ui_menu.c"
+                    "path": "../GUI/ui.c"
                   }
                 ],
                 "folders": []
@@ -990,6 +993,9 @@
                   },
                   {
                     "path": "../Users/Src/systick.c"
+                  },
+                  {
+                    "path": "../Users/Src/test.c"
                   }
                 ],
                 "folders": []
@@ -1056,10 +1062,34 @@
         "LIBRARIES/GD32/CMSIS/GD/GD32F3X0/SOURCE/GNU",
         "LIBRARIES/GD32/CMSIS/GD/GD32F3X0/SOURCE/GNU/startup_gd32f3x0.s",
         "DRIVERS/LCD/fonts.c",
-        "DRIVERS/LCD/gfx.c",
         "DRIVERS/LCD/st7735s_compat.c",
         "LIBRARIES/GD32/GD32F3X0_STANDARD_PERIPHERAL/SOURCE/gd32f3x0_fmc.c",
-        "LIBRARIES/GD32/GD32F3X0_USBFS_LIBRARY"
+        "LIBRARIES/GD32/GD32F3X0_USBFS_LIBRARY",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_unscii_8.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_unscii_16.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_simsun_16_cjk.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_8.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_48.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_44.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_46.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_42.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_40.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_38.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_36.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_34.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_32.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_30.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_28.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_28_compressed.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_26.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_24.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_22.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_20.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_18.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_16.c",
+        "LIBRARIES/LVGL/SRC/LV_FONT/lv_font_montserrat_12_subpx.c",
+        "LIBRARIES/LVGL",
+        "USERS/SRC/lv_port_disp.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {
@@ -1208,7 +1238,6 @@
           "../Drivers/Key",
           "../Libraries/FreeRTOS-Kernel/include",
           "../Libraries/FreeRTOS-Kernel/portable/RVDS/ARM_CM4F",
-          "../Libraries/lvgl/src",
           "RTE/_Project",
           "../GUI"
         ],
