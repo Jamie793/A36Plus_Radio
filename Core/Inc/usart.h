@@ -7,6 +7,8 @@
 
 void usart_config(void);
 
+void USART_SendByte(uint8_t data);
+
 #endif
 
 

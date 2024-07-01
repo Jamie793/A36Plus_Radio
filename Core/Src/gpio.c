@@ -14,7 +14,7 @@ static void LCD_gpio_init(void)
 
 static void usart_gpio_init(void)
 {
-    gpio_af_set(USART_GPIO_PORT, GPIO_AF_1, USART_GPIO_TX_PIN | USART_GPIO_TX_PIN);
+    gpio_af_set(USART_GPIO_PORT, GPIO_AF_1, USART_GPIO_TX_PIN | USART_GPIO_RX_PIN);
     gpio_mode_set(USART_GPIO_PORT, GPIO_MODE_AF, GPIO_PUPD_PULLUP, USART_GPIO_TX_PIN | USART_GPIO_RX_PIN);
     gpio_output_options_set(USART_GPIO_PORT, GPIO_OTYPE_PP, GPIO_OSPEED_50MHZ, USART_GPIO_TX_PIN | USART_GPIO_RX_PIN);
 }
@@ -79,9 +79,9 @@ void gpio_config(void)
     LCD_gpio_init();
     key_gpio_init();
     flash_gpio_init();
+    key_gpio_init();
     usart_gpio_init();
     bk4819_gpio_init();
     bk1080_gpio_init();
-    key_gpio_init();
     misc_gpio_init();
 }

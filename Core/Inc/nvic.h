@@ -6,6 +6,9 @@ void tim_nvic_config(void);
 
 void dma_nvic_config(void);
 
+void usart_nvic_config(void);
+
 void nvic_config(void);
+
 
 #endif
