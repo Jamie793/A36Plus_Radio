@@ -69,6 +69,7 @@ typedef enum
 
 } w25q16jv_cmd_t;
 
+#define W25Q16JV_PAGE_SIZE 256
 #define W25Q16JV_SECTOR_SIZE 4096
 #define W25Q16JV_BLOCK32_SIZE W25Q16JV_SECTOR_SIZE * 8
 #define W25Q16JV_BLOCK64_SIZE W25Q16JV_SECTOR_SIZE * 16
@@ -98,5 +99,6 @@ void w25q16jv_sector_erase(uint32_t addr);
 void w25q16jv_block32_erase(uint32_t addr);
 void w25q16jv_block64_erase(uint32_t addr);
 void w25q16jv_chip_erase(void);
+uint8_t w25q16jv_read_busy(void);
 
 #endif
