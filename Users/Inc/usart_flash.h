@@ -8,6 +8,7 @@
 
 // Cmd or Data
 #define USART_FLASH_CMD 0x00
+#define USART_FLASH_FLAG 0x01
 #define USART_FLASH_DATA 0xFF
 
 // Handshake and Acknowledge
@@ -24,7 +25,8 @@ typedef enum
 typedef enum
 {
     USART_FLASH_CMD_FLASH_DATA = 0x01, // Flash data request
-    USART_FLASH_CMD_PACK_DATA = 0x02   // data package
+    USART_FLASH_CMD_PACK_DATA = 0x02,  // data package
+    USART_FLASH_CMD_READ_DATA = 0x03   // read data from flash
 } usart_flash_cmd_t;
 
 // State
@@ -34,10 +36,12 @@ typedef enum
     USART_FLASH_STATE_SHAKE_1,
     USART_FLASH_STATE_SHAKE_2,
     USART_FLASH_STATE_SHAKE_OK,
-    USART_FLASH_STATE_REV_DATA
+
+    USART_FLASH_STATE_REV_DATA,
+    USART_FLASH_STATE_TRS_DATA,
 } usart_flash_state_t;
 
-// typedef struct 
+// typedef struct
 // {
 //     uint32_t header;
 //     uint8_t option;
