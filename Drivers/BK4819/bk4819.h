@@ -23,10 +23,12 @@
 #define BIT(x) (1u << (x))
 #define BITV(x, y) ((x) << (y))
 
+#define BK4819_REG07_RESERVE BITV(0x07, 12)
+
 #define BK4819_REG30_VCO_CALIBRATION BIT(15)
-#define BK4819_REG30_REVERSE1_ENABLE BIT(14)
+#define BK4819_REG30_RESERVE1 BIT(14)
 #define BK4819_REG30_RX_LINK_ENABLE BITV(0x0F, 10)
-#define BK4819_REG30_REVERSE2_ENABLE BIT(8)
+#define BK4819_REG30_RESERVE2 BIT(8)
 #define BK4819_REG30_AF_DAC_ENABLE BIT(9)
 #define BK4819_REG30_PLL_VCO_ENABLE BITV(0x0F, 4)
 #define BK4819_REG30_PA_GAIN_ENABLE BIT(3)
@@ -34,15 +36,29 @@
 #define BK4819_REG30_TX_DSP_ENABLE BIT(1)
 #define BK4819_REG30_RX_DSP_ENABLE BIT(0)
 
+#define BK4819_REG31_VOX_ENABLE BIT(2)
+#define BK4819_REG36_PACTL_ENABLE BIT(7)
+
+#define BK4819_REG32_FREQUENCY_SCAN_ENABLE BIT(0)
+#define BK4819_REG32_RESERVE 0x3FFE
+
+#define BK4819_REG33_RESERVE BIT(7)
+
 #define BK4819_REG51_TX_CTCDSS_ENABLE BIT(15)
 #define BK4819_REG51_GPIO6_CDCSS BIT(14)
 #define BK4819_REG51_TRANSMIT_NEG_CDCSS_CODE BIT(13)
-#define BK4819_REG51_CTCSCSS_MODE_SEL BIT(12)
-#define BK4819_REG51_CDCSS_BIT_SEL BIT(11)
+#define BK4819_REG51_CTCSCSS_MODE BIT(12)
+#define BK4819_REG51_CDCSS_24BIT BIT(11)
 #define BK4819_REG51_1050HZ_DET_MOD BIT(10)
 #define BK4819_REG51_AUTO_CDCSS_BW_MOD BIT(9)
 #define BK4819_REG51_AUTO_CTCSS_BW_MOD BIT(8)
+#define BK4819_REG51_RESERVE BIT(7)
 #define BK4819_REG51_CTCDCSS_TX_GAIN1T(x) BITV((x), 0)
+
+#define BK4819_CTDCSS_GAIN 5 // 0x-0x7F
+
+#define BK4819_GPIO_SET 1
+#define BK4819_GPIO_RESET 0
 
 typedef enum
 {
@@ -80,6 +96,8 @@ typedef enum
     BK4819_REG_31 = 0x31,
     BK4819_REG_32 = 0x32,
     BK4819_REG_33 = 0x33,
+    BK4819_REG_34 = 0x34,
+    BK4819_REG_35 = 0x35,
     BK4819_REG_36 = 0x36,
     BK4819_REG_37 = 0x37,
     BK4819_REG_38 = 0x38,
@@ -166,6 +184,17 @@ typedef enum
 
 typedef enum
 {
+    BK4819_GPIO_0 = 0,
+    BK4819_GPIO_1,
+    BK4819_GPIO_2,
+    BK4819_GPIO_3,
+    BK4819_GPIO_4,
+    BK4819_GPIO_5,
+    BK4819_GPIO_6,
+} bk4819_gpio_t;
+
+typedef enum
+{
     BK4819_FLAG_DTMF_REV = BITV(0x8, 11), // DTMF/5 Tone code received
     BK4819_FLAG_FSK_RX_SNF = BIT(7),      // FSK RX Sync Negative has been found
     BK4819_FLAG_FSK_RX_SPF = BIT(6),      // FSK RX Sync Positive has been found
@@ -173,11 +202,6 @@ typedef enum
     BK4819_FLAG_CDCSS_PCR = BIT(14),      // CDCSS positive code received
     BK4819_FLAG_CDCSS_PNR = BIT(15),      //  CDCSS negative code received
 } bk4819_flag_t;
-
-typedef enum
-{
-    BK4819_RDATA_
-} bk4819_rdata_t;
 
 // typedef enum
 // {
@@ -206,18 +230,60 @@ void bk4819_init(void);
 
 void bk4819_set_freq(uint32_t frq);
 
-void bk4819_rx_on(void);
+void bk4819_enable_rx(void);
 
-void bk4819_tx_on(void);
+void bk4819_enable_tx(void);
 
-void bk4819_CTDCSS_enable(uint8_t sel);
+void bk4819_disable_rtx(void);
 
-void bk4819_CTDCSS_disable(void);
+int16_t bk4819_get_rssi(void);
 
-void bk4819_set_Squelch(uint8_t RTSO, uint8_t RTSC, uint8_t ETSO, uint8_t ETSC, uint8_t GTSO, uint8_t GTSC);
+void bk4819_enable_vox(uint8_t delay_time, uint8_t interval_time, uint16_t threshold_on, uint16_t threshold_off);
 
-void bk4819_CTDCSS_set(uint8_t sel, uint16_t frequency);
+uint8_t bk4819_get_vox_indicator(void);
 
-void bk4819_set_CTDCSS(uint8_t sel, uint16_t frequency);
+uint16_t bk4819_get_vox_level(void);
+
+void bk4819_disable_vox(void);
+
+void bk4819_enable_rtx_ctcss(uint16_t frequency);
+
+void bk4819_enable_rtx_cdcss(uint16_t code, uint8_t polarity);
+
+uint8_t bk4819_get_ctcss_indictor(void);
+
+uint8_t bk4819_get_cdcss_indictor(void);
+
+void bk4819_disable_ctdcss(void);
+
+void bk4819_enable_freq_scan(uint8_t scan_time);
+
+void bk4819_enable_ctscss_scan(uint8_t scan_time);
+
+uint8_t bk4819_get_freq_scan_indicator(void);
+
+uint32_t bk4819_get_freq_scan(void);
+
+void bk4819_disable_freq_scan(void);
+
+void bk4819_set_tx_power(uint8_t bias, uint8_t pa_gain1, uint8_t pa_gain2);
+
+void bk4819_enable_gpio(bk4819_gpio_t gpio, uint8_t type);
+
+void bk4819_set_gpio(bk4819_gpio_t gpio, uint8_t val);
+
+uint8_t bk4819_get_gpio(bk4819_gpio_t gpio);
+
+void bk4819_disable_gpio(bk4819_gpio_t gpio);
+
+// void bk4819_CTDCSS_enable(uint8_t sel);
+
+// void bk4819_CTDCSS_disable(void);
+
+// void bk4819_set_Squelch(uint8_t RTSO, uint8_t RTSC, uint8_t ETSO, uint8_t ETSC, uint8_t GTSO, uint8_t GTSC);
+
+// void bk4819_CTDCSS_set(uint8_t sel, uint16_t frequency);
+
+// void bk4819_set_CTDCSS(uint8_t sel, uint16_t frequency);
 
 #endif
