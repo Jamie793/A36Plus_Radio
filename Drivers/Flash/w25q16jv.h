@@ -1,11 +1,16 @@
-#ifndef __W25Q16JV_JAMIEXU_H__
-#define __W25Q16JV_JAMIEXU_H__
+#ifndef __W25Q16JV_TALKPOD_H__
+#define __W25Q16JV_TALKPOD_H__
 #include "main.h"
 
 // Written by Jamiexu
 
 #define FLASH_CS_HIGHT gpio_bit_set(FLASH_GPIO_PORT, FLASH_GPIO_CS_PIN)
 #define FLASH_CS_LOW gpio_bit_reset(FLASH_GPIO_PORT, FLASH_GPIO_CS_PIN)
+
+#define W25Q16JV_PAGE_SIZE 256
+#define W25Q16JV_SECTOR_SIZE 4096
+#define W25Q16JV_BLOCK32_SIZE W25Q16JV_SECTOR_SIZE * 8
+#define W25Q16JV_BLOCK64_SIZE W25Q16JV_SECTOR_SIZE * 16
 
 #define W25Q16JV_SET 1
 #define W25Q16JV_RESET !W25Q16JV_SET
@@ -21,6 +26,7 @@ typedef enum
     W25Q16JV_REG1_TB = (1 << 5),  // top/bottom protect
     W25Q16JV_REG1_SEC = (1 << 6), // sector protect
     W25Q16JV_REG1_SRP = (1 << 7), // status register protect
+    W25Q16JV_REG1_ALL = 0xFF,
 
     // REG 2
     W25Q16JV_REG2_SRL = 1,        // status register lock
@@ -31,6 +37,7 @@ typedef enum
     W25Q16JV_REG2_LB3 = (1 << 5), //
     W25Q16JV_REG2_CMP = (1 << 6), // complement protect
     W25Q16JV_REG2_SUS = (1 << 7), // suspend status
+    W25Q16JV_REG2_ALL = 0xFF,
 
     // REG3
     W25Q16JV_REG3_R = 1,           // reserved
@@ -41,6 +48,9 @@ typedef enum
     W25Q16JV_REG3_DRV2 = (1 << 5), // ouput driver strength
     W25Q16JV_REG3_DRV1 = (1 << 6), //
     W25Q16JV_REG3_R4 = (1 << 7),   // reserved
+    W25Q16JV_REG3_ALL = 0xFF,
+
+    
 
 } w25q16jv_reg_t;
 
@@ -51,7 +61,7 @@ typedef enum
     W25Q16JV_CMD_FAST_READ = 0x0B,    // read data fastly
     W25Q16JV_CMD_PAGE_PROGRAM = 0x02, // program data to flash
 
-    W25Q16JV_CMD_SECTOR_ERASE = 0x20,  // erase ssector
+    W25Q16JV_CMD_SECTOR_ERASE = 0x20,  // erase sector
     W25Q16JV_CMD_BLOCK32_ERASE = 0x52, // erase block 32k
     W25Q16JV_CMD_BLOCK64_ERASE = 0xD8, // erase block 64k
     W25Q16JV_CMD_CHIP_ERASE = 0xC7,    // erase chip
@@ -69,38 +79,47 @@ typedef enum
 
 } w25q16jv_cmd_t;
 
-#define W25Q16JV_PAGE_SIZE 256
-#define W25Q16JV_SECTOR_SIZE 4096
-#define W25Q16JV_BLOCK32_SIZE W25Q16JV_SECTOR_SIZE * 8
-#define W25Q16JV_BLOCK64_SIZE W25Q16JV_SECTOR_SIZE * 16
-
-static void SPI_send_data(uint8_t data);
-static uint8_t SPI_read_data(void);
 
 void w25q16jv_send_cmd(w25q16jv_cmd_t cmd);
 
 uint8_t w25q16jv_read_reg1(w25q16jv_reg_t reg);
-void w25q16jv_write_reg1(w25q16jv_reg_t reg, uint8_t bit);
 
 uint8_t w25q16jv_read_reg2(w25q16jv_reg_t reg);
-void w25q16jv_write_reg2(w25q16jv_reg_t reg, uint8_t bit);
 
 uint8_t w25q16jv_read_reg3(w25q16jv_reg_t reg);
+
+void w25q16jv_write_reg1(w25q16jv_reg_t reg, uint8_t bit);
+
+void w25q16jv_write_reg2(w25q16jv_reg_t reg, uint8_t bit);
+
 void w25q16jv_write_reg3(w25q16jv_reg_t reg, uint8_t bit);
 
+uint8_t w25q16jv_read_busy(void);
+
 void w25q16jv_read_sector(uint32_t addr, uint8_t *readData);
-void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData);
 
 void w25q16jv_read_block(uint32_t addr, uint8_t *readData);
+
+void w25q16jv_read_sector_fast(uint32_t addr, uint8_t *readData);
+
 void w25q16jv_read_block_fast(uint32_t addr, uint8_t *readData);
 
-void w25q16jv_read_num(uint32_t addr, uint8_t *readData, uint32_t num);
+void w25q16jv_read_addr(uint32_t addr, uint8_t *readData, uint32_t num);
 
-void w25q16jv_page_program(uint32_t addr, uint8_t *raw_data, uint16_t size);
-void w25q16jv_sector_erase(uint32_t addr);
-void w25q16jv_block32_erase(uint32_t addr);
-void w25q16jv_block64_erase(uint32_t addr);
-void w25q16jv_chip_erase(void);
-uint8_t w25q16jv_read_busy(void);
+void w25q16jv_read_addr_fast(uint32_t addr, uint8_t *readData, uint32_t num);
+
+void w25q16jv_erase_chip(void);
+
+void w25q16jv_erase_sector(uint32_t addr);
+
+void w25q16jv_erase_block32(uint32_t addr);
+
+void w25q16jv_erase_block64(uint32_t addr);
+
+void w25q16jv_program_page(uint32_t addr, uint8_t *raw_data, uint16_t size);
+
+void w25q16jv_enable_write(void);
+
+void w25q16jv_disable_write(void);
 
 #endif
